@@ -34,6 +34,12 @@ const routesConfig = [
   },
   {
     exact: true,
+    path: "/product-information",
+    // layout: DashboardLayout,
+    component: lazy(() => import("./views/ProductInformation")),
+  },
+  {
+    exact: true,
     path: "/404",
     component: lazy(() => import("./views/Error404View")),
   },
