@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 
 import Page from "../../components/Page";
 
-import ProductInformationCard from "../../components/SingleProductComponents/ProductInformationCard";
+import ProductInformationCard from "../../components/SingleProduct/ProductInformationCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {

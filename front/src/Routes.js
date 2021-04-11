@@ -7,12 +7,12 @@ const routesConfig = [
   {
     exact: true,
     path: "/",
-    component: () => <Redirect to="/login" />,
+    component: () => <Redirect to="/landing" />,
   },
   {
     exact: true,
-    path: "/login",
-    component: lazy(() => import("./views/LoginView")),
+    path: "/landing",
+    component: lazy(() => import("./views/LandingView")),
   },
   {
     exact: true,

@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   makeStyles,
   Paper,
-  Button,
   Typography,
   Grid,
   Chip,
-  Fab,
+  Box,
+  Divider,
 } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+
+import CartButton from "./CartButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   productImageBox: {
     margin: "120px auto", // xaltura
     textAlign: "center",
+
+    [theme.breakpoints.down("sm")]: {
+      margin: "20px auto",
+    },
   },
   button: {
     borderRadius: 50,
@@ -50,6 +53,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: "#000",
     marginBottom: theme.spacing(2),
+
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "35px",
+      textAlign: "center",
+    },
   },
   subtitle: {
     color: "#000",
@@ -68,36 +76,21 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 16,
   },
   buttonsWrapper: {
+    display: "flex",
+    flexWrap: "nowrap",
     justifyContent: "space-between",
     marginTop: theme.spacing(6),
   },
-  rightSideWrapper: {
-    borderLeft: "2px solid rgba(0,0,0,0.1)", // xaltura
+  chip: {
+    color: "#000",
+    marginRight: 8,
   },
 }));
 
 function ProductInformationCard(props) {
   const classes = useStyles();
 
-  const [clicked, setClicked] = useState(false);
-  const [counter, setCounter] = useState(0);
-
-  const handleClick = () => {
-    setClicked(!clicked);
-    if (counter === 0) {
-      setCounter((s) => s + 1);
-    }
-  };
   const chips = [{}, {}, {}, {}];
-
-  const handleIncrement = () => setCounter((s) => s + 1);
-
-  const handleDecrement = () => {
-    if (counter === 1) {
-      setClicked(!clicked);
-      setCounter(0);
-    } else setCounter((s) => s - 1);
-  };
 
   return (
     <Paper className={classes.root}>
@@ -115,45 +108,21 @@ function ProductInformationCard(props) {
           <Typography className={classes.description}>
             {props.flower.description}
           </Typography>
-          <Grid style={{ marginTop: 30 }} container spacing={1}>
+
+          <Box>
             {chips.map((chip) => (
-              <Grid item>
-                <Chip label="Geles" className={classes.subtitle} />
-              </Grid>
+              <Chip label="Geles" className={classes.chip} />
             ))}
-          </Grid>
-          <Grid className={classes.buttonsWrapper} container>
+          </Box>
+
+          <Box className={classes.buttonsWrapper}>
             <Typography variant="h3" className={classes.subtitle}>
               1.5$
             </Typography>
-            {clicked ? (
-              <Grid className={classes.fabWrapper}>
-                <Fab
-                  size="small"
-                  onClick={handleDecrement}
-                  className={classes.fab}
-                >
-                  <RemoveIcon className={classes.fabIcon} />
-                </Fab>
-                {counter}
-                <Fab
-                  size="small"
-                  onClick={handleIncrement}
-                  className={classes.fab}
-                >
-                  <AddIcon className={classes.fabIcon} />
-                </Fab>
-              </Grid>
-            ) : (
-              <Button
-                variant="contained"
-                className={classes.button}
-                onClick={() => handleClick()}
-              >
-                <AddShoppingCartIcon />Į krepšelį
-              </Button>
-            )}
-          </Grid>
+            <Box>
+              <CartButton counter={0} />
+            </Box>
+          </Box>
         </Grid>
       </Grid>
     </Paper>
