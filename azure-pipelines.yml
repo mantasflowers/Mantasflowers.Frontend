@@ -48,6 +48,7 @@ steps:
     displayName: 'npm install and build'
     workingDirectory: $(projectPathPrefix)
 
+  - script: cd ./front/
 
   - task: PublishBuildArtifacts@1
     inputs:
