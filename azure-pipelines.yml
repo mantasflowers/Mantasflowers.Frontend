@@ -31,16 +31,23 @@ steps:
   #   displayName: npm install
   #   # workingDirectory: $(projectPathPrefix)/
 
-  - task: Npm@1
-    inputs:
-      command: 'install'
-      workingDir: $(publishArtifactName)
+  # - task: Npm@1
+  #   inputs:
+  #     command: 'install'
+  #     workingDir: $(publishArtifactName)
   
-  - task: Npm@1
-    inputs:
-      command: 'custom'
-      workingDir: $(publishArtifactName)
-      customCommand: 'run build'
+  # - task: Npm@1
+  #   inputs:
+  #     command: 'custom'
+  #     workingDir: $(publishArtifactName)
+  #     customCommand: 'run build'
+
+  - script: |
+      npm install
+      npm run build
+    displayName: 'npm install and build'
+    workingDirectory: $(projectPathPrefix)
+
 
   - task: PublishBuildArtifacts@1
     inputs:
