@@ -4,6 +4,7 @@
 variables:
   isMasterBranch: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
   publishArtifactName: 'mantasflowers-frontend'
+  projectPathPrefix: './front/'
   __Githash: $(Build.SourceVersion)
 
 pool:
@@ -25,3 +26,4 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+  workingDirectory: $(projectPathPrefix)
