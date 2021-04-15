@@ -42,7 +42,7 @@ steps:
     displayName: archive build files
     condition: and(succeeded(), eq(variables.isMasterBranch, true))
     inputs:
-      rootFolderOrFile: '${projectPathPrefix}/build'
+      rootFolderOrFile: './front/build'
       # might need to change below to false
       includeRootFolder: false
       archiveType: 'zip'
