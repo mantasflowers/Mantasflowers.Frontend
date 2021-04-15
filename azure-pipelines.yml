@@ -48,6 +48,28 @@ steps:
       archiveType: 'zip'
       archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
       replaceExistingArchive: false
+    
+  - task: ArchiveFiles@2
+    displayName: archive build files 2
+    condition: and(succeeded(), eq(variables.isMasterBranch, true))
+    inputs:
+      rootFolderOrFile: './front/node_modules'
+      # might need to change below to false
+      includeRootFolder: true
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+      replaceExistingArchive: false
+
+  - task: ArchiveFiles@2
+    displayName: archive build files 3
+    condition: and(succeeded(), eq(variables.isMasterBranch, true))
+    inputs:
+      rootFolderOrFile: './front/package.json'
+      # might need to change below to false
+      includeRootFolder: true
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+      replaceExistingArchive: false
 
   # - task: CopyFiles@2
   #   condition: and(succeeded(), eq(variables.isMasterBranch, true))
