@@ -1,0 +1,27 @@
+# Schema reference:
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema
+
+variables:
+  isMasterBranch: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  publishArtifactName: 'mantasflowers-frontend'
+  __Githash: $(Build.SourceVersion)
+
+pool:
+  vmImage: ubuntu-18.04
+
+# Run on every push
+# trigger:
+
+# Run on every pull request
+# pr:
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
