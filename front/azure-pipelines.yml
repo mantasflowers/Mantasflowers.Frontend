@@ -21,7 +21,7 @@ steps:
   - task: NodeTool@0
     displayName: install node tool
     inputs:
-      versionSpec: '6.x'
+      versionSpec: '14.x'
       checkLatest: false
 
   - script: npm install
