@@ -4,7 +4,7 @@
 variables:
   isMasterBranch: $[eq(variables['Build.SourceBranch'], 'refs/heads/ci_cd')]
   publishArtifactName: 'mantasflowers-frontend'
-  projectPathPrefix: './front/'
+  projectPathPrefix: './front'
   __Githash: $(Build.SourceVersion)
 
 pool:
@@ -26,17 +26,17 @@ steps:
 
   - script: npm install
     displayName: npm install
-    workingDirectory: $(projectPathPrefix)
+    workingDirectory: $(projectPathPrefix)/
 
   - script: npm run test -- --watchAll=false --passWithNoTests
     displayName: npm run test
     # we can disable this if we won't have any tests :)
     enabled: true
-    workingDirectory: $(projectPathPrefix)
+    workingDirectory: $(projectPathPrefix)/
 
   - script: npm run build
     displayName: npm run build
-    workingDirectory: $(projectPathPrefix)
+    workingDirectory: $(projectPathPrefix)/
 
   - task: ArchiveFiles@2
     displayName: archive build files
