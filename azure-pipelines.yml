@@ -48,12 +48,10 @@ steps:
     displayName: 'npm install and build'
     workingDirectory: $(projectPathPrefix)
 
-  - script: cd ./front/
-
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: $(publishArtifactName)/build
+      PathtoPublish: $(projectPathPrefix)/build
+      ArtifactName: $(publishArtifactName)
       publishLocation: 'Container'
 
   # - script: npm run test -- --watchAll=false --passWithNoTests
