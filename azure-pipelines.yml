@@ -38,18 +38,30 @@ steps:
     displayName: npm run build
     workingDirectory: $(projectPathPrefix)
 
-  - task: CopyFiles@2
+  - task: ArchiveFiles@2
+    displayName: archive build files
     condition: and(succeeded(), eq(variables.isMasterBranch, true))
-    displayName: copy build files
     inputs:
-      SourceFolder: $(projectPathPrefix)
-      Contents: 'build/**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      rootFolderOrFile: '${projectPathPrefix}/build'
+      # might need to change below to false
+      includeRootFolder: true
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+      replaceExistingArchive: false
+
+  # - task: CopyFiles@2
+  #   condition: and(succeeded(), eq(variables.isMasterBranch, true))
+  #   displayName: copy build files
+  #   inputs:
+  #     SourceFolder: $(projectPathPrefix)
+  #     Contents: 'build/**'
+  #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
   - task: PublishBuildArtifacts@1
     condition: and(succeeded(), eq(variables.isMasterBranch, true))
     displayName: azure artifacts publish
     inputs:
+      # might need to change to $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: $(publishArtifactName)
 
