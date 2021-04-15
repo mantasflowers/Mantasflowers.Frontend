@@ -46,7 +46,7 @@ steps:
       # might need to change below to false
       includeRootFolder: false
       archiveType: 'zip'
-      archiveFile: '$(publishArtifactName).zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
       replaceExistingArchive: false
 
   # - task: CopyFiles@2
