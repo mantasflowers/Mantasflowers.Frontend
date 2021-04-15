@@ -28,7 +28,7 @@ steps:
     displayName: npm install
     workingDirectory: $(projectPathPrefix)
 
-  - script: npm run test
+  - script: npm run test -- --watchAll=false --passWithNoTests
     displayName: npm run test
     # we can disable this if we won't have any tests :)
     enabled: true
