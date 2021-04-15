@@ -34,18 +34,18 @@ steps:
   - task: Npm@1
     inputs:
       command: 'install'
-      # workingDir: 'aaa'
+      workingDir: $(Build.SourceVersion)/
   
   - task: Npm@1
     inputs:
       command: 'custom'
-      # workingDir: 'aaa'
+      workingDir: $(Build.SourceVersion)/
       customCommand: 'run build'
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'build'
+      ArtifactName: $(Build.SourceVersion)/build
       publishLocation: 'Container'
 
   # - script: npm run test -- --watchAll=false --passWithNoTests
