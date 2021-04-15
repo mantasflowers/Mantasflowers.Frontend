@@ -18,45 +18,34 @@ pool:
 
 
 steps:
+
+  - script: cd $(projectPathPrefix)
+
   - task: NodeTool@0
     displayName: install node tool
     inputs:
       versionSpec: '14.x'
       checkLatest: false
 
+  - script: npm install
+    displayName: npm install
+    # workingDirectory: $(projectPathPrefix)/
 
-  - task: Npm@1
-    inputs:
-      command: 'install'
-      workingDir: $(projectPathPrefix)/
+  - script: npm run test -- --watchAll=false --passWithNoTests
+    displayName: npm run test
+    # we can disable this if we won't have any tests :)
+    enabled: true
+    # workingDirectory: $(projectPathPrefix)/
 
-  - task: Npm@1
-    inputs:
-      command: 'custom'
-      workingDir: $(projectPathPrefix)/
-      customCommand: 'run build'
+  - script: npm run build
+    displayName: npm run build
+    # workingDirectory: $(projectPathPrefix)/
 
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'build'
       publishLocation: 'Container'
-
-
-
-  # - script: npm install
-  #   displayName: npm install
-  #   workingDirectory: $(projectPathPrefix)/
-
-  # - script: npm run test -- --watchAll=false --passWithNoTests
-  #   displayName: npm run test
-  #   # we can disable this if we won't have any tests :)
-  #   enabled: true
-  #   workingDirectory: $(projectPathPrefix)/
-
-  # - script: npm run build
-  #   displayName: npm run build
-  #   workingDirectory: $(projectPathPrefix)/
 
   # - task: ArchiveFiles@2
   #   displayName: archive build files
