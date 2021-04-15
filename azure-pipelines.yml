@@ -34,12 +34,12 @@ steps:
   - task: Npm@1
     inputs:
       command: 'install'
-      workingDir: $(publishArtifactName)/
+      workingDir: $(publishArtifactName)
   
   - task: Npm@1
     inputs:
       command: 'custom'
-      workingDir: $(publishArtifactName)/
+      workingDir: $(publishArtifactName)
       customCommand: 'run build'
 
   - task: PublishBuildArtifacts@1
