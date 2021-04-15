@@ -24,52 +24,50 @@ steps:
       versionSpec: '14.x'
       checkLatest: false
 
-  - script: npm install
-    displayName: npm install
-    workingDirectory: $(projectPathPrefix)/
 
-  - script: npm run test -- --watchAll=false --passWithNoTests
-    displayName: npm run test
-    # we can disable this if we won't have any tests :)
-    enabled: true
-    workingDirectory: $(projectPathPrefix)/
-
-  - script: npm run build
-    displayName: npm run build
-    workingDirectory: $(projectPathPrefix)/
-
-  - task: ArchiveFiles@2
-    displayName: archive build files
-    condition: and(succeeded(), eq(variables.isMasterBranch, true))
+  - task: Npm@1
     inputs:
-      rootFolderOrFile: './front/build'
-      # might need to change below to false
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
-      replaceExistingArchive: false
-    
-  - task: ArchiveFiles@2
-    displayName: archive build files 2
-    condition: and(succeeded(), eq(variables.isMasterBranch, true))
-    inputs:
-      rootFolderOrFile: './front/node_modules'
-      # might need to change below to false
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
-      replaceExistingArchive: false
+      command: 'install'
+      workingDir: $(projectPathPrefix)/
 
-  - task: ArchiveFiles@2
-    displayName: archive build files 3
-    condition: and(succeeded(), eq(variables.isMasterBranch, true))
+  - task: Npm@1
     inputs:
-      rootFolderOrFile: './front/package.json'
-      # might need to change below to false
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
-      replaceExistingArchive: false
+      command: 'custom'
+      workingDir: $(projectPathPrefix)/
+      customCommand: 'run build'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'build'
+      publishLocation: 'Container'
+
+
+
+  # - script: npm install
+  #   displayName: npm install
+  #   workingDirectory: $(projectPathPrefix)/
+
+  # - script: npm run test -- --watchAll=false --passWithNoTests
+  #   displayName: npm run test
+  #   # we can disable this if we won't have any tests :)
+  #   enabled: true
+  #   workingDirectory: $(projectPathPrefix)/
+
+  # - script: npm run build
+  #   displayName: npm run build
+  #   workingDirectory: $(projectPathPrefix)/
+
+  # - task: ArchiveFiles@2
+  #   displayName: archive build files
+  #   condition: and(succeeded(), eq(variables.isMasterBranch, true))
+  #   inputs:
+  #     rootFolderOrFile: './front/build'
+  #     # might need to change below to false
+  #     includeRootFolder: true
+  #     archiveType: 'zip'
+  #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+  #     replaceExistingArchive: false
 
   # - task: CopyFiles@2
   #   condition: and(succeeded(), eq(variables.isMasterBranch, true))
@@ -79,13 +77,13 @@ steps:
   #     Contents: 'build/**'
   #     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-  - task: PublishBuildArtifacts@1
-    condition: and(succeeded(), eq(variables.isMasterBranch, true))
-    displayName: azure artifacts publish
-    inputs:
-      # might need to change to $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: $(publishArtifactName)
+  # - task: PublishBuildArtifacts@1
+  #   condition: and(succeeded(), eq(variables.isMasterBranch, true))
+  #   displayName: azure artifacts publish
+  #   inputs:
+  #     # might need to change to $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+  #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  #     ArtifactName: $(publishArtifactName)
 
 
 # steps:
