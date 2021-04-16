@@ -24,8 +24,8 @@ steps:
       versionSpec: '14.x'
       checkLatest: false
 
-  - script: npm install
-    workingDirectory: $(projectPathPrefix)/
+  # - script: npm install
+  #   workingDirectory: $(projectPathPrefix)/
 
   - script: ls -la $(projectPathPrefix)/
 
