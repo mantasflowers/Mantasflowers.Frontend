@@ -109,22 +109,15 @@ function ProductInformationCard(props) {
 
       setFlowerData(response.data);
     };
-
     getProductData();
-
-    // const response = axios.post(`https://mantasflowers-backend.azurewebsites.net/product/${id}`, data, {headers:
-    //   "application/json"
-    // })
-    // mes padarysim call'a i back'a, kai kazkas paspaudzia ant tam tikro produkto
-    //  mes fronte turesim to produkto id ir mes padarysim call'a kad gautumem visa likusia produkto informacija (ProductInfo)
-    // grazins mum produkta
-    // setFlower(produktas grazintas)
   }, []);
 
   return (
     <>
       {flowerData === null ? (
-        <CircularProgress />
+        <Box>
+          <CircularProgress />
+        </Box>
       ) : (
         <Paper className={classes.root}>
           <Grid container spacing={3} direction="row">
@@ -133,7 +126,7 @@ function ProductInformationCard(props) {
             </Grid>
             <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
               <Typography className={classes.title} variant="h3">
-                Rožė
+                {flowerData.name}
               </Typography>
               <Typography className={classes.subtitle} variant="subtitle1">
                 1 vnt.
