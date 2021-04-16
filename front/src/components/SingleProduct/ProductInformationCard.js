@@ -6,8 +6,9 @@ import {
   Grid,
   Chip,
   Box,
-  Divider,
+  CircularProgress,
 } from "@material-ui/core";
+import axios from "axios";
 
 import CartButton from "./CartButton";
 
@@ -92,40 +93,74 @@ function ProductInformationCard(props) {
 
   const chips = [{}, {}, {}, {}];
 
+  const [flowerData, setFlowerData] = React.useState(null);
+
+  React.useEffect(() => {
+    const getProductData = async () => {
+      let id = props.id;
+
+      const response = await axios.get(
+        `https://mantasflowers-backend.azurewebsites.net/product/${id}`
+      );
+
+      console.log("response =>", response);
+
+      // response.data name: flower, shortDescription: blablabla.....
+
+      setFlowerData(response.data);
+    };
+
+    getProductData();
+
+    // const response = axios.post(`https://mantasflowers-backend.azurewebsites.net/product/${id}`, data, {headers:
+    //   "application/json"
+    // })
+    // mes padarysim call'a i back'a, kai kazkas paspaudzia ant tam tikro produkto
+    //  mes fronte turesim to produkto id ir mes padarysim call'a kad gautumem visa likusia produkto informacija (ProductInfo)
+    // grazins mum produkta
+    // setFlower(produktas grazintas)
+  }, []);
+
   return (
-    <Paper className={classes.root}>
-      <Grid container spacing={3} direction="row">
-        <Grid item className={classes.productImageBox}>
-          <img src={props.flower.image} alt="product" />
-        </Grid>
-        <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
-          <Typography className={classes.title} variant="h3">
-            Rožė
-          </Typography>
-          <Typography className={classes.subtitle} variant="subtitle1">
-            1 vnt.
-          </Typography>
-          <Typography className={classes.description}>
-            {props.flower.description}
-          </Typography>
+    <>
+      {flowerData === null ? (
+        <CircularProgress />
+      ) : (
+        <Paper className={classes.root}>
+          <Grid container spacing={3} direction="row">
+            <Grid item className={classes.productImageBox}>
+              <img src={props.flower.image} alt="product" />
+            </Grid>
+            <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
+              <Typography className={classes.title} variant="h3">
+                Rožė
+              </Typography>
+              <Typography className={classes.subtitle} variant="subtitle1">
+                1 vnt.
+              </Typography>
+              <Typography className={classes.description}>
+                {props.flower.description}
+              </Typography>
 
-          <Box>
-            {chips.map((chip) => (
-              <Chip label="Geles" className={classes.chip} />
-            ))}
-          </Box>
+              <Box>
+                {chips.map((chip) => (
+                  <Chip label="Geles" className={classes.chip} />
+                ))}
+              </Box>
 
-          <Box className={classes.buttonsWrapper}>
-            <Typography variant="h3" className={classes.subtitle}>
-              1.5$
-            </Typography>
-            <Box>
-              <CartButton counter={0} />
-            </Box>
-          </Box>
-        </Grid>
-      </Grid>
-    </Paper>
+              <Box className={classes.buttonsWrapper}>
+                <Typography variant="h3" className={classes.subtitle}>
+                  1.5$
+                </Typography>
+                <Box>
+                  <CartButton counter={0} />
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Paper>
+      )}
+    </>
   );
 }
 

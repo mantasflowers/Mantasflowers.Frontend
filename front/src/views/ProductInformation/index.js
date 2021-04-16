@@ -27,20 +27,15 @@ function Index() {
     image: "/static/images/avatars/avatar_1.png",
   });
 
-  React.useEffect(() => {
-    // mes padarysim call'a i back'a, kai kazkas paspaudzia ant tam tikro produkto
-    //  mes fronte turesim to produkto id ir mes padarysim call'a kad gautumem visa likusia produkto informacija (ProductInfo)
-    // grazins mum produkta
-    // setFlower(produktas grazintas)
-  }, []);
-
   const classes = useStyles();
   return (
     <>
       {flower && (
         <Page className={classes.root} title="Produkto informacija">
           {/* ir per propsus perduodam i savo componenta */}
-          <ProductInformationCard flower={flower} />
+          <ProductInformationCard
+            flower={flower} //id={product.id}
+          />
         </Page>
       )}
     </>
