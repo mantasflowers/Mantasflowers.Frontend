@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
-import _ from "lodash";
 import { createMuiTheme } from "@material-ui/core";
 import typography from "./typography";
 import { strongShadows } from "./shadows";
@@ -66,7 +65,7 @@ const themeConfigs = [
 export function createTheme() {
   let themeConfig = themeConfigs[0];
 
-  let theme = createMuiTheme(_.merge({}, baseConfig, themeConfig));
+  let theme = createMuiTheme({ ...baseConfig, ...themeConfig });
 
   return theme;
 }
