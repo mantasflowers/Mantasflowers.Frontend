@@ -1,41 +1,43 @@
 import React from "react";
-import styled from "styled-components";
-import { down } from "styled-breakpoints";
+import { Grid, createStyles, makeStyles, Box } from "@material-ui/core";
 
 // Components
 
 import ProductCard from "./ProductCard";
 
-const ProductList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 30px;
-  max-width: 1140px;
-  margin: 0 auto;
-
-  ${down("md")} {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  ${down("sm")} {
-    grid-template-columns: 1fr 1fr;
-  }
-`;
-
-const ProductDiv = styled.div`
-  padding-top: 40px;
-  padding-bottom: 40px;
-`;
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    container: {
+      marginTop: "20px",
+      padding: "0 20px",
+      [theme.breakpoints.down("sm")]: {
+        justifyContent: "center",
+      },
+    },
+    product: {
+      margin: "0 auto",
+      [theme.breakpoints.down("sm")]: {
+        minWidth: "260px",
+      },
+    },
+  })
+);
 
 function ProductGrid(props) {
+  const classes = useStyles();
+
   return (
-    <ProductDiv>
-      <ProductList>
-        {props.products.map((product) => (
-          <ProductCard product={product} key={product.id} />
-        ))}
-      </ProductList>
-    </ProductDiv>
+    <Grid container spacing={6} className={classes.container}>
+      {props.products.map((product) => (
+        <Grid item md={3}>
+          <ProductCard
+            className={classes.product}
+            product={product}
+            key={product.id}
+          />
+        </Grid>
+      ))}
+    </Grid>
   );
 }
 

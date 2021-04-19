@@ -21,10 +21,8 @@ const useStyles = makeStyles((theme) => ({
 function Index() {
   const [flower, setFlower] = React.useState({
     title: "Rožė",
-    description:
-      "pati kokybiškiausia rožė pati kokybiškiausia rožė pati kokybiškiausia rožė pati kokybiškiausia rožė pati kokybiškiausia rožė",
+    description: "pati kokybiškiausia rožė pati kokybiškiausia rožė",
     price: 20,
-    image: "/static/images/avatars/avatar_1.png",
   });
 
   const classes = useStyles();
@@ -34,7 +32,7 @@ function Index() {
         <Page className={classes.root} title="Produkto informacija">
           {/* ir per propsus perduodam i savo componenta */}
           <ProductInformationCard
-            flower={flower} //id={product.id}
+          // flower={flower} //id={product.id}
           />
         </Page>
       )}

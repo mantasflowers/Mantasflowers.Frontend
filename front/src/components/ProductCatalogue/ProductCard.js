@@ -1,13 +1,19 @@
 import React from "react";
-import { Card, Typography, makeStyles, Box } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  makeStyles,
+  Grid,
+  CardHeader,
+  CardContent,
+} from "@material-ui/core";
+import classNames from "classnames";
 
 import CartButton from "../../components/SingleProduct/CartButton";
 
 const useStyles = makeStyles((theme) => ({
   mainCard: {
     backgroundColor: "#ffffff",
-
-    padding: 10,
   },
 
   productTitle: {
@@ -32,39 +38,35 @@ function ProductCard(props) {
   let product = props.product;
 
   return (
-    <Card className={classes.mainCard}>
-      <Box mb={1}>
-        <Typography
-          variant="h4"
-          component="h2"
-          className={classes.productTitle}
-        >
-          {product.name}
-        </Typography>
-      </Box>
-
-      <Box mb={1}>
-        <Typography className={classes.productStock}>
-          Liko: {product.leftInStock}
-        </Typography>
-      </Box>
-
-      <Box
-        mb={1}
-        style={{
-          display: "flex",
-          flexWrap: "nowrap",
-          justifyContent: "space-between",
-        }}
-      >
-        <Typography className={classes.productPrice}>
-          {product.price}€
-        </Typography>
-
-        <Box style={{ width: "50%" }}>
-          <CartButton counter={0} />
-        </Box>
-      </Box>
+    <Card className={classNames(classes.mainCard, props.className)}>
+      <CardHeader
+        title={
+          <Typography
+            variant="h4"
+            component="h2"
+            className={classes.productTitle}
+          >
+            {product.name}
+          </Typography>
+        }
+      />
+      <CardContent>
+        <Grid container direction="column">
+          <Grid item>
+            <Typography className={classes.productStock}>
+              Liko: {product.leftInStock}
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Grid container direction="row" justify="space-between">
+              <Typography className={classes.productPrice}>
+                {product.price}€
+              </Typography>
+              <CartButton counter={0} />
+            </Grid>
+          </Grid>
+        </Grid>
+      </CardContent>
     </Card>
   );
 }

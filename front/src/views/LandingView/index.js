@@ -1,19 +1,35 @@
 import React from "react";
 import styled from "styled-components";
-import { Box } from "@material-ui/core";
+import {
+  Box,
+  Grid,
+  Typography,
+  makeStyles,
+  createStyles,
+} from "@material-ui/core";
 
 // Components
 
 import Hero from "../../components/LandingPage/Hero";
 import ProductGrid from "../../components/ProductCatalogue/ProductGrid";
 
-const Inner = styled.div`
-  max-width: 1140;
-  margin: 0 auto;
-  padding: 2rem;
-  background: #ffffff;
-  position: relative;
-`;
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      background:
+        "linear-gradient(90deg,rgba(131, 58, 180, 1) 0%,rgba(253, 29, 29, 1) 49%,rgba(252, 176, 69, 1) 100%)",
+      //height: "600px",
+    },
+    title: {
+      margin: "80px 0",
+      textAlign: "center",
+    },
+    content: {
+      marginBottom: "80px",
+      textAlign: "center",
+    },
+  })
+);
 
 const products = [
   {
@@ -73,14 +89,18 @@ const products = [
 ];
 
 function Index() {
+  const classes = useStyles();
   return (
     <>
-      <Hero />
-      <Inner>
-        <Box style={{ marginTop: "600px" }}>
-          <ProductGrid products={products} />
-        </Box>
-      </Inner>
+      <Grid container className={classes.root} direction="column">
+        <Grid item className={classes.title}>
+          <Typography variant="h3">Mantas Flowers</Typography>
+        </Grid>
+        <Grid item className={classes.content}>
+          <Typography variant="body1">Inovative flower selling app</Typography>
+        </Grid>
+      </Grid>
+      <ProductGrid products={products} />
     </>
   );
 }
