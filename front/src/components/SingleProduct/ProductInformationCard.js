@@ -8,15 +8,15 @@ import {
   Box,
   CircularProgress,
 } from "@material-ui/core";
-import axios from "axios";
 
+import GoBackButton from "../GoBackButton";
 import CartButton from "./CartButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#ffffff",
     padding: 25,
-    width: "1020px",
+    // width: "1020px",
   },
   description: {
     color: "#000",
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 2,
   },
   productImageBox: {
-    margin: "120px auto", // xaltura
+    // margin: "120px auto", // xaltura
     textAlign: "center",
 
     [theme.breakpoints.down("sm")]: {
@@ -86,6 +86,10 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
     marginRight: 8,
   },
+  productImage: {
+    width: "60%",
+    height: "100%",
+  },
 }));
 
 function ProductInformationCard(props) {
@@ -93,24 +97,7 @@ function ProductInformationCard(props) {
 
   const chips = [{}, {}, {}, {}];
 
-  const [flowerData, setFlowerData] = React.useState(null);
-
-  React.useEffect(() => {
-    const getProductData = async () => {
-      let id = props.id;
-
-      const response = await axios.get(
-        `https://mantasflowers-backend.azurewebsites.net/product/${id}`
-      );
-
-      console.log("response =>", response);
-
-      // response.data name: flower, shortDescription: blablabla.....
-
-      setFlowerData(response.data);
-    };
-    getProductData();
-  }, []);
+  let flowerData = props.flowerData;
 
   return (
     <>
@@ -119,39 +106,48 @@ function ProductInformationCard(props) {
           <CircularProgress />
         </Box>
       ) : (
-        <Paper className={classes.root}>
-          <Grid container spacing={3} direction="row">
-            <Grid item className={classes.productImageBox}>
-              <img src={props.flower.image} alt="product" />
-            </Grid>
-            <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
-              <Typography className={classes.title} variant="h3">
-                {flowerData.name}
-              </Typography>
-              <Typography className={classes.subtitle} variant="subtitle1">
-                1 vnt.
-              </Typography>
-              <Typography className={classes.description}>
-                {props.flower.description}
-              </Typography>
-
-              <Box>
-                {chips.map((chip) => (
-                  <Chip label="Geles" className={classes.chip} />
-                ))}
-              </Box>
-
-              <Box className={classes.buttonsWrapper}>
-                <Typography variant="h3" className={classes.subtitle}>
-                  1.5$
+        <Box mb={7}>
+          <Box style={{ paddingBottom: "20px" }}>
+            <GoBackButton />
+          </Box>
+          <Paper className={classes.root}>
+            <Grid container spacing={3} direction="row">
+              <Grid item md={6} className={classes.productImageBox}>
+                <img
+                  src={flowerData.pictureUrl}
+                  alt="product"
+                  className={classes.productImage}
+                />
+              </Grid>
+              <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
+                <Typography className={classes.title} variant="h3">
+                  {flowerData.name}
                 </Typography>
-                <Box>
-                  <CartButton counter={0} />
+                <Typography className={classes.subtitle} variant="subtitle1">
+                  {flowerData.leftInStock}
+                </Typography>
+                <Typography className={classes.description}>
+                  {flowerData.shortDescription}
+                </Typography>
+
+                <Box mt="20px">
+                  {chips.map((chip) => (
+                    <Chip label="Geles" className={classes.chip} />
+                  ))}
                 </Box>
-              </Box>
+
+                <Box className={classes.buttonsWrapper}>
+                  <Typography variant="h3" className={classes.subtitle}>
+                    {flowerData.price}
+                  </Typography>
+                  <Box>
+                    <CartButton counter={0} />
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </Box>
       )}
     </>
   );

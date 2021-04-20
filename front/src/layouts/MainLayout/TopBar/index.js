@@ -13,6 +13,8 @@ import {
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "react-feather";
 
+import Logo from "../../../components/Logo";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     zIndex: theme.zIndex.drawer + 100,
@@ -42,7 +44,9 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
           </IconButton>
         </Hidden>
         <Hidden mdDown>
-          <RouterLink to="/">{/* <Logo /> */}</RouterLink>
+          <RouterLink to="/">
+            <Logo />
+          </RouterLink>
         </Hidden>
         <Box ml={2} flexGrow={1} />
       </Toolbar>

@@ -1,43 +1,49 @@
 import React, { lazy, Suspense, Fragment } from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
-import DashboardLayout from "./layouts/DashboardLayout";
 import LoadingScreen from "./components/LoadingScreen";
 
 const routesConfig = [
   {
     exact: true,
     path: "/",
-    component: () => <Redirect to="/landing" />,
+    component: () => <Redirect to="/landing/1" />,
   },
   {
     exact: true,
-    path: "/landing",
+    path: "/landing/:page",
     component: lazy(() => import("./views/LandingView")),
   },
   {
     exact: true,
-    layout: DashboardLayout,
+    path: "/flowers/:page",
+    component: lazy(() => import("./views/FlowersView")),
+  },
+  {
+    exact: true,
+    path: "/bouquets/:page",
+    component: lazy(() => import("./views/BouquetsView")),
+  },
+  {
+    exact: true,
+    path: "/product-information/:id",
+    component: lazy(() => import("./views/ProductInformation")),
+  },
+  {
+    exact: true,
     path: ["/chat/new", "/chat/:threadKey"],
     component: lazy(() => import("./views/ChatView")),
   },
   {
     exact: true,
-    layout: DashboardLayout,
     path: "/chat",
     component: () => <Redirect to="/chat/new" />,
   },
   {
     exact: true,
     path: "/profile-edit",
-    layout: DashboardLayout,
     component: lazy(() => import("./views/ProfileView")),
   },
-  {
-    exact: true,
-    path: "/product-information",
-    // layout: DashboardLayout,
-    component: lazy(() => import("./views/ProductInformation")),
-  },
+
   {
     exact: true,
     path: "/404",

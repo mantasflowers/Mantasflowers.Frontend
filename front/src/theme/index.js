@@ -45,18 +45,18 @@ const themeConfigs = [
       },
       background: {
         default: "#282C34",
-        dark: "#1c2025",
-        paper: "#282C34",
+        dark: "#B9D6F2",
+        paper: "#006DAA",
       },
       primary: {
-        main: "#8a85ff",
+        main: "#061A40",
       },
       secondary: {
-        main: "#8a85ff",
+        main: "#0353A4",
       },
       text: {
-        primary: "#e6e5e8",
-        secondary: "#adb0bb",
+        primary: "#006DAA",
+        secondary: "#006DAA",
       },
     },
     shadows: strongShadows,

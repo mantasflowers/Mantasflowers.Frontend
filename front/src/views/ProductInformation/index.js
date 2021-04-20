@@ -1,43 +1,52 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core";
+import React, { useEffect } from "react";
+import { makeStyles, Box } from "@material-ui/core";
+import axios from "axios";
 
 import Page from "../../components/Page";
-
 import ProductInformationCard from "../../components/SingleProduct/ProductInformationCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    justifyContent: "center",
     minHeight: "100%",
+    paddingTop: 80,
+  },
+  productInformationBox: {
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     padding: theme.spacing(3),
-    paddingTop: 80,
-    paddingBottom: 80,
-    backgroundColor: theme.palette.background.default,
   },
 }));
 
 function Index() {
-  const [flower, setFlower] = React.useState({
-    title: "Rožė",
-    description:
-      "pati kokybiškiausia rožė pati kokybiškiausia rožė pati kokybiškiausia rožė pati kokybiškiausia rožė pati kokybiškiausia rožė",
-    price: 20,
-    image: "/static/images/avatars/avatar_1.png",
-  });
-
   const classes = useStyles();
+
+  const [flowerData, setFlowerData] = React.useState(null);
+
+  useEffect(() => {
+    const getProductData = async () => {
+      let path = window.location.pathname.split("/");
+      let productId = path[2];
+
+      const response = await axios.get(`/product/${productId}`, {
+        headers: {
+          accept: "application/json",
+        },
+      });
+
+      setFlowerData(response.data);
+    };
+
+    getProductData();
+  }, []);
+
   return (
     <>
-      {flower && (
-        <Page className={classes.root} title="Produkto informacija">
-          {/* ir per propsus perduodam i savo componenta */}
-          <ProductInformationCard
-            flower={flower} //id={product.id}
-          />
-        </Page>
-      )}
+      <Page className={classes.root} title="Produkto informacija">
+        <Box className={classes.productInformationBox}>
+          <ProductInformationCard flowerData={flowerData} />
+        </Box>
+      </Page>
     </>
   );
 }

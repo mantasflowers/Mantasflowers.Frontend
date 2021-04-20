@@ -25,21 +25,21 @@ import NavItem from "./NavItem";
 
 const navConfig = [
   {
-    subheader: "Views",
+    subheader: "Navigacija",
     items: [
       {
-        title: "Login",
-        href: "/login",
+        title: "Visi pasiūlymai",
+        href: "/landing",
         icon: LockIcon,
       },
       {
-        title: "Profile Edit",
+        title: "Gėlės",
         icon: UserIcon,
-        href: "/profile-edit",
+        href: "/landing",
       },
       {
-        title: "Chat",
-        href: "/chat",
+        title: "Puokštės",
+        href: "/landing",
         icon: MessageCircleIcon,
       },
     ],
@@ -100,17 +100,12 @@ function reduceChildRoutes({ acc, pathname, item, depth = 0 }) {
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
-    width: 256,
+    width: 175,
   },
   desktopDrawer: {
-    width: 256,
+    width: 175,
     top: 64,
     height: "calc(100% - 64px)",
-  },
-  avatar: {
-    cursor: "pointer",
-    width: 64,
-    height: 64,
   },
 }));
 
@@ -133,31 +128,7 @@ function NavBar({ openMobile, onMobileClose }) {
             <RouterLink to="/">{/* <Logo /> */}</RouterLink>
           </Box>
         </Hidden>
-        <Box p={2}>
-          <Box display="flex" justifyContent="center">
-            <RouterLink to="/app/account">
-              <Avatar
-                alt="User"
-                className={classes.avatar}
-                src={"/static/avatar-default.jpg"}
-              />
-            </RouterLink>
-          </Box>
-          <Box mt={2} textAlign="center">
-            <Link
-              component={RouterLink}
-              to="/profile-edit"
-              variant="h5"
-              color="textPrimary"
-              underline="none"
-            >
-              {`Martynas Padarauskas`}
-            </Link>
-            <Typography variant="body2" color="textSecondary">
-              Expert @ using MUI templates
-            </Typography>
-          </Box>
-        </Box>
+
         <Divider />
         <Box p={2}>
           {navConfig.map((config) => (

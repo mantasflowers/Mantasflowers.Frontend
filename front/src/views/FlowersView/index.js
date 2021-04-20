@@ -27,7 +27,7 @@ function Index() {
   const history = useHistory();
 
   const paginationClick = (e, number) => {
-    history.push(`/landing/${number}`);
+    history.push(`/flowers/${number}`);
     setPage(page + 1);
   };
 
@@ -39,15 +39,13 @@ function Index() {
       let page = path[2];
 
       const response = await axios.get(
-        `/product?page=${page}&pageSize=3&categories=flower&categories=bouquet`,
+        `/product?page=${page}&pageSize=3&categories=flower`,
         {
           headers: {
             accept: "application/json",
           },
         }
       );
-
-      console.log("response.data", response.data);
 
       setPageCount(response.data.totalPages);
       setProducts(response.data.items);

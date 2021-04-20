@@ -4,7 +4,7 @@ function Logo(props) {
   return (
     <img
       alt="Logo"
-      // src="/static/kilo-logo.png"
+      src="/static/rose.jpeg"
       {...props}
       style={{ width: 75, height: 50 }}
     />

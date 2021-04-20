@@ -6,6 +6,7 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 
 const useStyles = makeStyles((theme) => ({
   button: {
+    zIndex: 100,
     borderRadius: 50,
     background: "#FFF",
     textTransform: "initial",
@@ -28,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   fabWrapper: {
+    zIndex: 100,
     backgroundColor: theme.palette.primary.main,
     width: "100%",
     borderRadius: 50,
@@ -75,11 +77,29 @@ function CartButton(props) {
     <>
       {clicked ? (
         <Grid className={classes.fabWrapper}>
-          <Fab size="small" onClick={handleDecrement} className={classes.fab}>
+          <Fab
+            size="small"
+            onClick={(event) => {
+              event.stopPropagation();
+              event.preventDefault();
+              handleDecrement();
+            }}
+            onMouseDown={(event) => event.stopPropagation()}
+            className={classes.fab}
+          >
             <RemoveIcon className={classes.fabIcon} />
           </Fab>
           {counter}
-          <Fab size="small" onClick={handleIncrement} className={classes.fab}>
+          <Fab
+            size="small"
+            onClick={(event) => {
+              event.stopPropagation();
+              event.preventDefault();
+              handleIncrement();
+            }}
+            onMouseDown={(event) => event.stopPropagation()}
+            className={classes.fab}
+          >
             <AddIcon className={classes.fabIcon} />
           </Fab>
         </Grid>
@@ -87,7 +107,12 @@ function CartButton(props) {
         <Button
           variant="contained"
           className={classes.button}
-          onClick={() => handleClick()}
+          onClick={(event) => {
+            event.stopPropagation();
+            event.preventDefault();
+            handleClick();
+          }}
+          onMouseDown={(event) => event.stopPropagation()}
         >
           <AddShoppingCartIcon />Į krepšelį
         </Button>
