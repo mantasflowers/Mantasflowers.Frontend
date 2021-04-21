@@ -1,0 +1,69 @@
+# Schema reference:
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema
+
+variables:
+  isMasterBranch: $[eq(variables['Build.SourceBranch'], 'refs/heads/ci_cd')]
+  publishArtifactName: 'mantasflowers-frontend'
+  projectPathPrefix: './front'
+  __Githash: $(Build.SourceVersion)
+
+pool:
+  vmImage: ubuntu-18.04
+
+# Run on every push
+# trigger:
+
+# Run on pull request to master
+pr: [ master ]
+
+
+steps:
+  - task: Npm@1
+    inputs:
+      command: 'install'
+      workingDir: '$(projectPathPrefix)'
+  - script: npm install serve
+  - task: Npm@1
+    inputs:
+      command: 'custom'
+      workingDir: '$(projectPathPrefix)'
+      customCommand: 'build'
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(projectPathPrefix)/build/'
+      includeRootFolder: false
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+      replaceExistingArchive: true
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+      ArtifactName: '$(publishArtifactName)'
+      publishLocation: 'Container'
+
+
+# steps:
+#   - task: NodeTool@0
+#     displayName: install node tool
+#     inputs:
+#       versionSpec: '14.x'
+#       checkLatest: false
+
+#   # - script: npm install
+#   #   workingDirectory: $(projectPathPrefix)/
+
+#   - script: ls -la $(projectPathPrefix)/
+
+#   - task: ArchiveFiles@2
+#     inputs:
+#       rootFolderOrFile: $(projectPathPrefix)/
+#       includeRootFolder: false
+#       archiveType: 'zip'
+#       archiveFile: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+#       replaceExistingArchive: true
+  
+#   - task: PublishBuildArtifacts@1
+#     inputs:
+#       PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(publishArtifactName).zip'
+#       ArtifactName: $(publishArtifactName)
+#       publishLocation: 'Container'

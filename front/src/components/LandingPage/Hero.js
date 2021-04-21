@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 const StyledHero = styled.div`
   border-bottom: 1px solid #000000;
@@ -35,6 +36,10 @@ const Subtitle = styled.h5`
 `;
 
 function Hero() {
+axios.get("https://mantasflowers-backend.azurewebsites.net/product?page=1&pageSize=10&categories=flower&categories=bouquet")
+	.then((resp) => {
+		console.log(resp);
+	})
   return (
     <StyledHero>
       <HeroContentBox>
