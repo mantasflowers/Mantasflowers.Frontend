@@ -27,7 +27,7 @@ steps:
     inputs:
       command: 'custom'
       workingDir: '$(projectPathPrefix)'
-      customCommand: 'build'
+      customCommand: 'run build'
   - task: ArchiveFiles@2
     inputs:
       rootFolderOrFile: '$(projectPathPrefix)/build/'
