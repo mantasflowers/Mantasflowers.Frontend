@@ -6,12 +6,12 @@ import {
   AppBar,
   Box,
   Hidden,
-  IconButton,
+  // IconButton,
   Toolbar,
   makeStyles,
-  SvgIcon,
+  // SvgIcon,
 } from "@material-ui/core";
-import { Menu as MenuIcon } from "react-feather";
+// import { Menu as MenuIcon } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({
   root: {

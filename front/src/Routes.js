@@ -28,16 +28,7 @@ const routesConfig = [
     path: "/product-information/:id",
     component: lazy(() => import("./views/ProductInformation")),
   },
-  {
-    exact: true,
-    path: ["/chat/new", "/chat/:threadKey"],
-    component: lazy(() => import("./views/ChatView")),
-  },
-  {
-    exact: true,
-    path: "/chat",
-    component: () => <Redirect to="/chat/new" />,
-  },
+
   {
     exact: true,
     path: "/profile-edit",

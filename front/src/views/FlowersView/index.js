@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Box } from "@material-ui/core";
+import { Box, CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import Pagination from "@material-ui/lab/Pagination";
 import { useHistory } from "react-router";
@@ -39,7 +39,7 @@ function Index() {
       let page = path[2];
 
       const response = await axios.get(
-        `/product?page=${page}&pageSize=3&categories=flower`,
+        `/product?page=${page}&pageSize=10&categories=flower`,
         {
           headers: {
             accept: "application/json",
@@ -60,7 +60,15 @@ function Index() {
       <Inner>
         <Box style={{ marginTop: "600px" }}>
           <NavBar />
-          {products && <ProductGrid products={products} />}
+          {products ? (
+            <ProductGrid products={products} />
+          ) : (
+            <Box
+              style={{ textAlign: "center", marginBottom: 40, marginTop: 40 }}
+            >
+              <CircularProgress />
+            </Box>
+          )}
         </Box>
 
         <Box style={{ display: "flex", justifyContent: "center" }}>

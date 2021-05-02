@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Box } from "@material-ui/core";
+import { Box, CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import Pagination from "@material-ui/lab/Pagination";
 import { useHistory } from "react-router";
@@ -39,15 +39,13 @@ function Index() {
       let page = path[2];
 
       const response = await axios.get(
-        `/product?page=${page}&pageSize=3&categories=flower&categories=bouquet`,
+        `/product?page=${page}&pageSize=10&categories=flower&categories=bouquet`,
         {
           headers: {
             accept: "application/json",
           },
         }
       );
-
-      console.log("response.data", response.data);
 
       setPageCount(response.data.totalPages);
       setProducts(response.data.items);
@@ -62,7 +60,15 @@ function Index() {
       <Inner>
         <Box style={{ marginTop: "600px" }}>
           <NavBar />
-          {products && <ProductGrid products={products} />}
+          {products ? (
+            <ProductGrid products={products} />
+          ) : (
+            <Box
+              style={{ textAlign: "center", marginBottom: 40, marginTop: 40 }}
+            >
+              <CircularProgress />
+            </Box>
+          )}
         </Box>
 
         <Box style={{ display: "flex", justifyContent: "center" }}>

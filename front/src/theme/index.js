@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable import/prefer-default-export */
 import _ from "lodash";
-import { createMuiTheme } from "@material-ui/core";
+import { colors, createMuiTheme } from "@material-ui/core";
 import typography from "./typography";
 import { strongShadows } from "./shadows";
 
@@ -36,7 +36,7 @@ const themeConfigs = [
     palette: {
       type: "dark",
       action: {
-        active: "rgba(255, 255, 255, 0.54)",
+        active: colors.blueGrey[600],
         hover: "rgba(255, 255, 255, 0.04)",
         selected: "rgba(255, 255, 255, 0.08)",
         disabled: "rgba(255, 255, 255, 0.26)",
@@ -46,7 +46,7 @@ const themeConfigs = [
       background: {
         default: "#282C34",
         dark: "#B9D6F2",
-        paper: "#006DAA",
+        paper: "#ffffff",
       },
       primary: {
         main: "#061A40",

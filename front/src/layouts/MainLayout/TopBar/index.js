@@ -10,10 +10,16 @@ import {
   Toolbar,
   makeStyles,
   SvgIcon,
+  Button,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "react-feather";
+import { useSelector } from "react-redux";
+import { logout } from "../../../actions/accountActions";
+import { useDispatch } from "react-redux";
 
 import Logo from "../../../components/Logo";
+import LoginDrawer from "../../../components/LoginDrawer";
+import RegisterDrawer from "../../../components/RegisterDrawer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
 
 function TopBar({ className, onMobileNavOpen, ...rest }) {
   const classes = useStyles();
+  const account = useSelector((state) => state.account);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <AppBar className={clsx(classes.root, className)} {...rest}>
@@ -48,7 +60,23 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
             <Logo />
           </RouterLink>
         </Hidden>
-        <Box ml={2} flexGrow={1} />
+        <Box ml={2} flexGrow={1}>
+          {account.user === null ? (
+            <Box style={{ display: "flex" }}>
+              <LoginDrawer openDrawerName={"Prisijungti"} />
+              {/* <RegisterDrawer openDrawerName={"Registruotis"} /> */}
+            </Box>
+          ) : (
+            <Button
+              style={{ textTransform: "initial" }}
+              onClick={() => {
+                handleLogout();
+              }}
+            >
+              Atsijungti
+            </Button>
+          )}
+        </Box>
       </Toolbar>
     </AppBar>
   );
