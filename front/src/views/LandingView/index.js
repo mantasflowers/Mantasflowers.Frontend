@@ -10,6 +10,7 @@ import Page from "../../components/Page";
 import Hero from "../../components/LandingPage/Hero";
 import ProductGrid from "../../components/ProductCatalogue/ProductGrid";
 import NavBar from "../../components/LandingPage/NavBar";
+import CartPopUp from "../../features/carts/CartPopup";
 
 const Inner = styled.div`
   max-width: 1140;
@@ -54,6 +55,8 @@ function Index() {
     getProductData();
   }, [page]);
 
+  console.log({ products });
+
   return (
     <Page>
       <Hero />
@@ -80,6 +83,7 @@ function Index() {
           />
         </Box>
       </Inner>
+      <CartPopUp deviceType={{ desktop: true }} />
     </Page>
   );
 }

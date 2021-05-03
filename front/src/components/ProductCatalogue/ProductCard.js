@@ -94,7 +94,7 @@ function ProductCard(props) {
               </Typography>
 
               <Box style={{ width: "50%" }}>
-                <CartButton counter={0} />
+                <CartButton product={product} />
               </Box>
             </Box>
           </Box>

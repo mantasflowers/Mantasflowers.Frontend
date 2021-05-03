@@ -15,20 +15,12 @@ export const REGISTER_SUCCESS = "@account/register-success";
 export const REGISTER_FAILURE = "@account/register-failure";
 export const SET_CURRENT_USER = "@account/set-current-user";
 
-/**
- * function to dispatch redux LOGIN_REQUEST and call the authService logic component to validate ant set UserToken to localstorage
- * @param {String} email
- * @param {String} password
- */
-
 export function login(email, password) {
   return async (dispatch) => {
     try {
       dispatch({ type: LOGIN_REQUEST });
 
       const user = await authService.loginWithEmailAndPassword(email, password);
-
-      console.log("user in actions", user);
 
       dispatch({
         type: LOGIN_SUCCESS,
@@ -43,11 +35,6 @@ export function login(email, password) {
   };
 }
 
-/**
- * function to set UserData to redux store
- * @param {Object} user
- */
-
 export function setUserData(user) {
   return (dispatch) =>
     dispatch({
@@ -57,10 +44,6 @@ export function setUserData(user) {
       },
     });
 }
-
-/**
- * function which calls authService to delete the UserToken from localStorage -> logout
- */
 
 export function logout() {
   return async (dispatch) => {
@@ -72,17 +55,14 @@ export function logout() {
   };
 }
 
-/**
- * function to register an user
- * @param {Object} data
- */
-
-export function register(data) {
+export function registerUser(email, password) {
   return async (dispatch) => {
     try {
       dispatch({ type: REGISTER_REQUEST });
 
-      const user = await authService.registerUser(data);
+      const response = await authService.registerUser(email, password);
+
+      const user = await authService.loginWithEmailAndPassword(email, password);
 
       dispatch({
         type: REGISTER_SUCCESS,

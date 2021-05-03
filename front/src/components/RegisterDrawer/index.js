@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Button } from "@material-ui/core";
 
 import ReusableDrawer from "../../components/ReusableDrawer";
+import RegisterForm from "./RegisterForm";
 
 function RegisterDrawer(props) {
   const [isShowing, setIsShowing] = useState(false);
@@ -23,7 +24,7 @@ function RegisterDrawer(props) {
           setIsShowing={setIsShowing}
           anchor={"left"}
         >
-          <h1>REGISTER</h1>
+          <RegisterForm />
         </ReusableDrawer>
       </Box>
     </>

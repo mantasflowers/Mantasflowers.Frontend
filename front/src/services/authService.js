@@ -19,17 +19,21 @@ class AuthService {
     );
   };
 
-  registerUser = (data) =>
+  registerUser = (email, password) =>
     new Promise((resolve, reject) => {
       axios
-        .post("/auth/register", data, {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
+        .post(
+          "/userbase/create-user",
+          { email, password },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((response) => {
           if (response) {
-            resolve(response.data.user);
+            resolve(response.data);
           } else {
             reject(response.data.error);
           }
@@ -130,7 +134,7 @@ class AuthService {
   setSession = (accessToken) => {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
-      axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
+      axios.defaults.headers.common.Authorization = `${accessToken}`;
     } else {
       localStorage.removeItem("accessToken");
       delete axios.defaults.headers.common.Authorization;
@@ -144,9 +148,15 @@ class AuthService {
       return false;
     }
 
-    const decoded = jwtDecode(accessToken);
-    const currentTime = Date.now() / 1000;
+    console.log({ accessToken });
 
+    const decoded = jwtDecode(accessToken);
+
+    console.log({ decoded });
+    const currentTime = Date.now() / 1000;
+    console.log({ decoded });
+
+    console.log(decoded.exp > currentTime);
     return decoded.exp > currentTime;
   };
 

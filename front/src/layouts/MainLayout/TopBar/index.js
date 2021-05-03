@@ -64,7 +64,7 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
           {account.user === null ? (
             <Box style={{ display: "flex" }}>
               <LoginDrawer openDrawerName={"Prisijungti"} />
-              {/* <RegisterDrawer openDrawerName={"Registruotis"} /> */}
+              <RegisterDrawer openDrawerName={"Registruotis"} />
             </Box>
           ) : (
             <Button

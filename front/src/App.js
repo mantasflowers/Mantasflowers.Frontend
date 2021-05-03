@@ -16,6 +16,8 @@ import { createTheme } from "./theme";
 // Routes ~
 import Routes from "./Routes";
 
+import Auth from "./components/Auth";
+
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const useStyles = makeStyles(() =>
@@ -51,9 +53,11 @@ function App() {
     <ThemeProvider theme={createTheme()}>
       <StylesProvider jss={jss}>
         <SnackbarProvider maxSnack={1}>
-          <Router>
-            <Routes />
-          </Router>
+          <Auth>
+            <Router>
+              <Routes />
+            </Router>
+          </Auth>
         </SnackbarProvider>
       </StylesProvider>
     </ThemeProvider>

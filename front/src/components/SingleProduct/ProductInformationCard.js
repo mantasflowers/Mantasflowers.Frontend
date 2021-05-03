@@ -97,11 +97,11 @@ function ProductInformationCard(props) {
 
   const chips = [{}, {}, {}, {}];
 
-  let flowerData = props.flowerData;
+  let product = props.flowerData;
 
   return (
     <>
-      {flowerData === null ? (
+      {product === null ? (
         <Box>
           <CircularProgress />
         </Box>
@@ -114,20 +114,20 @@ function ProductInformationCard(props) {
             <Grid container spacing={3} direction="row">
               <Grid item md={6} className={classes.productImageBox}>
                 <img
-                  src={flowerData.pictureUrl}
+                  src={product.pictureUrl}
                   alt="product"
                   className={classes.productImage}
                 />
               </Grid>
               <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
                 <Typography className={classes.title} variant="h3">
-                  {flowerData.name}
+                  {product.name}
                 </Typography>
                 <Typography className={classes.subtitle} variant="subtitle1">
-                  {flowerData.leftInStock}
+                  {product.leftInStock}
                 </Typography>
                 <Typography className={classes.description}>
-                  {flowerData.shortDescription}
+                  {product.shortDescription}
                 </Typography>
 
                 <Box mt="20px">
@@ -138,10 +138,10 @@ function ProductInformationCard(props) {
 
                 <Box className={classes.buttonsWrapper}>
                   <Typography variant="h3" className={classes.subtitle}>
-                    {flowerData.price}
+                    {product.price}
                   </Typography>
                   <Box>
-                    <CartButton counter={0} />
+                    <CartButton product={product} />
                   </Box>
                 </Box>
               </Grid>

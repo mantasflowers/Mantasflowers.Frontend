@@ -4,6 +4,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  REGISTER_SUCCESS,
   LOGOUT,
   SILENT_LOGIN,
 } from "../actions/accountActions";
@@ -22,6 +23,14 @@ const accountReducer = (state = initialState, action) => {
     }
 
     case LOGIN_SUCCESS: {
+      const { user } = action.payload;
+
+      return produce(state, (draft) => {
+        draft.user = user;
+      });
+    }
+
+    case REGISTER_SUCCESS: {
       const { user } = action.payload;
 
       return produce(state, (draft) => {

@@ -1,122 +1,101 @@
 import React, { useState } from "react";
-import { makeStyles, Button, Grid, Fab } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
+import { Button, Typography } from "@material-ui/core";
+import { useCart } from "../../contexts/cart/useCart";
+import styled from "styled-components";
+import { themeGet } from "@styled-system/theme-get";
+import { CartIcon } from "../../assets/icons/CartIcon";
+import { Counter } from "./Counter";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    zIndex: 100,
-    borderRadius: 50,
-    background: "#FFF",
-    textTransform: "initial",
-    color: theme.palette.primary.main,
-    "&:hover": {
-      background: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText, // default - balta
-    },
-  },
-  fab: {
-    backgroundColor: "unset",
-    boxShadow: "unset",
-    "&:hover": {
-      background: "unset",
-    },
-    "&.Mui-disabled": {
-      background: "unset",
-    },
-    color: theme.palette.primary.contrastText,
-  },
+export const ProductCartWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-  fabWrapper: {
-    zIndex: 100,
-    backgroundColor: theme.palette.primary.main,
-    width: "100%",
-    borderRadius: 50,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    textAlign: "center",
-    alignItems: "center",
-  },
-  fabIcon: {
-    fontSize: 16,
-  },
-  buttonsWrapper: {
-    justifyContent: "space-between",
-    marginTop: theme.spacing(6),
-  },
-  rightSideWrapper: {
-    borderLeft: "2px solid rgba(0,0,0,0.1)", // xaltura
-  },
-}));
+export const ProductCartBtn = styled.div`
+  .card-counter {
+    height: 48px;
+    width: 130px;
+
+    .control-button {
+      padding: 10px 15px;
+    }
+  }
+
+  .cart-button {
+    padding-left: 30px;
+
+    .btn-icon {
+      margin-right: 5px;
+
+      svg {
+        width: 14px;
+        height: auto;
+        @media (max-width: 990px) {
+          width: 14px;
+          margin-right: 8px;
+        }
+      }
+    }
+  }
+  .quantity {
+    width: 115px;
+    height: 38px;
+  }
+`;
+
+export const ButtonText = styled.span`
+  /* @media (max-width: 767px) {
+    display: none;
+  } */
+`;
 
 function CartButton(props) {
-  const classes = useStyles();
+  const { addItem, removeItem, isInCart, getItem } = useCart();
+  const data = props.product;
 
-  const [clicked, setClicked] = useState(false);
-  const [counter, setCounter] = useState(props.counter);
-
-  const handleClick = () => {
-    setClicked(!clicked);
-    if (counter === 0) {
-      setCounter((s) => s + 1);
-    }
+  const handleAddClick = (e) => {
+    e.stopPropagation();
+    addItem(data);
   };
 
-  const handleIncrement = () => setCounter((s) => s + 1);
-
-  const handleDecrement = () => {
-    if (counter === 1) {
-      setClicked(!clicked);
-      setCounter(0);
-    } else setCounter((s) => s - 1);
+  const handleRemoveClick = (e) => {
+    e.stopPropagation();
+    removeItem(data);
   };
 
   return (
     <>
-      {clicked ? (
-        <Grid className={classes.fabWrapper}>
-          <Fab
-            size="small"
-            onClick={(event) => {
-              event.stopPropagation();
-              event.preventDefault();
-              handleDecrement();
-            }}
-            onMouseDown={(event) => event.stopPropagation()}
-            className={classes.fab}
-          >
-            <RemoveIcon className={classes.fabIcon} />
-          </Fab>
-          {counter}
-          <Fab
-            size="small"
-            onClick={(event) => {
-              event.stopPropagation();
-              event.preventDefault();
-              handleIncrement();
-            }}
-            onMouseDown={(event) => event.stopPropagation()}
-            className={classes.fab}
-          >
-            <AddIcon className={classes.fabIcon} />
-          </Fab>
-        </Grid>
-      ) : (
-        <Button
-          variant="contained"
-          className={classes.button}
-          onClick={(event) => {
-            event.stopPropagation();
-            event.preventDefault();
-            handleClick();
-          }}
-          onMouseDown={(event) => event.stopPropagation()}
-        >
-          <AddShoppingCartIcon />Į krepšelį
-        </Button>
-      )}
+      <ProductCartWrapper>
+        <ProductCartBtn>
+          {!isInCart(data.id) ? (
+            <Button
+              // className="cart-button"
+              style={{ textTransform: "initial" }}
+              color="primary"
+              size="small"
+              onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                handleAddClick(event);
+              }}
+              onMouseDown={(event) => event.stopPropagation()}
+            >
+              <CartIcon mr={2} />
+              <ButtonText>
+                <Typography>į krepšelį</Typography>
+              </ButtonText>
+            </Button>
+          ) : (
+            <Counter
+              value={getItem(data.id).quantity || 0}
+              onDecrement={handleRemoveClick}
+              onIncrement={handleAddClick}
+              // className="card-counter"
+              variant="altHorizontal"
+            />
+          )}
+        </ProductCartBtn>
+      </ProductCartWrapper>
     </>
   );
 }

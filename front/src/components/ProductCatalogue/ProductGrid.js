@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { down } from "styled-breakpoints";
 
 // Components
 
@@ -13,11 +12,10 @@ const ProductList = styled.div`
   max-width: 1140px;
   margin: 0 auto;
 
-  ${down("md")} {
+  @media screen and (max-width: 768px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
-
-  ${down("sm")} {
+  @media screen and (max-width: 450px) {
     grid-template-columns: 1fr 1fr;
   }
 `;
