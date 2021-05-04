@@ -60,5 +60,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://localhost:5001"
+  "proxy": "https://mantasflowers-backend.azurewebsites.net"
 }

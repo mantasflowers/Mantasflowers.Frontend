@@ -23,7 +23,7 @@ class AuthService {
     new Promise((resolve, reject) => {
       axios
         .post(
-          "/userbase/create-user",
+          "/user/create",
           { email, password },
           {
             headers: {
@@ -35,11 +35,14 @@ class AuthService {
           if (response) {
             resolve(response.data);
           } else {
-            reject(response.data.error);
+            let msg = "Sistemos klaida!";
+            reject(msg);
           }
         })
         .catch((error) => {
-          reject(error);
+          let msg = "Sistemos klaida!";
+
+          reject(msg);
         });
     });
 
@@ -61,7 +64,7 @@ class AuthService {
     new Promise((resolve, reject) => {
       axios
         .post(
-          "/userbase/tokens",
+          "/authentication/login",
           { email, password },
           {
             headers: {
@@ -70,8 +73,6 @@ class AuthService {
           }
         )
         .then((response) => {
-          console.log("response in service ->", response);
-
           if (response.data.idToken) {
             this.setSession(response.data.idToken);
             resolve(response.data);
@@ -82,10 +83,10 @@ class AuthService {
         .catch((error) => {
           let errorMsg = error.response.data;
 
-          let msg;
+          let msg = "Sistemos klaida!";
 
           if (errorMsg === "EMAIL_NOT_FOUND") {
-            msg = "Tokio vartotojo sistemoje nėra!";
+            msg = "Sistemos klaida!";
           }
 
           if (errorMsg === "INVALID_PASSWORD") {
