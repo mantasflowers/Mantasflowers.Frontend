@@ -18,9 +18,15 @@ const Inner = styled.div`
   padding: 2rem;
   background: #b5cb9f;
   position: relative;
+
+  @media (max-width: 580px) {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 10px;
+  }
 `;
 
-function Index() {
+function Index({ deviceType }) {
   const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -55,8 +61,6 @@ function Index() {
     getProductData();
   }, [page]);
 
-  console.log({ products });
-
   return (
     <Page>
       <Hero />
@@ -83,7 +87,7 @@ function Index() {
           />
         </Box>
       </Inner>
-      <CartPopUp deviceType={{ desktop: true }} />
+      <CartPopUp deviceType={deviceType} />
     </Page>
   );
 }

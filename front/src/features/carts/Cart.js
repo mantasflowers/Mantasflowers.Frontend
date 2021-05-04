@@ -28,13 +28,6 @@ import { useCart } from "../../contexts/cart/useCart";
 import { CartItem } from "./CartItem/CartItem";
 // import Coupon from "features/coupon/coupon";
 
-// type CartPropsType = {
-//   style?: any;
-//   className?: string;
-//   scrollbarHeight?: string;
-//   onCloseBtnClick?: (e: any) => void;
-// };
-
 const Cart = ({ style, className, onCloseBtnClick, scrollbarHeight }) => {
   const {
     items,

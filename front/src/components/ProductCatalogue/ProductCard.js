@@ -94,7 +94,7 @@ function ProductCard(props) {
                 {product.price}€
               </Typography>
 
-              <Box style={{ width: "50%" }}>
+              <Box>
                 <CartButton product={product} />
               </Box>
             </Box>

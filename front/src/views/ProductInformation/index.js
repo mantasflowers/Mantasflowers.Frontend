@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Index() {
+function Index({ deviceType }) {
   const classes = useStyles();
 
   const [flowerData, setFlowerData] = React.useState(null);
@@ -48,7 +48,7 @@ function Index() {
         <Box className={classes.productInformationBox}>
           <ProductInformationCard flowerData={flowerData} />
         </Box>
-        <CartPopUp deviceType={{ desktop: true }} />
+        <CartPopUp deviceType={deviceType} />
       </Page>
     </>
   );

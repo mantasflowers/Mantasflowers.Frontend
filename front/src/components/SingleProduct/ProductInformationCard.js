@@ -11,12 +11,14 @@ import {
 
 import GoBackButton from "../GoBackButton";
 import CartButton from "./CartButton";
+import { CURRENCY } from "../../utils/constant";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
     padding: 25,
     // width: "1020px",
+    // width: "70%",
   },
   description: {
     color: "#000",
@@ -106,7 +108,7 @@ function ProductInformationCard(props) {
           <CircularProgress />
         </Box>
       ) : (
-        <Box mb={7}>
+        <Box mb={7} style={{ width: "70%", margin: "80px auto" }}>
           <Box style={{ paddingBottom: "20px" }}>
             <GoBackButton />
           </Box>
@@ -120,25 +122,20 @@ function ProductInformationCard(props) {
                 />
               </Grid>
               <Grid xs={12} md={6} item className={classes.rightSideWrapper}>
-                <Typography className={classes.title} variant="h3">
+                <Typography className={classes.title} variant="h2">
                   {product.name}
-                </Typography>
-                <Typography className={classes.subtitle} variant="subtitle1">
-                  {product.leftInStock}
                 </Typography>
                 <Typography className={classes.description}>
                   {product.shortDescription}
                 </Typography>
-
-                <Box mt="20px">
-                  {chips.map((chip) => (
-                    <Chip label="Geles" className={classes.chip} />
-                  ))}
-                </Box>
+                <Typography className={classes.subtitle} variant="subtitle1">
+                  Liko: {product.leftInStock}
+                </Typography>
 
                 <Box className={classes.buttonsWrapper}>
-                  <Typography variant="h3" className={classes.subtitle}>
+                  <Typography variant="h4" className={classes.subtitle}>
                     {product.price}
+                    {CURRENCY}
                   </Typography>
                   <Box>
                     <CartButton product={product} />

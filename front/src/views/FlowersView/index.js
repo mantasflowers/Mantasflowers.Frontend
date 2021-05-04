@@ -20,7 +20,7 @@ const Inner = styled.div`
   position: relative;
 `;
 
-function Index() {
+function Index({ deviceType }) {
   const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
   const [pageCount, setPageCount] = useState(1);
@@ -81,7 +81,7 @@ function Index() {
           />
         </Box>
       </Inner>
-      <CartPopUp deviceType={{ desktop: true }} />
+      <CartPopUp deviceType={deviceType} />
     </Page>
   );
 }

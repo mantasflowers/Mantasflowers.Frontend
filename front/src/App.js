@@ -9,6 +9,7 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 import { SnackbarProvider } from "notistack";
+import { useMedia } from "./utils/useMedia";
 
 // Base theme ~
 import { createTheme } from "./theme";
@@ -48,6 +49,9 @@ const useStyles = makeStyles(() =>
 
 function App() {
   useStyles();
+  const mobile = useMedia("(max-width: 580px)");
+  const tablet = useMedia("(max-width: 991px)");
+  const desktop = useMedia("(min-width: 992px)");
 
   return (
     <ThemeProvider theme={createTheme()}>
@@ -55,7 +59,7 @@ function App() {
         <SnackbarProvider maxSnack={1}>
           <Auth>
             <Router>
-              <Routes />
+              <Routes deviceType={{ mobile, tablet, desktop }} />
             </Router>
           </Auth>
         </SnackbarProvider>

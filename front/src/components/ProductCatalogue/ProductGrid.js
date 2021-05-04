@@ -17,6 +17,7 @@ const ProductList = styled.div`
   }
   @media screen and (max-width: 450px) {
     grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
   }
 `;
 

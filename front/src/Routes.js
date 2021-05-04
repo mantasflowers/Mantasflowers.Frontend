@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, Fragment } from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 import LoadingScreen from "./components/LoadingScreen";
+import { Modal } from "@redq/reuse-modal";
 
 const routesConfig = [
   {
@@ -45,7 +46,7 @@ const routesConfig = [
   },
 ];
 
-const renderRoutes = (routes) =>
+const renderRoutes = (routes, deviceType) =>
   routes ? (
     <Suspense fallback={<LoadingScreen />}>
       <Switch>
@@ -62,7 +63,9 @@ const renderRoutes = (routes) =>
                   {route.routes ? (
                     renderRoutes(route.routes)
                   ) : (
-                    <Component {...props} />
+                    <Modal>
+                      <Component {...props} deviceType={deviceType} />
+                    </Modal>
                   )}
                 </Layout>
               )}
@@ -73,8 +76,8 @@ const renderRoutes = (routes) =>
     </Suspense>
   ) : null;
 
-function Routes() {
-  return renderRoutes(routesConfig);
+function Routes(props) {
+  return renderRoutes(routesConfig, props.deviceType);
 }
 
 export default Routes;

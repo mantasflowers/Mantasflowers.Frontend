@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 const StyledHero = styled.div`
-  border-bottom: 1px solid #000000;
   height: 600px;
   position: absolute;
   z-index: 3;

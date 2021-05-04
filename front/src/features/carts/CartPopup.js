@@ -1,7 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
-import { openModal, closeModal } from "@redq/reuse-modal";
 import Cart from "./Cart";
 import CartPopupButton, {
   BoxedCartButton,
@@ -9,6 +8,7 @@ import CartPopupButton, {
 import { CURRENCY } from "../../utils/constant";
 import { CartSlidePopup } from "./CartStyle";
 import { useCart } from "../../contexts/cart/useCart";
+const { openModal, closeModal } = require("@redq/reuse-modal");
 
 const CartPopupStyle = createGlobalStyle`
   .cartPopup{
@@ -31,14 +31,6 @@ const CartPopupStyle = createGlobalStyle`
   }
 `;
 
-// type CartProps = {
-//   deviceType: {
-//     mobile: boolean;
-//     tablet: boolean;
-//     desktop: boolean;
-//   };
-// };
-
 const CartPopUp = ({ deviceType: { mobile, tablet, desktop } }) => {
   const { isOpen, cartItemsCount, toggleCart, calculatePrice } = useCart();
 
@@ -47,8 +39,8 @@ const CartPopUp = ({ deviceType: { mobile, tablet, desktop } }) => {
       show: true,
       config: {
         className: "cartPopup",
-        width: "auto",
-        height: "auto",
+        width: "375px",
+        height: "300px",
         enableResizing: false,
         disableDragging: true,
         transition: {
