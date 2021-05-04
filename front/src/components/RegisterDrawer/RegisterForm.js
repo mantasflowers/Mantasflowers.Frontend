@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) =>
       width: "100%",
       textTransform: "initial",
       height: 40,
+      color: "#d8a56d",
     },
     error: {
       color: "#d9534f",

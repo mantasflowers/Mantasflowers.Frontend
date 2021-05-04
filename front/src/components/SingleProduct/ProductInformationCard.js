@@ -14,7 +14,7 @@ import CartButton from "./CartButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "#ffffff",
+    backgroundColor: theme.palette.background.default,
     padding: 25,
     // width: "1020px",
   },

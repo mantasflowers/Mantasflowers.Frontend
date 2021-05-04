@@ -11,6 +11,7 @@ import {
   makeStyles,
   SvgIcon,
   Button,
+  Typography,
 } from "@material-ui/core";
 import { Menu as MenuIcon } from "react-feather";
 import { useSelector } from "react-redux";
@@ -56,8 +57,11 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
           </IconButton>
         </Hidden>
         <Hidden mdDown>
-          <RouterLink to="/">
-            <Logo />
+          <RouterLink to="/" style={{ textDecoration: "none" }}>
+            {/* <Logo /> */}
+            <Typography style={{ fontSize: 45, color: "#422426" }}>
+              MF
+            </Typography>
           </RouterLink>
         </Hidden>
         <Box ml={2} flexGrow={1}>
@@ -68,10 +72,12 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
             </Box>
           ) : (
             <Button
-              style={{ textTransform: "initial" }}
+              style={{ textTransform: "initial", color: "#d8a56d" }}
               onClick={() => {
                 handleLogout();
               }}
+              color="primary"
+              variant="contained"
             >
               Atsijungti
             </Button>

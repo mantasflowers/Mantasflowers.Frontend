@@ -16,13 +16,14 @@ import {
   CouponBoxWrapper,
   CouponCode,
 } from "./CartStyle";
+import { Typography } from "@material-ui/core";
 import { CloseIcon } from "../../assets/icons/CloseIcon";
 import { ShoppingBagLarge } from "../../assets/icons/ShoppingBagLarge";
 import { NoCartBag } from "../../assets/icons/NoCartBag";
 import { CURRENCY } from "../../utils/constant";
 // import { useLocale } from "contexts/language/language.provider";
 
-// import { Scrollbar } from "components/scrollbar/scrollbar";
+import { Scrollbar } from "../../components/Scrollbar/Scrollbar";
 import { useCart } from "../../contexts/cart/useCart";
 import { CartItem } from "./CartItem/CartItem";
 // import Coupon from "features/coupon/coupon";
@@ -46,22 +47,12 @@ const Cart = ({ style, className, onCloseBtnClick, scrollbarHeight }) => {
   } = useCart();
   const [hasCoupon, setCoupon] = useState(false);
 
-  console.log({ items, cartItemsCount, calculatePrice });
-
   return (
     <CartPopupBody className={className} style={style}>
       <PopupHeader>
         <PopupItemCount>
           <ShoppingBagLarge width="19px" height="24px" />
-          <span>
-            {cartItemsCount}
-            &nbsp;
-            {/* {cartItemsCount > 1 ? (
-              <FormattedMessage id="cartItems" defaultMessage="items" />
-            ) : (
-              <FormattedMessage id="cartItem" defaultMessage="item" />
-            )} */}
-          </span>
+          <span>{cartItemsCount}</span>
         </PopupItemCount>
 
         <CloseButton onClick={onCloseBtnClick}>
@@ -69,33 +60,30 @@ const Cart = ({ style, className, onCloseBtnClick, scrollbarHeight }) => {
         </CloseButton>
       </PopupHeader>
 
-      {/* <Scrollbar className="cart-scrollbar"> */}
-      <ItemWrapper className="items-wrapper">
-        {!!cartItemsCount ? (
-          items.map((item) => (
-            <CartItem
-              key={`cartItem-${item.id}`}
-              onIncrement={() => addItem(item)}
-              onDecrement={() => removeItem(item)}
-              onRemove={() => removeItemFromCart(item)}
-              data={item}
-            />
-          ))
-        ) : (
-          <>
-            <NoProductImg>
-              <NoCartBag />
-            </NoProductImg>
-            <NoProductMsg>
-              {/* <FormattedMessage
-                id="noProductFound"
-                defaultMessage="No products found"
-              /> */}
-            </NoProductMsg>
-          </>
-        )}
-      </ItemWrapper>
-      {/* </Scrollbar> */}
+      <Scrollbar className="cart-scrollbar">
+        <ItemWrapper className="items-wrapper">
+          {!!cartItemsCount ? (
+            items.map((item) => (
+              <CartItem
+                key={`cartItem-${item.id}`}
+                onIncrement={() => addItem(item)}
+                onDecrement={() => removeItem(item)}
+                onRemove={() => removeItemFromCart(item)}
+                data={item}
+              />
+            ))
+          ) : (
+            <>
+              <NoProductImg>
+                <NoCartBag />
+              </NoProductImg>
+              <NoProductMsg>
+                <Typography>Prekių nerasta</Typography>
+              </NoProductMsg>
+            </>
+          )}
+        </ItemWrapper>
+      </Scrollbar>
 
       <CheckoutButtonWrapper>
         {/* <PromoCode>
@@ -131,14 +119,11 @@ const Cart = ({ style, className, onCloseBtnClick, scrollbarHeight }) => {
         </PromoCode> */}
 
         {cartItemsCount !== 0 ? (
-          <Link href="/checkout">
+          <Link href="/checkout" style={{ textDecoration: "none" }}>
             <CheckoutButton onClick={onCloseBtnClick}>
               <>
                 <Title>
-                  {/* <FormattedMessage
-                    id="nav.checkout"
-                    defaultMessage="Checkout"
-                  /> */}
+                  <Typography>Sumokėti</Typography>
                 </Title>
                 <PriceBox>
                   {CURRENCY}
@@ -151,7 +136,7 @@ const Cart = ({ style, className, onCloseBtnClick, scrollbarHeight }) => {
           <CheckoutButton>
             <>
               <Title>
-                {/* <FormattedMessage id="nav.checkout" defaultMessage="Checkout" /> */}
+                <Typography>Sumokėti</Typography>
               </Title>
               <PriceBox>
                 {CURRENCY}

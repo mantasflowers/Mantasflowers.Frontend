@@ -71,13 +71,6 @@ const FixedCartPopup = ({ onCheckout }) => {
       <CartPopupButton
         className="fixedCartPopup"
         itemCount={cartItemsCount}
-        // itemPostfix={
-        //   cartItemsCount > 1 ? (
-        //     <FormattedMessage id="cartItems" defaultMessage="items" />
-        //   ) : (
-        //     <FormattedMessage id="cartItem" defaultMessage="item" />
-        //   )
-        // }
         price={calculatePrice()}
         pricePrefix={CURRENCY}
         onClick={handleModal}

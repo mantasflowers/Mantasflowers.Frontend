@@ -23,7 +23,13 @@ const addItemToCart = (state, action) => {
 
   if (existingCartItemIndex > -1) {
     const newState = [...state.items];
-    newState[existingCartItemIndex].quantity += action.payload.quantity;
+    if (
+      newState[existingCartItemIndex].quantity <
+      newState[existingCartItemIndex].leftInStock
+    ) {
+      newState[existingCartItemIndex].quantity += action.payload.quantity;
+    }
+
     return newState;
   }
   return [...state.items, action.payload];

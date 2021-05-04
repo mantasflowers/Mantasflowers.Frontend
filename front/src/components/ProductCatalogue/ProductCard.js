@@ -12,7 +12,7 @@ import CartButton from "../../components/SingleProduct/CartButton";
 
 const useStyles = makeStyles((theme) => ({
   mainCard: {
-    backgroundColor: "#ffffff",
+    backgroundColor: theme.palette.background.default,
 
     // padding: 10,
   },
@@ -24,17 +24,18 @@ const useStyles = makeStyles((theme) => ({
   productTitle: {
     fontFamily: "Noto Sans",
     textAlign: "center",
-    color: theme.palette.text.primary,
+    color: theme.palette.primary.main,
+    fontWeight: "bold",
   },
 
   productStock: {
     fontFamily: "Noto Sans",
-    color: theme.palette.text.primary,
+    color: theme.palette.primary.main,
   },
   productPrice: {
     fontFamily: "Noto Sans",
     fontWeight: "bold",
-    color: theme.palette.text.secondary,
+    color: theme.palette.primary.main,
   },
   productImageBox: {
     textAlign: "center",

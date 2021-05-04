@@ -16,7 +16,7 @@ const Inner = styled.div`
   max-width: 1140;
   margin: 0 auto;
   padding: 2rem;
-  background: #ffffff;
+  background: #b5cb9f;
   position: relative;
 `;
 

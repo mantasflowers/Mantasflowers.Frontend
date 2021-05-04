@@ -13,7 +13,9 @@ function RegisterDrawer(props) {
           event.preventDefault();
           setIsShowing(true);
         }}
-        style={{ textTransform: "initial" }}
+        style={{ textTransform: "initial", color: "#d8a56d" }}
+        color="primary"
+        variant="contained"
       >
         {props.openDrawerName}
       </Button>

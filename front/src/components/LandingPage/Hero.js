@@ -8,17 +8,14 @@ const StyledHero = styled.div`
   z-index: 3;
   width: 100%;
 
-  background: linear-gradient(
-    90deg,
-    rgba(131, 58, 180, 1) 0%,
-    rgba(253, 29, 29, 1) 49%,
-    rgba(252, 176, 69, 1) 100%
-  );
+  background-image: url("/static/background-mantasflowers.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
 `;
 
 const HeroContentBox = styled.div`
   text-align: center;
-  margin: 160px auto;
+  margin: 280px auto;
   position: relative;
   z-index: 4;
 `;
@@ -26,12 +23,7 @@ const HeroContentBox = styled.div`
 const Title = styled.h1`
   font-size: 60px;
   width: 100%;
-`;
-
-const Subtitle = styled.h5`
-  font-size: 20px;
-  font-weight: 570;
-  width: 100%;
+  color: "#422426";
 `;
 
 function Hero() {
@@ -39,7 +31,6 @@ function Hero() {
     <StyledHero>
       <HeroContentBox>
         <Title>Mantas Flowers</Title>
-        <Subtitle>Inovative flower selling app</Subtitle>
       </HeroContentBox>
     </StyledHero>
   );

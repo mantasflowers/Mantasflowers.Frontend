@@ -4,11 +4,13 @@ import axios from "axios";
 
 import Page from "../../components/Page";
 import ProductInformationCard from "../../components/SingleProduct/ProductInformationCard";
+import CartPopUp from "../../features/carts/CartPopup";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     minHeight: "100%",
     paddingTop: 80,
+    background: theme.palette.background.paper,
   },
   productInformationBox: {
     display: "flex",
@@ -46,6 +48,7 @@ function Index() {
         <Box className={classes.productInformationBox}>
           <ProductInformationCard flowerData={flowerData} />
         </Box>
+        <CartPopUp deviceType={{ desktop: true }} />
       </Page>
     </>
   );

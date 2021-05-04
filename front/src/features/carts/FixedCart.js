@@ -15,21 +15,14 @@ import {
   CouponBoxWrapper,
   CouponCode,
 } from "./cart.style";
+import { Typography } from "@material-ui/core";
 import { CloseIcon } from "assets/icons/CloseIcon";
 import { ShoppingBagLarge } from "assets/icons/ShoppingBagLarge";
 import { CURRENCY } from "../../utils/constant";
-import { useLocale } from "contexts/language/language.provider";
 import { Scrollbar } from "components/scrollbar/scrollbar";
 import { useCart } from "contexts/cart/use-cart";
 import { TextCartItem } from "components/cart-item/text-cart-item";
 import Coupon from "features/coupon/coupon";
-
-// type CartPropsType = {
-//   style?: any;
-//   className?: string;
-//   onCloseBtnClick?: (e: any) => void;
-//   onCheckout?: (e: any) => void;
-// };
 
 const FixedCart = ({ style, className, onCloseBtnClick, onCheckout }) => {
   const {
@@ -51,11 +44,6 @@ const FixedCart = ({ style, className, onCloseBtnClick, onCheckout }) => {
           <span>
             {cartItemsCount}
             &nbsp;
-            {/* {cartItemsCount > 1 ? (
-              <FormattedMessage id="cartItems" defaultMessage="items" />
-            ) : (
-              <FormattedMessage id="cartItem" defaultMessage="item" />
-            )} */}
           </span>
         </PopupItemCount>
 
@@ -78,10 +66,7 @@ const FixedCart = ({ style, className, onCloseBtnClick, onCheckout }) => {
             ))
           ) : (
             <NoProductMsg>
-              {/* <FormattedMessage
-                id="noProductFound"
-                defaultMessage="No products found"
-              /> */}
+              <Typography>Prekių nerasta</Typography>
             </NoProductMsg>
           )}
         </ItemWrapper>

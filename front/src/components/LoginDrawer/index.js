@@ -13,7 +13,9 @@ function LoginDrawer(props) {
           event.preventDefault();
           setIsShowing(true);
         }}
-        style={{ textTransform: "initial" }}
+        style={{ textTransform: "initial", marginRight: 10, color: "#d8a56d" }}
+        color="primary"
+        variant="contained"
       >
         {props.openDrawerName}
       </Button>

@@ -5,6 +5,7 @@ import App from "./App";
 import { CartProvider } from "./contexts/cart/useCart";
 import { configureStore } from "./store";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import "overlayscrollbars/css/OverlayScrollbars.css";
 
 const store = configureStore();
 

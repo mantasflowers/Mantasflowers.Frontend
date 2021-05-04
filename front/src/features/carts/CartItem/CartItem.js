@@ -31,9 +31,7 @@ export const CartItem = ({ data, onDecrement, onIncrement, onRemove }) => {
           {CURRENCY}
           {displayPrice}
         </Price>
-        <Weight>
-          {quantity} X {leftInStock}
-        </Weight>
+        <Weight>kiekis: {quantity}</Weight>
       </Information>
       <Total>
         {CURRENCY}

@@ -10,12 +10,13 @@ import Page from "../../components/Page";
 import Hero from "../../components/LandingPage/Hero";
 import ProductGrid from "../../components/ProductCatalogue/ProductGrid";
 import NavBar from "../../components/LandingPage/NavBar";
+import CartPopUp from "../../features/carts/CartPopup";
 
 const Inner = styled.div`
   max-width: 1140;
   margin: 0 auto;
   padding: 2rem;
-  background: #ffffff;
+  background: #b5cb9f;
   position: relative;
 `;
 
@@ -80,6 +81,7 @@ function Index() {
           />
         </Box>
       </Inner>
+      <CartPopUp deviceType={{ desktop: true }} />
     </Page>
   );
 }

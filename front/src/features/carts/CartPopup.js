@@ -73,15 +73,8 @@ const CartPopUp = ({ deviceType: { mobile, tablet, desktop } }) => {
           <CartPopupButton
             className="product-cart"
             itemCount={cartItemsCount}
-            // itemPostfix={
-            //   cartItemsCount > 1 ? (
-            //     <FormattedMessage id="cartItems" defaultMessage="items" />
-            //   ) : (
-            //     <FormattedMessage id="cartItem" defaultMessage="item" />
-            //   )
-            // }
             price={calculatePrice()}
-            pricePrefix="$"
+            pricePrefix="€"
             onClick={handleModal}
           />
         </>
@@ -96,13 +89,6 @@ const CartPopUp = ({ deviceType: { mobile, tablet, desktop } }) => {
           <BoxedCartButton
             className="product-cart"
             itemCount={cartItemsCount}
-            // itemPostfix={
-            //   cartItemsCount > 1 ? (
-            //     <FormattedMessage id="cartItems" defaultMessage="items" />
-            //   ) : (
-            //     <FormattedMessage id="cartItem" defaultMessage="item" />
-            //   )
-            // }
             price={calculatePrice()}
             pricePrefix={CURRENCY}
             onClick={toggleCart}

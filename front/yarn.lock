@@ -8375,6 +8375,16 @@
   "resolved" "https://registry.npmjs.org/os-browserify/-/os-browserify-0.3.0.tgz"
   "version" "0.3.0"
 
+"overlayscrollbars-react@^0.2.2":
+  "integrity" "sha512-sRJDaKIxD+No6ygMRaCxejuIH2CksSCUTfaDOzDhPt22lI3IPZq/+Ifw2RT4j+U7hgXLn9P5QqA00f2bsZVwPA=="
+  "resolved" "https://registry.npmjs.org/overlayscrollbars-react/-/overlayscrollbars-react-0.2.2.tgz"
+  "version" "0.2.2"
+
+"overlayscrollbars@^1.10.0":
+  "integrity" "sha512-gIQfzgGgu1wy80EB4/6DaJGHMEGmizq27xHIESrzXq0Y/J0Ay1P3DWk6tuVmEPIZH15zaBlxeEJOqdJKmowHCQ=="
+  "resolved" "https://registry.npmjs.org/overlayscrollbars/-/overlayscrollbars-1.13.1.tgz"
+  "version" "1.13.1"
+
 "p-each-series@^2.1.0":
   "integrity" "sha512-ycIL2+1V32th+8scbpTvyHNaHe02z0sjgh91XXjAk+ZeXoPN4Z46DVUnzdso0aX4KckKw0FNNFHdjZ2UsZvxiA=="
   "resolved" "https://registry.npmjs.org/p-each-series/-/p-each-series-2.2.0.tgz"
@@ -9926,7 +9936,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.0.0", "react@^16.3.0 || ^17.0.0", "react@^16.3.0 || 17", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.2", "react@^16.8.3 || ^17", "react@^16.8.6 || ^17", "react@>= 0.14.0 < 18.0.0", "react@>= 16", "react@>= 16.8.0", "react@>=15", "react@>=16.3.0", "react@>=16.3.3", "react@>=16.6.0":
+"react@^0.14.0 || ^15.0.0 || ^16.0.0 || ^17.0.0", "react@^16.0.0", "react@^16.3.0 || ^17.0.0", "react@^16.3.0 || 17", "react@^16.4.0", "react@^16.8.0", "react@^16.8.0 || ^17.0.0", "react@^16.8.2", "react@^16.8.3 || ^17", "react@^16.8.6 || ^17", "react@>= 0.14.0 < 18.0.0", "react@>= 16", "react@>= 16.8.0", "react@>=15", "react@>=16.3.0", "react@>=16.3.3", "react@>=16.6.0":
   "integrity" "sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   "version" "16.14.0"

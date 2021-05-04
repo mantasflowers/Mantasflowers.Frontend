@@ -44,19 +44,19 @@ const themeConfigs = [
         focus: "rgba(255, 255, 255, 0.12)",
       },
       background: {
-        default: "#282C34",
+        default: "#d8a56d",
         dark: "#B9D6F2",
-        paper: "#ffffff",
+        paper: "#b5cb9f",
       },
       primary: {
-        main: "#061A40",
+        main: "#422426",
       },
       secondary: {
-        main: "#0353A4",
+        main: "#F28166",
       },
       text: {
-        primary: "#006DAA",
-        secondary: "#006DAA",
+        primary: "#B95953",
+        secondary: "#B95953",
       },
     },
     shadows: strongShadows,

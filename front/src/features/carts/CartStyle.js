@@ -7,7 +7,7 @@ const CartPopupBody = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: ${themeGet("radii.base", "6px")};
-  background-color: ${themeGet("colors.white", "#ffffff")};
+  background-color: ${themeGet("colors.white", "#b5cb9f")};
   box-sizing: content-box;
 
   @media (max-width: 767px) {
@@ -25,12 +25,12 @@ const CartPopupBody = styled.div`
 `;
 
 const PopupHeader = styled.div`
-  padding: 15px 25px;
-  background-color: ${themeGet("colors.white", "#ffffff")};
+  padding: 21px 25px;
+  background-color: ${themeGet("colors.white", "#d8a56d")};
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${themeGet("colors.gray.500", "#f1f1f1")};
+  border-bottom: 1px solid #422426;
 
   @media (max-width: 766px) {
     justify-content: center;
@@ -40,13 +40,13 @@ const PopupHeader = styled.div`
 const PopupItemCount = styled.div`
   display: inline-flex;
   align-items: center;
-  color: ${themeGet("colors.primary.regular", "#009e7f")};
+  color: ${themeGet("colors.primary.regular", "#422426")};
 
   span {
     font-family: ${themeGet("fonts.body", "Lato")};
     font-size: ${themeGet("fontSizes.base", "15")}px;
     font-weight: ${themeGet("fontWeights.bold", "700")};
-    color: ${themeGet("colors.primary.regular", "#009e7f")};
+    color: ${themeGet("colors.primary.regular", "#422426")};
     padding-left: 10px;
 
     @media (max-width: 767px) {
@@ -66,7 +66,7 @@ const CloseButton = styled.button`
   outline: 0;
   flex-shrink: 0;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.25);
+  color: #422426;
   transition: all 0.4s ease;
   background-color: transparent;
 
@@ -101,7 +101,7 @@ const ItemCards = styled.div`
   padding: 15px 25px;
   display: inline-flex;
   align-items: center;
-  background-color: ${themeGet("colors.white", "#ffffff")};
+  background-color: #422426;
   margin-bottom: 1px;
   box-sizing: border-box;
 `;
@@ -133,7 +133,7 @@ const ItemTitle = styled.span`
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.base", "15")}px;
   font-weight: ${themeGet("fontWeights.regular", "400")};
-  color: ${themeGet("colors.text.bold", "#0D1136")};
+  color: ${themeGet("colors.text.bold", "#422426")};
   margin-bottom: 10px;
 `;
 
@@ -141,7 +141,7 @@ const ItemPrice = styled.span`
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.base", "15")}px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.primary.regular", "#009e7f")};
+  color: ${themeGet("colors.primary.regular", "#422426")};
   margin-bottom: 10px;
 `;
 
@@ -149,14 +149,14 @@ const ItemWeight = styled.span`
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.sm", "13")}px;
   font-weight: ${themeGet("fontWeights.regular", "400")};
-  color: ${themeGet("colors.text.regular", "#77798c")};
+  color: ${themeGet("colors.text.regular", "#422426")};
 `;
 
 const TotalPrice = styled.span`
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.base", "15")}px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.text.bold", "#0D1136")};
+  color: ${themeGet("colors.text.bold", "#422426")};
   flex-shrink: 0;
   margin-left: auto;
 `;
@@ -173,7 +173,7 @@ const DeleteButton = styled.button`
   margin-left: 15px;
   flex-shrink: 0;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.25);
+  color: #422426;
   transition: all 0.4s ease;
   background-color: transparent;
 
@@ -211,7 +211,7 @@ const CheckoutButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${themeGet("colors.primary.regular", "#009e7f")};
+  background-color: ${themeGet("colors.primary.regular", "#422426")};
   padding: 0;
   border-radius: 48px;
   box-shadow: ${themeGet("shadows.base", "0 3px 6px rgba(0, 0, 0, 0.16)")};
@@ -247,7 +247,7 @@ const Title = styled.a`
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.base", "15")}px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.white", "#ffffff")};
+  color: ${themeGet("colors.white", "#d8a56d")};
   padding-left: 5px;
   padding-right: 10px;
 `;
@@ -261,11 +261,11 @@ const PriceBox = styled.span`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: ${themeGet("colors.white", "#ffffff")};
+  background-color: ${themeGet("colors.white", "#d8a56d")};
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.base", "15")}px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.primary.regular", "#009e7f")};
+  color: ${themeGet("colors.primary.regular", "#422426")};
   margin-right: 2px;
 
   @media (max-width: 767px) {
@@ -277,7 +277,8 @@ const NoProductMsg = styled.span`
   font-family: ${themeGet("fonts.body", "Lato")};
   font-size: ${themeGet("fontSizes.base", "15")}px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.text.regular", "#77798c")};
+  color: ${themeGet("colors.text.regular", "#422426")};
+  background-color: #b5cb9f;
   display: block;
   width: 100%;
   padding: 40px 0;
@@ -288,8 +289,8 @@ export const NoProductImg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
   margin-top: 50px;
+  background-color: #b5cb9f;
 
   @media (max-width: 580px) {
     margin-top: 20px;
