@@ -25,6 +25,7 @@ function LoginDrawer(props) {
           isShowing={isShowing}
           setIsShowing={setIsShowing}
           anchor={"left"}
+          mobile={false}
         >
           <LoginForm />
         </ReusableDrawer>

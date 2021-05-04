@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import { themeGet } from "@styled-system/theme-get";
 import Cart from "./Cart";
@@ -8,7 +8,7 @@ import CartPopupButton, {
 import { CURRENCY } from "../../utils/constant";
 import { CartSlidePopup } from "./CartStyle";
 import { useCart } from "../../contexts/cart/useCart";
-const { openModal, closeModal } = require("@redq/reuse-modal");
+import ReusableDrawer from "../../components/ReusableDrawer";
 
 const CartPopupStyle = createGlobalStyle`
   .cartPopup{
@@ -33,26 +33,10 @@ const CartPopupStyle = createGlobalStyle`
 
 const CartPopUp = ({ deviceType: { mobile, tablet, desktop } }) => {
   const { isOpen, cartItemsCount, toggleCart, calculatePrice } = useCart();
+  const [isShowing, setIsShowing] = useState(false);
 
-  const handleModal = () => {
-    openModal({
-      show: true,
-      config: {
-        className: "cartPopup",
-        width: "375px",
-        height: "300px",
-        enableResizing: false,
-        disableDragging: true,
-        transition: {
-          tension: 360,
-          friction: 40,
-        },
-      },
-      closeOnClickOutside: true,
-      component: Cart,
-      closeComponent: () => <div />,
-      componentProps: { onCloseBtnClick: closeModal, scrollbarHeight: 330 },
-    });
+  const closeModal = () => {
+    setIsShowing(false);
   };
 
   let cartSliderClass = isOpen === true ? "cartPopupFixed" : "";
@@ -67,8 +51,19 @@ const CartPopUp = ({ deviceType: { mobile, tablet, desktop } }) => {
             itemCount={cartItemsCount}
             price={calculatePrice()}
             pricePrefix="€"
-            onClick={handleModal}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsShowing(true);
+            }}
           />
+          <ReusableDrawer
+            isShowing={isShowing}
+            setIsShowing={setIsShowing}
+            anchor={"bottom"}
+            mobile={true}
+          >
+            <Cart onCloseBtnClick={closeModal} scrollbarHeight="330px" />
+          </ReusableDrawer>
         </>
       ) : (
         <>

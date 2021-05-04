@@ -25,6 +25,7 @@ function RegisterDrawer(props) {
           isShowing={isShowing}
           setIsShowing={setIsShowing}
           anchor={"left"}
+          mobile={false}
         >
           <RegisterForm />
         </ReusableDrawer>

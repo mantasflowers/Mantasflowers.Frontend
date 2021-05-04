@@ -45,25 +45,11 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
   return (
     <AppBar className={clsx(classes.root, className)} {...rest}>
       <Toolbar className={classes.toolbar}>
-        <Hidden lgUp>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            onClick={onMobileNavOpen}
-          >
-            <SvgIcon fontSize="small">
-              <MenuIcon />
-            </SvgIcon>
-          </IconButton>
-        </Hidden>
-        <Hidden mdDown>
-          <RouterLink to="/" style={{ textDecoration: "none" }}>
-            {/* <Logo /> */}
-            <Typography style={{ fontSize: 45, color: "#422426" }}>
-              MF
-            </Typography>
-          </RouterLink>
-        </Hidden>
+        <RouterLink to="/" style={{ textDecoration: "none" }}>
+          {/* <Logo /> */}
+          <Typography style={{ fontSize: 45, color: "#422426" }}>MF</Typography>
+        </RouterLink>
+
         <Box ml={2} flexGrow={1}>
           {account.user === null ? (
             <Box style={{ display: "flex" }}>

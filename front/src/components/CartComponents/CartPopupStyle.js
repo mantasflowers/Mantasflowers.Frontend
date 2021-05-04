@@ -6,7 +6,7 @@ const CartPopupButtonStyled = styled("button")`
   width: auto;
   display: flex;
   align-items: center;
-  background-color: ${themeGet("colors.primary.regular", "#009E7F")};
+  background-color: ${themeGet("colors.primary.regular", "#422426")};
   padding: 0;
   padding-left: 30px;
   border-radius: 60px;
@@ -17,7 +17,7 @@ const CartPopupButtonStyled = styled("button")`
   position: fixed;
   bottom: 50px;
   right: 50px;
-  z-index: 999;
+  z-index: 1301;
 
   @media (max-width: 767px) {
     width: calc(100% - 60px);
@@ -35,14 +35,14 @@ const CartPopupButtonStyled = styled("button")`
 `;
 
 const ButtonImgBox = styled("span")`
-  color: ${themeGet("colors.white", "#ffffff")};
+  color: ${themeGet("colors.white", "#d8a56d")};
 `;
 
 const ItemCount = styled("span")`
   font-family: ${themeGet("fonts.body", "sans-serif")};
   font-size: 12px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.white", "#ffffff")};
+  color: ${themeGet("colors.white", "#d8a56d")};
   padding-left: 5px;
   padding-right: 10px;
 `;
@@ -55,11 +55,11 @@ const PriceBox = styled("span")`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: ${themeGet("colors.white", "#ffffff")};
+  background-color: ${themeGet("colors.white", "#d8a56d")};
   font-family: ${themeGet("fonts.body", "sans-serif")};
   font-size: ${themeGet("fontSizes.xs", "12")}px;
   font-weight: ${themeGet("fontWeights.bold", "700")};
-  color: ${themeGet("colors.primary.regular", "#009E7F")};
+  color: ${themeGet("colors.primary.regular", "#422426")};
   margin-right: 2px;
 
   @media (max-width: 767px) {

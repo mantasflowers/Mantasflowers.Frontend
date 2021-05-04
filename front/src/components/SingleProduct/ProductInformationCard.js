@@ -92,6 +92,15 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     height: "100%",
   },
+  mainBox: {
+    width: "70%",
+    margin: "80px auto",
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      marginBottom: 40,
+      margin: 0,
+    },
+  },
 }));
 
 function ProductInformationCard(props) {
@@ -108,7 +117,7 @@ function ProductInformationCard(props) {
           <CircularProgress />
         </Box>
       ) : (
-        <Box mb={7} style={{ width: "70%", margin: "80px auto" }}>
+        <Box mb={7} className={classes.mainBox}>
           <Box style={{ paddingBottom: "20px" }}>
             <GoBackButton />
           </Box>
