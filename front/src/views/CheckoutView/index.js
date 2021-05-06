@@ -9,13 +9,14 @@ import {
   Typography,
   Box,
 } from "@material-ui/core";
+import { Title } from "features/carts/CartStyle";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       padding: "130px 60px",
       height: "100%",
-      justifyContent: "center",
+      flexDirection: "row",
     },
     cardsRoot: {
       padding: "20px",
@@ -27,11 +28,16 @@ const useStyles = makeStyles((theme) =>
     },
     orderRoot: {
       paddingTop: "20px",
-      width: "270px",
+      maxWidth: "270px",
       [theme.breakpoints.down("lg")]: {
         width: "260px",
+        justifyContent: "center",
+        maxWidth: "unset",
       },
-      [theme.breakpoints.down("md")]: { width: "100%" },
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+        justifyContent: "center",
+      },
     },
     orderDivider: {
       backgroundColor: "Grey",
@@ -51,11 +57,52 @@ function CheckoutView() {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item className={classes.cardsRoot}>
-        <CheckoutCard></CheckoutCard>
+      <Grid item xs={6} className={classes.cardsRoot}>
+        <Grid container spacing={6} direction="column">
+          <Grid item>
+            <CheckoutCard
+              cards={[
+                {
+                  cardHeader: "Title",
+                  cardContent: "Adresas",
+                  modalBody: <div>osifjosifjd</div>,
+                  handleDelete: () => console.log("a"),
+                },
+                {
+                  cardHeader: "Title",
+                  cardContent: "Adresas",
+                  modalBody: <div>osifjosifjd</div>,
+                  handleDelete: () => console.log("b"),
+                },
+                {
+                  cardHeader: "Title",
+                  cardContent: "Adresas",
+                  modalBody: <div>osifjosifjd</div>,
+                  handleDelete: () => console.log("c"),
+                },
+                {
+                  cardHeader: "Title",
+                  cardContent: "Adresas",
+                  modalBody: <div>osifjosifjd</div>,
+                  handleDelete: () => console.log("d"),
+                },
+              ]}
+              cardLabel="Delivery Address"
+              cardNumber={1}
+              isButton={true}
+              modalContent={<div>ModalContent</div>}
+            />
+          </Grid>
+          <Grid item>
+            <CheckoutCard cardLabel="Delivery Schedule" cardNumber={2} />
+          </Grid>
+          <Grid item>
+            <CheckoutCard cardLabel="Phone Number" cardNumber={3} />
+          </Grid>
+        </Grid>
       </Grid>
 
-      <Grid item className={classes.orderRoot}>
+      <Grid item xs={6} className={classes.orderRoot}>
         <Grid
           container
           direction="column"
