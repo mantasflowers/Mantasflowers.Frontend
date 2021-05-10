@@ -8,8 +8,10 @@ import {
   Divider,
   Typography,
   Box,
+  TextField,
+  Button,
+  Paper,
 } from "@material-ui/core";
-import { Title } from "features/carts/CartStyle";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -47,6 +49,33 @@ const useStyles = makeStyles((theme) =>
     },
     checkoutWrapper: {
       flexDirection: "column",
+    },
+    formWrapper: {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100%",
+      width: "100%",
+      border: 1,
+      color: "White",
+    },
+    form: {
+      flexDirection: "column",
+      display: "flex",
+    },
+    formField: {
+      width: "400px",
+      marginBottom: "20px",
+    },
+    text: {
+      textTransform: "none",
+    },
+    paper: {
+      padding: "15px",
+      width: "430px", //supranti gi
+    },
+    dialogTitle: {
+      marginBottom: "20px",
     },
   })
 );
@@ -90,14 +119,86 @@ function CheckoutView() {
               cardLabel="Delivery Address"
               cardNumber={1}
               isButton={true}
-              modalContent={<div>ModalContent</div>}
+              cardButtonLabel="Pridėti adresą"
+              modalContent={
+                <Box className={classes.formWrapper}>
+                  <Paper className={classes.paper} color="White">
+                    <Typography
+                      className={classes.dialogTitle}
+                      align="center"
+                      variant="h4"
+                    >
+                      Pridėkite adresą
+                    </Typography>
+                    <form
+                      noValidate
+                      autoComplete="off"
+                      className={classes.form}
+                    >
+                      <TextField
+                        className={classes.formField}
+                        id="address-title"
+                        label="Pavadinimas"
+                        variant="outlined"
+                      />
+                      <TextField
+                        className={classes.formField}
+                        id="address"
+                        label="Adresas"
+                        variant="outlined"
+                        multiline="true"
+                      ></TextField>
+                      <Button variant="outlined">
+                        <Typography className={classes.text}>
+                          Pridėti
+                        </Typography>
+                      </Button>
+                    </form>
+                  </Paper>
+                </Box>
+              }
             />
           </Grid>
           <Grid item>
             <CheckoutCard cardLabel="Delivery Schedule" cardNumber={2} />
           </Grid>
           <Grid item>
-            <CheckoutCard cardLabel="Phone Number" cardNumber={3} />
+            <CheckoutCard
+              cardLabel="Phone Number"
+              cardNumber={3}
+              isButton={true}
+              cardButtonLabel="Pridėti telefono numerį"
+              modalContent={
+                <Box className={classes.formWrapper}>
+                  <Paper className={classes.paper} color="White">
+                    <Typography
+                      className={classes.dialogTitle}
+                      align="center"
+                      variant="h4"
+                    >
+                      Pridėkite telefono numerį
+                    </Typography>
+                    <form
+                      noValidate
+                      autoComplete="off"
+                      className={classes.form}
+                    >
+                      <TextField
+                        className={classes.formField}
+                        id="address-title"
+                        label="Numeris"
+                        variant="outlined"
+                      />
+                      <Button variant="outlined">
+                        <Typography className={classes.text}>
+                          Pridėti
+                        </Typography>
+                      </Button>
+                    </form>
+                  </Paper>
+                </Box>
+              }
+            />
           </Grid>
         </Grid>
       </Grid>

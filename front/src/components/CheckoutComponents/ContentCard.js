@@ -4,7 +4,7 @@ import {
   CardHeader,
   IconButton,
   CardContent,
-  Modal,
+  Dialog,
 } from "@material-ui/core";
 import { Edit, Delete } from "@material-ui/icons";
 import { useState } from "react";
@@ -62,9 +62,9 @@ const ContentCard = ({ cardHeader, cardContent, modalBody, handleDelete }) => {
         />
         <CardContent>{cardContent}</CardContent>
       </Card>
-      <Modal open={isOpen} onClose={handleModalClose}>
+      <Dialog open={isOpen} onClose={handleModalClose}>
         {modalBody}
-      </Modal>
+      </Dialog>
     </>
   );
 };

@@ -64,6 +64,7 @@ const CheckoutCard = ({
   isButton,
   modalContent,
   cards,
+  cardButtonLabel,
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -93,7 +94,7 @@ const CheckoutCard = ({
                 >
                   <Add />
                   <Typography className={classes.iconButtonText}>
-                    Add Address
+                    {cardButtonLabel}
                   </Typography>{" "}
                 </IconButton>
                 <Modal open={open} onClose={handleClose}>
