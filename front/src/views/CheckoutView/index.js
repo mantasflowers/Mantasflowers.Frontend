@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) =>
     },
     paper: {
       padding: "15px",
-      width: "430px", //supranti gi
+      width: "430px",
     },
     dialogTitle: {
       marginBottom: "20px",
@@ -86,7 +86,7 @@ function CheckoutView() {
 
   return (
     <Grid container className={classes.root}>
-      <Grid item xs={6} className={classes.cardsRoot}>
+      <Grid item xs={12} className={classes.cardsRoot}>
         <Grid container spacing={6} direction="column">
           <Grid item>
             <CheckoutCard
