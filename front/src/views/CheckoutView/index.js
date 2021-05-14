@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) =>
     cardsRoot: {
       padding: "20px",
       marginRight: "20px",
+      maxWidth: 700,
+      order: 1,
+      [theme.breakpoints.down("sm")]: {
+        order: 2,
+      },
     },
     orderTitle: {
       fontWeight: "bold",
@@ -31,14 +36,19 @@ const useStyles = makeStyles((theme) =>
     orderRoot: {
       paddingTop: "20px",
       maxWidth: "270px",
+      order: 2,
       [theme.breakpoints.down("lg")]: {
         width: "260px",
         justifyContent: "center",
         maxWidth: "unset",
+        order: 1,
       },
       [theme.breakpoints.down("md")]: {
         width: "100%",
         justifyContent: "center",
+      },
+      [theme.breakpoints.down("sm")]: {
+        order: 1,
       },
     },
     orderDivider: {
@@ -80,13 +90,64 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function CheckoutView() {
+function CheckoutView(props) {
   const classes = useStyles();
   var itemCount = 2;
 
+  const deviceType = props.deviceType;
+
   return (
-    <Grid container className={classes.root}>
-      <Grid item xs={12} className={classes.cardsRoot}>
+    <Grid
+      container
+      className={classes.root}
+      direction={deviceType.mobile ? "column" : "row"}
+    >
+      <Grid item xs={12} sm={3} className={classes.orderRoot}>
+        <Grid container alignItems="center" className={classes.checkoutWrapper}>
+          <Box item marginBottom="20px">
+            <Typography className={classes.orderTitle}>Your order</Typography>
+          </Box>
+
+          <Grid item>
+            <CheckoutRow
+              productLabel="Grazi gele"
+              productPrice={5}
+              productAmount={itemCount}
+            />
+            <CheckoutRow
+              productLabel="Grazi gele"
+              productPrice={5}
+              productAmount={itemCount}
+            />
+            <CheckoutRow
+              productLabel="Grazi gele"
+              productPrice={5}
+              productAmount={itemCount}
+            />
+            <Divider variant="fullWidth" className={classes.orderDivider} />
+          </Grid>
+
+          <Grid item>
+            <CheckoutRow
+              productLabel="Grazi gele"
+              productPrice={5}
+              productAmount={itemCount}
+            />
+            <CheckoutRow
+              productLabel="Grazi gele"
+              productPrice={5}
+              productAmount={itemCount}
+            />
+            <CheckoutRow
+              productLabel="Grazi gele"
+              productPrice={5}
+              productAmount={itemCount}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid item xs={12} sm={9} className={classes.cardsRoot}>
         <Grid container spacing={6} direction="column">
           <Grid item>
             <CheckoutCard
@@ -198,56 +259,6 @@ function CheckoutView() {
                   </Paper>
                 </Box>
               }
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Grid item xs={6} className={classes.orderRoot}>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          className={classes.checkoutWrapper}
-        >
-          <Box item marginBottom="20px">
-            <Typography className={classes.orderTitle}>Your order</Typography>
-          </Box>
-
-          <Grid item>
-            <CheckoutRow
-              productLabel="Grazi gele"
-              productPrice={5}
-              productAmount={itemCount}
-            />
-            <CheckoutRow
-              productLabel="Grazi gele"
-              productPrice={5}
-              productAmount={itemCount}
-            />
-            <CheckoutRow
-              productLabel="Grazi gele"
-              productPrice={5}
-              productAmount={itemCount}
-            />
-            <Divider variant="fullWidth" className={classes.orderDivider} />
-          </Grid>
-
-          <Grid item>
-            <CheckoutRow
-              productLabel="Grazi gele"
-              productPrice={5}
-              productAmount={itemCount}
-            />
-            <CheckoutRow
-              productLabel="Grazi gele"
-              productPrice={5}
-              productAmount={itemCount}
-            />
-            <CheckoutRow
-              productLabel="Grazi gele"
-              productPrice={5}
-              productAmount={itemCount}
             />
           </Grid>
         </Grid>

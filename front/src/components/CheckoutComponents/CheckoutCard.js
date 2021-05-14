@@ -4,7 +4,7 @@ import {
   Typography,
   createStyles,
   makeStyles,
-  Modal,
+  Dialog,
   IconButton,
   Grid,
 } from "@material-ui/core";
@@ -95,11 +95,11 @@ const CheckoutCard = ({
                   <Add />
                   <Typography className={classes.iconButtonText}>
                     {cardButtonLabel}
-                  </Typography>{" "}
+                  </Typography>
                 </IconButton>
-                <Modal open={open} onClose={handleClose}>
+                <Dialog open={open} onClose={handleClose}>
                   {modalContent}
-                </Modal>
+                </Dialog>
               </>
             )}
           </Grid>
