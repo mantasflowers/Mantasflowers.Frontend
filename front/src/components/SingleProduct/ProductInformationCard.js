@@ -12,6 +12,7 @@ import {
 import GoBackButton from "../GoBackButton";
 import CartButton from "./CartButton";
 import { CURRENCY } from "../../utils/constant";
+// import ProductRating from "components/ProductCatalogue/ProductRating"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -150,6 +151,10 @@ function ProductInformationCard(props) {
                     <CartButton product={product} />
                   </Box>
                 </Box>
+
+                {/* <Box>
+                <ProductRating id={product.id} />
+                </Box> */}
               </Grid>
             </Grid>
           </Paper>
