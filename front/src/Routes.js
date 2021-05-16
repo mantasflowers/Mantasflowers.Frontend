@@ -41,6 +41,13 @@ const routesConfig = [
     path: "/404",
     component: lazy(() => import("./views/Error404View")),
   },
+
+  {
+    exact: true,
+    path: "/checkout",
+    component: lazy(() => import("./views/CheckoutView")),
+  },
+
   {
     component: () => <Redirect to="/404" />,
   },
