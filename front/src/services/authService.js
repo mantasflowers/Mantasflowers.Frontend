@@ -48,7 +48,6 @@ class AuthService {
 
   handleAuthentication() {
     const accessToken = this.getAccessToken();
-
     if (!accessToken) {
       return;
     }
@@ -74,8 +73,24 @@ class AuthService {
         )
         .then((response) => {
           if (response.data.idToken) {
-            this.setSession(response.data.idToken);
-            resolve(response.data);
+            const data = jwtDecode(response.data.idToken);
+
+            let userData = {
+              ...response.data,
+              email: data.email,
+              role: "user",
+            };
+
+            if (
+              data[
+                "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+              ]
+            ) {
+              userData.role = "admin";
+            }
+
+            this.setSession(`Bearer ${response.data.idToken}`);
+            resolve(userData);
           } else {
             reject("Nepavyko prisijungti!");
           }
@@ -135,7 +150,7 @@ class AuthService {
   setSession = (accessToken) => {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
-      axios.defaults.headers.common.Authorization = `${accessToken}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
     } else {
       localStorage.removeItem("accessToken");
       delete axios.defaults.headers.common.Authorization;

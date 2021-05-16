@@ -112,8 +112,8 @@ const Cart = ({ style, className, onCloseBtnClick, scrollbarHeight }) => {
         </PromoCode> */}
 
         {cartItemsCount !== 0 ? (
-          <Link href="/checkout" style={{ textDecoration: "none" }}>
-            <CheckoutButton onClick={onCloseBtnClick}>
+          <Link to="/checkout" style={{ textDecoration: "none" }}>
+            <CheckoutButton>
               <>
                 <Title>
                   <Typography>Sumokėti</Typography>

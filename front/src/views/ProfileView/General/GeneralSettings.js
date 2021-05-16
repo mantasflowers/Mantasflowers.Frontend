@@ -12,7 +12,8 @@ import {
 	FormHelperText,
 	Grid,
 	TextField,
-	makeStyles
+	makeStyles,
+	ThemeProvider
 } from '@material-ui/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -20,8 +21,10 @@ import { useSelector } from 'react-redux';
 
 const cityOptions = [ 'Vilnius', 'Kaunas', 'NYC' ];
 
-const useStyles = makeStyles(() => ({
-	root: {}
+const useStyles = makeStyles((theme) => ({
+	root: {
+	 backgroundColor: theme.palette.background.paper,
+	}
 }));
 
 function GeneralSettings({ className, ...rest }) {

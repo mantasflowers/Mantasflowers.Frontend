@@ -26,7 +26,7 @@ export default function SwipeableTemporaryDrawer(props) {
         anchor={props.anchor}
         open={props.isShowing}
         onClose={toggleDrawer(false)}
-        onOpen={null}
+        onOpen={() => {}}
         style={{ zIndex: 1302 }}
       >
         <Box style={props.mobile ? { width: "375px" } : { width: "340px" }}>

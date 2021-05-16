@@ -1,6 +1,8 @@
 import React, { lazy, Suspense, Fragment } from "react";
 import { Switch, Redirect, Route } from "react-router-dom";
 import LoadingScreen from "./components/LoadingScreen";
+import DashboardGuard from "components/DashboardGuard";
+import DashboardLayout from "layouts/MainLayout";
 import { Modal } from "@redq/reuse-modal";
 
 const routesConfig = [
@@ -49,6 +51,44 @@ const routesConfig = [
   },
 
   {
+    exact: true,
+    path: "/checkout-success",
+    component: lazy(() => import("./views/OrderSuccessView")),
+  },
+
+  {
+    path: "/admin",
+    // guard: DashboardGuard,
+    layout: DashboardLayout,
+    routes: [
+      {
+        exact: true,
+        path: "/admin",
+        component: () => <Redirect to="/admin/dashboard/1" />,
+      },
+      {
+        exact: true,
+        path: "/admin/dashboard/:page",
+        component: lazy(() => import("views/admin/ProductsView")),
+      },
+      // {
+      //   exact: true,
+      //   path: "/admin/create-product",
+      //   component: lazy(() => import("views/admin/CreateProductView")),
+      // },
+      {
+        exact: true,
+        path: "/admin/manage-users",
+        component: lazy(() => import("views/admin/ManageUsersView")),
+      },
+
+      {
+        component: () => <Redirect to="/404" />,
+      },
+    ],
+  },
+
+  {
     component: () => <Redirect to="/404" />,
   },
 ];
@@ -58,6 +98,7 @@ const renderRoutes = (routes, deviceType) =>
     <Suspense fallback={<LoadingScreen />}>
       <Switch>
         {routes.map((route, i) => {
+          const Guard = route.guard || Fragment;
           const Component = route.component;
           const Layout = route.layout || Fragment;
           return (
@@ -66,15 +107,17 @@ const renderRoutes = (routes, deviceType) =>
               path={route.path}
               exact={route.exact}
               render={(props) => (
-                <Layout>
-                  {route.routes ? (
-                    renderRoutes(route.routes)
-                  ) : (
-                    <Modal>
-                      <Component {...props} deviceType={deviceType} />
-                    </Modal>
-                  )}
-                </Layout>
+                <Guard>
+                  <Layout>
+                    {route.routes ? (
+                      renderRoutes(route.routes)
+                    ) : (
+                      <Modal>
+                        <Component {...props} deviceType={deviceType} />
+                      </Modal>
+                    )}
+                  </Layout>
+                </Guard>
               )}
             />
           );

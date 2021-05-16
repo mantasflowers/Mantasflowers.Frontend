@@ -6,10 +6,9 @@ import General from './General';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		backgroundColor: theme.palette.background.dark,
+		backgroundColor: theme.palette.background.paper,
 		minHeight: '100%',
 		paddingTop: theme.spacing(3),
-		paddingBottom: theme.spacing(3)
 	}
 }));
 

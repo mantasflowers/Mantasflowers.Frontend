@@ -32,9 +32,7 @@ const useStyles = makeStyles((theme) =>
       padding: "130px 60px",
       height: "100%",
       flexDirection: "row",
-      backgroundColor: "#b5cb9f",
     },
-
     cardsRoot: {
       padding: "20px",
       marginRight: "20px",
@@ -142,7 +140,7 @@ function CheckoutView(props) {
         message: "smh",
         orderItems,
       },
-      successUrl: "http://localhost:3000/checkout-success",
+      successUrl: "http://localhost:3000/order-success",
       cancelUrl: "http://localhost:3000",
     };
 

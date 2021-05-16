@@ -1,66 +1,63 @@
-import React, { useState } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import {
-  Button,
-  Collapse,
-  ListItem,
-  makeStyles
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { Button, Collapse, ListItem, makeStyles } from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 const useStyles = makeStyles((theme) => ({
   item: {
-    display: 'block',
+    display: "block",
     paddingTop: 0,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   itemLeaf: {
-    display: 'flex',
+    display: "flex",
     paddingTop: 0,
-    paddingBottom: 0
+    paddingBottom: 0,
   },
   button: {
     color: theme.palette.text.secondary,
-    padding: '10px 8px',
-    justifyContent: 'flex-start',
-    textTransform: 'none',
+    padding: "10px 8px",
+    justifyContent: "flex-start",
+    textTransform: "none",
     letterSpacing: 0,
-    width: '100%'
+    width: "100%",
   },
   buttonLeaf: {
     color: theme.palette.text.secondary,
-    padding: '10px 8px',
-    justifyContent: 'flex-start',
-    textTransform: 'none',
+    padding: "10px 8px",
+    justifyContent: "flex-start",
+    textTransform: "none",
     letterSpacing: 0,
-    width: '100%',
+    width: "100%",
     fontWeight: theme.typography.fontWeightRegular,
-    '&.depth-0': {
-      '& $title': {
-        fontWeight: theme.typography.fontWeightMedium
-      }
-    }
+    "&.depth-0": {
+      "& $title": {
+        fontWeight: theme.typography.fontWeightMedium,
+      },
+    },
   },
   icon: {
-    display: 'flex',
-    alignItems: 'center',
-    marginRight: theme.spacing(1)
+    display: "flex",
+    alignItems: "center",
+    marginRight: theme.spacing(1),
+    color: "#422426",
   },
   title: {
-    marginRight: 'auto'
+    marginRight: "auto",
+    color: "#422426",
   },
   active: {
-    color: theme.palette.secondary.main,
-    '& $title': {
-      fontWeight: theme.typography.fontWeightMedium
+    color: "#F28166",
+    "& $title": {
+      fontWeight: theme.typography.fontWeightMedium,
     },
-    '& $icon': {
-      color: theme.palette.secondary.main
-    }
-  }
+    "& $icon": {
+      color: "#F28166",
+    },
+  },
 }));
 
 function NavItem({
@@ -97,35 +94,16 @@ function NavItem({
         key={title}
         {...rest}
       >
-        <Button
-          className={classes.button}
-          onClick={handleToggle}
-          style={style}
-        >
-          {Icon && (
-            <Icon
-              className={classes.icon}
-              size="20"
-            />
-          )}
-          <span className={classes.title}>
-            {title}
-          </span>
+        <Button className={classes.button} onClick={handleToggle} style={style}>
+          {Icon && <Icon className={classes.icon} size="20" />}
+          <span className={classes.title}>{title}</span>
           {open ? (
-            <ExpandLessIcon
-              size="small"
-              color="inherit"
-            />
+            <ExpandLessIcon size="small" color="inherit" />
           ) : (
-            <ExpandMoreIcon
-              size="small"
-              color="inherit"
-            />
+            <ExpandMoreIcon size="small" color="inherit" />
           )}
         </Button>
-        <Collapse in={open}>
-          {children}
-        </Collapse>
+        <Collapse in={open}>{children}</Collapse>
       </ListItem>
     );
   }
@@ -140,20 +118,13 @@ function NavItem({
       <Button
         activeClassName={classes.active}
         className={clsx(classes.buttonLeaf, `depth-${depth}`)}
-        component={RouterLink}
+        component={Link}
         exact
         style={style}
         to={href}
       >
-        {Icon && (
-          <Icon
-            className={classes.icon}
-            size="20"
-          />
-        )}
-        <span className={classes.title}>
-          {title}
-        </span>
+        {Icon && <Icon className={classes.icon} size="20" />}
+        <span className={classes.title}>{title}</span>
         {Info && <Info className={classes.info} />}
       </Button>
     </ListItem>
@@ -168,11 +139,11 @@ NavItem.propTypes = {
   icon: PropTypes.any,
   info: PropTypes.any,
   open: PropTypes.bool,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
 };
 
 NavItem.defaultProps = {
-  open: false
+  open: false,
 };
 
 export default NavItem;

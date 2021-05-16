@@ -28,19 +28,19 @@ const navConfig = [
     subheader: "Navigacija",
     items: [
       {
-        title: "Visi pasiūlymai",
-        href: "/landing",
+        title: "Produktai",
+        href: "/admin/dashboard/1",
         icon: LockIcon,
       },
       {
-        title: "Gėlės",
+        title: "Kurti naudotojus",
+        href: "/admin/manage-users",
         icon: UserIcon,
-        href: "/landing",
       },
       {
-        title: "Puokštės",
-        href: "/landing",
+        title: "Kurti produktą",
         icon: MessageCircleIcon,
+        href: "/admin/create-product",
       },
     ],
   },
@@ -103,9 +103,10 @@ const useStyles = makeStyles(() => ({
     width: 175,
   },
   desktopDrawer: {
-    width: 175,
+    width: 200,
     top: 64,
     height: "calc(100% - 64px)",
+    background: "#d8a56d",
   },
 }));
 
@@ -135,7 +136,11 @@ function NavBar({ openMobile, onMobileClose }) {
             <List
               key={config.subheader}
               subheader={
-                <ListSubheader disableGutters disableSticky>
+                <ListSubheader
+                  disableGutters
+                  disableSticky
+                  style={{ color: "#422426" }}
+                >
                   {config.subheader}
                 </ListSubheader>
               }

@@ -20,31 +20,21 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const CheckoutRow = ({ productAmount, productLabel, productPrice }) => {
+const CheckoutRowPrice = ({ productLabel, productPrice }) => {
   const classes = useStyles();
 
   return (
     <Box container className={classes.checkoutRow}>
-      <Box style={{ display: "flex" }}>
-        <Typography variant="body1" className={classes.itemCount}>
-          {productAmount}
-        </Typography>
-        <Typography variant="body1" className={classes.checkoutX}>
-          x
-        </Typography>
+      <Typography variant="body1" style={{ marginRight: 20 }}>
+        {productLabel}
+      </Typography>
 
-        <Typography variant="body1" style={{ marginRight: 5 }}>
-          {productLabel}
-        </Typography>
-      </Box>
-      <Box>
-        <Typography>
-          {productPrice}
-          {CURRENCY}
-        </Typography>
-      </Box>
+      <Typography>
+        {productPrice}
+        {CURRENCY}
+      </Typography>
     </Box>
   );
 };
 
-export default CheckoutRow;
+export default CheckoutRowPrice;

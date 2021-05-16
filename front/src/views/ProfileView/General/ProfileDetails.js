@@ -11,7 +11,9 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {},
+  root: {
+    backgroundColor: theme.palette.background.paper,
+  },
   name: {
     marginTop: theme.spacing(1),
   },
