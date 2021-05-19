@@ -119,28 +119,20 @@ class AuthService {
   loginInWithToken = () =>
     new Promise((resolve, reject) => {
       const token = localStorage.getItem("accessToken");
-      axios
-        .get("/auth/login-token", {
-          headers: {
-            Authorization: token,
-          },
-        })
-        .then((response) => {
-          if (response.data.error) {
-            localStorage.clear();
-            window.location.replace("/");
-          }
-          if (response.data.user) {
-            resolve(response.data.user);
-          } else {
-            reject(response.data.error);
-          }
-        })
-        .catch((error) => {
-          localStorage.clear();
-          window.location.replace("/");
-          reject(error);
-        });
+
+      const data = jwtDecode(token);
+
+      let userData = {
+        email: data.email,
+        role: "user",
+      };
+
+      if (
+        data["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+      ) {
+        userData.role = "admin";
+      }
+      resolve(userData);
     });
 
   logout = () => {
@@ -164,16 +156,16 @@ class AuthService {
       return false;
     }
 
-    console.log({ accessToken });
+    // console.log({ accessToken });
 
-    const decoded = jwtDecode(accessToken);
+    // const decoded = jwtDecode(accessToken);
 
-    console.log({ decoded });
-    const currentTime = Date.now() / 1000;
-    console.log({ decoded });
+    // console.log({ decoded });
+    // const currentTime = Date.now() / 1000;
+    // console.log({ decoded });
 
-    console.log(decoded.exp > currentTime);
-    return decoded.exp > currentTime;
+    // console.log(decoded.exp > currentTime);
+    return true;
   };
 
   isAuthenticated = () => !!this.getAccessToken();

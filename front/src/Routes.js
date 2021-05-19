@@ -52,13 +52,13 @@ const routesConfig = [
 
   {
     exact: true,
-    path: "/checkout-success",
+    path: "/order/:password",
     component: lazy(() => import("./views/OrderSuccessView")),
   },
 
   {
     path: "/admin",
-    // guard: DashboardGuard,
+    guard: DashboardGuard,
     layout: DashboardLayout,
     routes: [
       {

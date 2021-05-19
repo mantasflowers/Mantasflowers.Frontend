@@ -8,7 +8,7 @@ import {
   TextField,
 } from "@material-ui/core";
 
-import { useState } from "react";
+import CartItem from "./Item";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -54,27 +54,20 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const ScheduleCard = ({ register, control, errors, cardNumber, cardLabel }) => {
+const AddressCard = ({ orderItems, cardNumber, cardLabel }) => {
   const classes = useStyles({ cardNumber });
 
   return (
     <Card style={{ backgroundColor: "#d8a56d" }}>
       <CardContent>
-        <Box className={classes.labelContainer} container>
+        <Box className={classes.labelContainer}>
           <Box item className={classes.firstRow}>
             <Typography className={classes.carLabel}>{cardLabel}</Typography>
           </Box>
-
-          <Box mb={2} mt={2}>
-            <TextField
-              fullWidth
-              label="žinutė prie gėlių"
-              name="message"
-              inputRef={register}
-              variant="outlined"
-              control={control}
-              className={classes.inputField}
-            />
+          <Box>
+            {orderItems.map((item) => {
+              return <CartItem key={`cartItem-${item.id}`} data={item} />;
+            })}
           </Box>
         </Box>
       </CardContent>
@@ -82,4 +75,4 @@ const ScheduleCard = ({ register, control, errors, cardNumber, cardLabel }) => {
   );
 };
 
-export default ScheduleCard;
+export default AddressCard;

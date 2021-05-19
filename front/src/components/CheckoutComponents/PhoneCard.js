@@ -70,7 +70,6 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               label="el. paštas"
               name="email"
               inputRef={register({
-                required: "laukas privalomas",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i,
                   message: "neteisingas el. pašto adresas",

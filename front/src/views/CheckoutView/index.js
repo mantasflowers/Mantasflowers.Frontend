@@ -118,6 +118,8 @@ function CheckoutView(props) {
 
   const deviceType = props.deviceType;
 
+  // get detailed user ir tada jeigu yra data reik prefillint;
+
   const onSubmit = async (formData) => {
     const orderItems = items.map((item) => {
       return {
@@ -136,13 +138,13 @@ function CheckoutView(props) {
           zipcode: formData.zipcode,
         },
         contactDetails: {
-          email: formData.email,
+          email: formData.email || "",
           phone: formData.phone,
         },
-        message: "smh",
+        message: formData.message || "",
         orderItems,
       },
-      successUrl: "http://localhost:3000/checkout-success",
+      successUrl: "http://localhost:3000/order/",
       cancelUrl: "http://localhost:3000",
     };
 
@@ -217,7 +219,13 @@ function CheckoutView(props) {
               />
             </Box>
             <Box mb={4}>
-              <ScheduleCard cardLabel="Pristatymas" cardNumber={2} />
+              <ScheduleCard
+                cardLabel="Pristatymas"
+                register={register}
+                errors={errors}
+                control={control}
+                cardNumber={2}
+              />
             </Box>
             <Box>
               <PhoneCard
