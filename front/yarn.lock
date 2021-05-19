@@ -1712,10 +1712,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stripe/stripe-js@^1.14.0":
-  "integrity" "sha512-Zw4EI+ph8RPxRpIX2uwKKDIbe7WM2OarasPjIPRulU1UCj8lRFqWWW/fTj79lZtnX3FNZkiTRM13UG1UZF7yjQ=="
-  "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.14.0.tgz"
-  "version" "1.14.0"
+"@stripe/stripe-js@^1.15.0":
+  "integrity" "sha512-KQsNPc+uVQkc8dewwz1A6uHOWeU2cWoZyNIbsx5mtmperr5TPxw4u8M20WOa22n6zmIOh/zLdzEe8DYK/0IjBw=="
+  "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.15.0.tgz"
+  "version" "1.15.0"
 
 "@styled-system/background@^5.1.2":
   "integrity" "sha512-jtwH2C/U6ssuGSvwTN3ri/IyjdHb8W9X/g8Y0JLcrH02G+BW3OS8kZdHphF1/YyRklnrKrBT2ngwGUK6aqqV3A=="
