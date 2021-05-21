@@ -57,6 +57,12 @@ const routesConfig = [
   },
 
   {
+    exact: true,
+    path: "/orders",
+    component: lazy(() => import("./views/UserOrdersView")),
+  },
+
+  {
     path: "/admin",
     guard: DashboardGuard,
     layout: DashboardLayout,
@@ -71,15 +77,26 @@ const routesConfig = [
         path: "/admin/dashboard/:page",
         component: lazy(() => import("views/admin/ProductsView")),
       },
-      // {
-      //   exact: true,
-      //   path: "/admin/create-product",
-      //   component: lazy(() => import("views/admin/CreateProductView")),
-      // },
+      {
+        exact: true,
+        path: "/admin/create-product",
+        component: lazy(() => import("views/admin/CreateProductView")),
+      },
+      {
+        exact: true,
+        path: "/admin/create-coupon",
+        component: lazy(() => import("views/admin/CreateCouponView")),
+      },
       {
         exact: true,
         path: "/admin/manage-users",
         component: lazy(() => import("views/admin/ManageUsersView")),
+      },
+
+      {
+        exact: true,
+        path: "/admin/orders",
+        component: lazy(() => import("./views/admin/OrdersView")),
       },
 
       {

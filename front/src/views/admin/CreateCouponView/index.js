@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -6,16 +6,13 @@ import {
   makeStyles,
   TextField,
   Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
 } from "@material-ui/core";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
 import { useSelector } from "react-redux";
 import axios from "axios";
+
 import FilesDropzone from "components/AdminComponents/FilesDropzone";
 
 const useStyles = makeStyles((theme) =>
@@ -28,6 +25,7 @@ const useStyles = makeStyles((theme) =>
     root: {
       padding: 20,
       margin: "0 auto",
+
       height: "100%",
       backgroundColor: theme.palette.background.paper,
 
@@ -53,35 +51,26 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-function CreateProductView() {
+function CreateCouponView() {
   const classes = useStyles();
   const { register, handleSubmit, errors, control } = useForm();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
   const account = useSelector((state) => state.account);
-  const [image, setImage] = useState(null);
 
   const onSubmit = async (data) => {
-    console.log({ data }, { image });
-
-    const productData = {
-      productInfo: {
-        description: data.description,
-        pictureUrl: image,
-      },
+    const couponData = {
       name: data.name,
-      category: data.category,
-      shortDescription: data.shortDescription,
-      thumbnailPictureUrl: image,
-      price: data.price,
-      leftInStock: data.leftInStock,
-      leftInStock: 0,
+      durationInMonths: data.durationInMonths,
+      redeemBy: "2021-06-28T08:51:16.494Z",
+      discountPrice: data.discountPrice,
+      orderOverPrice: data.orderOverPrice,
     };
 
     const response = await axios
       .post(
-        "https://mantasflowers-backend.azurewebsites.net/product",
-        productData,
+        "https://mantasflowers-backend.azurewebsites.net/payment/create-coupon",
+        couponData,
         {
           headers: {
             accept: "application/json",
@@ -90,17 +79,12 @@ function CreateProductView() {
         }
       )
       .catch((error) => {
-        console.log({ error });
         enqueueSnackbar("Sistemos klaida!", {
           variant: "error",
         });
       });
 
     console.log({ response });
-  };
-
-  const handleImage = (image) => {
-    setImage(image);
   };
 
   return (
@@ -111,12 +95,8 @@ function CreateProductView() {
       >
         <Box mb={2}>
           <Typography variant="h2" component="h1" className={classes.pageTitle}>
-            Sukurti naują produktą
+            Sukurti kuponą prekėms (kuponą atsiimti galima dvi savaites)
           </Typography>
-        </Box>
-
-        <Box mb={4} style={{ display: "flex", justifyContent: "center" }}>
-          <FilesDropzone handleImage={handleImage} />
         </Box>
 
         <Box mb={2}>
@@ -139,33 +119,17 @@ function CreateProductView() {
         <Box mb={2}>
           <TextField
             fullWidth
-            label="aprašymas (ilgas)"
-            name="description"
-            type="description"
+            label="trukmė (mėnesiais)"
+            name="durationInMonths"
+            type="durationInMonths"
             inputRef={register({ required: "laukas privalomas" })}
             variant="outlined"
             control={control}
             className={classes.inputField}
           />
-          {errors.description && (
-            <span style={{ color: "red" }}>{errors.description.message}</span>
-          )}
-        </Box>
-
-        <Box mb={2}>
-          <TextField
-            fullWidth
-            label="aprašymas (trumpas)"
-            name="shortDescription"
-            type="shortDescription"
-            inputRef={register({ required: "laukas privalomas" })}
-            variant="outlined"
-            control={control}
-            className={classes.inputField}
-          />
-          {errors.shortDescription && (
+          {errors.durationInMonths && (
             <span style={{ color: "red" }}>
-              {errors.shortDescription.message}
+              {errors.durationInMonths.message}
             </span>
           )}
         </Box>
@@ -173,50 +137,35 @@ function CreateProductView() {
         <Box mb={2}>
           <TextField
             fullWidth
-            label="kaina"
-            name="price"
-            type="price"
+            label="nuolaidos suma "
+            name="discountPrice"
+            type="discountPrice"
             inputRef={register({ required: "laukas privalomas" })}
             variant="outlined"
             control={control}
             className={classes.inputField}
           />
-          {errors.price && (
-            <span style={{ color: "red" }}>{errors.price.message}</span>
+          {errors.discountPrice && (
+            <span style={{ color: "red" }}>{errors.discountPrice.message}</span>
           )}
         </Box>
 
         <Box mb={2}>
           <TextField
             fullWidth
-            label="kiekis"
-            name="leftInStock"
-            type="leftInStock"
+            label="minimali kaina nuolaidos taikymui"
+            name="orderOverPrice"
+            type="orderOverPrice"
             inputRef={register({ required: "laukas privalomas" })}
             variant="outlined"
             control={control}
             className={classes.inputField}
           />
-          {errors.leftInStock && (
-            <span style={{ color: "red" }}>{errors.leftInStock.message}</span>
+          {errors.orderOverPrice && (
+            <span style={{ color: "red" }}>
+              {errors.orderOverPrice.message}
+            </span>
           )}
-        </Box>
-
-        <Box mb={2}>
-          <FormControl style={{ width: "100%", padding: 5 }}>
-            <InputLabel id="category-select">kategorija</InputLabel>
-            <Controller
-              as={
-                <Select labelId="category-select" label="kategorija">
-                  <MenuItem value="flower">Gėlė</MenuItem>
-                  <MenuItem value="bouquet">Puokštė</MenuItem>
-                </Select>
-              }
-              name="category"
-              control={control}
-              defaultValue="flower"
-            />
-          </FormControl>
         </Box>
 
         <Box>
@@ -235,4 +184,4 @@ function CreateProductView() {
   );
 }
 
-export default CreateProductView;
+export default CreateCouponView;

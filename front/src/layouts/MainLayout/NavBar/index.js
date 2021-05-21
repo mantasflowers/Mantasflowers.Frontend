@@ -19,6 +19,9 @@ import {
   Lock as LockIcon,
   User as UserIcon,
   MessageCircle as MessageCircleIcon,
+  DollarSign as DollarSignIcon,
+  Flag as FlagIcon,
+  Gift as GiftIcon,
 } from "react-feather";
 
 import NavItem from "./NavItem";
@@ -39,8 +42,18 @@ const navConfig = [
       },
       {
         title: "Kurti produktą",
-        icon: MessageCircleIcon,
+        icon: GiftIcon,
         href: "/admin/create-product",
+      },
+      {
+        title: "Užsakymai",
+        icon: DollarSignIcon,
+        href: "/admin/orders",
+      },
+      {
+        title: "Sukurti kupono kodą",
+        icon: FlagIcon,
+        href: "/admin/create-coupon",
       },
     ],
   },
@@ -103,7 +116,7 @@ const useStyles = makeStyles(() => ({
     width: 175,
   },
   desktopDrawer: {
-    width: 200,
+    width: 220,
     top: 64,
     height: "calc(100% - 64px)",
     background: "#d8a56d",

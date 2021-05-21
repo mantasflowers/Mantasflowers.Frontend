@@ -14,6 +14,7 @@ export const REGISTER_REQUEST = "@account/register-request";
 export const REGISTER_SUCCESS = "@account/register-success";
 export const REGISTER_FAILURE = "@account/register-failure";
 export const SET_CURRENT_USER = "@account/set-current-user";
+export const ADMIN_SUCCESS = "@account/admin-success";
 
 export function login(email, password) {
   return async (dispatch) => {
@@ -69,6 +70,29 @@ export function registerUser(email, password) {
         payload: {
           user,
         },
+      });
+    } catch (error) {
+      dispatch({ type: REGISTER_FAILURE });
+      throw error;
+    }
+  };
+}
+
+export function registerAdminUser(email, password, token) {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: REGISTER_REQUEST });
+
+      const user = await authService.registerUser(email, password);
+
+      console.log(user);
+
+      const changeRole = await authService.changeRoleToAdmin(user, token);
+
+      console.log({ changeRole });
+
+      dispatch({
+        type: ADMIN_SUCCESS,
       });
     } catch (error) {
       dispatch({ type: REGISTER_FAILURE });

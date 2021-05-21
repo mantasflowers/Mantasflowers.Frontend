@@ -182,7 +182,9 @@ function CheckoutView(props) {
       >
         <Grid item xs={12} sm={3} className={classes.orderRoot}>
           <Box item marginBottom="20px">
-            <Typography className={classes.orderTitle}>Your order</Typography>
+            <Typography className={classes.orderTitle}>
+              Jūsų užsakymas
+            </Typography>
           </Box>
 
           <Box>

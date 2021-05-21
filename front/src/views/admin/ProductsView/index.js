@@ -6,7 +6,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import { useHistory } from "react-router";
 
 // Components
-import ProductGrid from "components/ProductCatalogue/ProductGrid";
+import ProductGrid from "components/AdminComponents/ProductGrid";
 
 const Inner = styled.div`
   padding: 2rem;
@@ -29,7 +29,7 @@ function Index({ deviceType }) {
   const history = useHistory();
 
   const paginationClick = (e, number) => {
-    history.push(`/dashboard/${number}`);
+    history.push(`/admin/dashboard/${number}`);
     setPage(page + 1);
   };
 

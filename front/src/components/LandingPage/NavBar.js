@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
     padding: "5px",
     width: "83%",
+    maxWidth: 1140,
     background: theme.palette.background.default,
   },
   button: {

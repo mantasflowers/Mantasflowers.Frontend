@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) =>
       height: "100%",
       flexDirection: "row",
       minHeight: 920,
+      backgroundColor: theme.palette.background.paper,
     },
   })
 );
@@ -35,7 +36,7 @@ function CheckoutView(props) {
   const account = useSelector((state) => state.account);
 
   const [orderData, setOrderData] = useState(null);
-  const [isOpen, setIsOpen] = useState(account ? true : false);
+  const [isOpen, setIsOpen] = useState(account.user ? false : true);
 
   const handleClose = () => {
     setIsOpen(false);

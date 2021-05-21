@@ -7,6 +7,7 @@ import {
   REGISTER_SUCCESS,
   LOGOUT,
   SILENT_LOGIN,
+  ADMIN_SUCCESS,
 } from "../actions/accountActions";
 
 const initialState = {
@@ -36,6 +37,10 @@ const accountReducer = (state = initialState, action) => {
       return produce(state, (draft) => {
         draft.user = user;
       });
+    }
+
+    case ADMIN_SUCCESS: {
+      return produce(state, () => {});
     }
 
     case LOGIN_FAILURE: {

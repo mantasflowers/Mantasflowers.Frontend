@@ -78,7 +78,11 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
                   </Button>
                 </Link>
                 <Button
-                  style={{ textTransform: "initial", color: "#d8a56d" }}
+                  style={{
+                    textTransform: "initial",
+                    color: "#d8a56d",
+                    marginRight: 10,
+                  }}
                   onClick={() => {
                     handleLogout();
                   }}
@@ -87,6 +91,18 @@ function TopBar({ className, onMobileNavOpen, ...rest }) {
                 >
                   Atsijungti
                 </Button>
+                <Link
+                  style={{ textDecoration: "none", zIndex: 1 }}
+                  to="/orders"
+                >
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    style={{ textTransform: "initial", color: "#d8a56d" }}
+                  >
+                    Užsakymai
+                  </Button>
+                </Link>
               </Box>
               <Box>
                 {account.user.role === "admin" ? (

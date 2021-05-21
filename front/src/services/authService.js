@@ -23,11 +23,40 @@ class AuthService {
     new Promise((resolve, reject) => {
       axios
         .post(
-          "/user/create",
+          "/user",
           { email, password },
           {
             headers: {
               "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          if (response) {
+            resolve(response.data);
+          } else {
+            let msg = "Sistemos klaida!";
+            reject(msg);
+          }
+        })
+        .catch((error) => {
+          let msg = "Sistemos klaida!";
+
+          reject(msg);
+        });
+    });
+
+  changeRoleToAdmin = (user, token) =>
+    new Promise((resolve, reject) => {
+      console.log({ token }, "in service");
+      axios
+        .post(
+          "https://mantasflowers-backend.azurewebsites.net/authentication/admin/change-role",
+          { role: "admin", userId: user.id },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -120,11 +149,16 @@ class AuthService {
     new Promise((resolve, reject) => {
       const token = localStorage.getItem("accessToken");
 
+      axios.defaults.headers.common.Authorization = token;
+
       const data = jwtDecode(token);
+
+      const [, idToken] = token.split(" ");
 
       let userData = {
         email: data.email,
         role: "user",
+        idToken: idToken,
       };
 
       if (

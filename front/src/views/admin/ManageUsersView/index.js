@@ -7,7 +7,7 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import RegisterForm from "components/RegisterDrawer/RegisterForm";
+import RegisterForm from "components/AdminComponents/AdminRegistrationForm";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -24,20 +24,6 @@ const useStyles = makeStyles((theme) =>
         // padding: 10,
         // width: "90vw",
       },
-    },
-
-    button: {
-      width: "100%",
-      textTransform: "initial",
-      height: 40,
-      color: "#d8a56d",
-    },
-    error: {
-      color: "#d9534f",
-    },
-    inputField: {
-      border: "1px solid lightblue",
-      borderRadius: 4,
     },
   })
 );

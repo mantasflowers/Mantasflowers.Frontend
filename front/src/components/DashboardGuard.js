@@ -6,8 +6,6 @@ import PropTypes from "prop-types";
 function DashboardGuard({ children }) {
   const account = useSelector((state) => state.account);
 
-  console.log({ account });
-
   if (!account.user) return <Redirect to="/" />;
 
   if (account.user.role == "user") return <Redirect to="/" />;

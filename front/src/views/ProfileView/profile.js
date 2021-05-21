@@ -1,18 +1,18 @@
-import { NextPage } from 'next';
-import { useQuery } from '@apollo/client';
-import { Modal } from '@redq/reuse-modal';
+import { NextPage } from "next";
+import { useQuery } from "@apollo/client";
+import { Modal } from "@redq/reuse-modal";
 import {
   PageWrapper,
   SidebarSection,
   ContentBox,
-} from 'features/user-profile/user-profile.style';
+} from "features/user-profile/user-profile.style";
 
 type Props = {
   deviceType?: {
-    mobile: boolean;
-    tablet: boolean;
-    desktop: boolean;
-  };
+    mobile: boolean,
+    tablet: boolean,
+    desktop: boolean,
+  },
 };
 const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   const { data, error, loading } = useQuery(GET_LOGGED_IN_CUSTOMER);
@@ -22,7 +22,7 @@ const ProfilePage: NextPage<Props> = ({ deviceType }) => {
   if (error) return <ErrorMessage message={error.message} />;
   return (
     <>
-      <SEO title="Profile - PickBazar" description="Profile Details" />
+      <SEO title="Profile Mantas Flowers" description="Profile Details" />
       <ProfileProvider initData={data.me}>
         <Modal>
           <PageWrapper>
