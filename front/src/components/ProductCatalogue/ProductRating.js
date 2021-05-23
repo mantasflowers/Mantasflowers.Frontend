@@ -33,7 +33,7 @@ function ProductRating(props) {
         setAvgRating(response.data.averageScore);
         setCount(response.data.count);
       } catch (error) {
-        setAvgRating(1);
+        setAvgRating(5);
         setCount(1);
       }
     }
@@ -55,8 +55,9 @@ function ProductRating(props) {
           setIsReadOnly(true);
         }
       } catch (error) {
-        console.log({ error });
-        if (error.response.data === "Review not found") {
+        if (error.message === "Cannot read property 'idToken' of null") {
+          setIsReadOnly(true);
+        } else if (error.response.data === "Review not found") {
           setIsReadOnly(false);
         } else {
           setIsReadOnly(true);
