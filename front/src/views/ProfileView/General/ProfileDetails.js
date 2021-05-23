@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 import {
   Avatar,
   Box,
@@ -23,8 +26,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ProfileDetails({ user, className, ...rest }) {
+function ProfileDetails({ userTwo, className, ...rest }) {
   const classes = useStyles();
+	const account = useSelector((state) => state.account);
+  const [ user, setUser ] = useState();
+  
+	useEffect(() => {
+		if (account.user.idToken != null) {
+			const getUserData = async () => {
+				const response = await axios.get(`/user/detailed`, {
+					headers: {
+						accept: 'application/json',
+						Authorization: `Bearer ${account.user.idToken}`
+					}
+				});
+        console.log(response);
+				setUser(response.data);
+			};
+      getUserData(user);
+      console.log(user);
+		}
+	}, []);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -35,23 +57,20 @@ function ProfileDetails({ user, className, ...rest }) {
           flexDirection="column"
           textAlign="center"
         >
-          <Avatar
+          {/* <Avatar
             className={classes.avatar}
             src={"/static/avatar-default.jpg"}
-          />
+          /> */}
           <Typography
             className={classes.name}
             gutterBottom
             variant="h3"
             color="textPrimary"
           >
-            Martynas Padarauskas
-          </Typography>
-          <Typography color="textPrimary" variant="body1">
-            Lietuva!
-          </Typography>
-          <Typography color="textSecondary" variant="body2">
-            GMT +2
+            {user == null ? '' : user.firstName + ' ' + user.lastName }
+            <br/>
+            <br/>
+            {user == null ? '' : user.loginEmail }
           </Typography>
         </Box>
       </CardContent>

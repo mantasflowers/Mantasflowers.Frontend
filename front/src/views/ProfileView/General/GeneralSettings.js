@@ -18,6 +18,7 @@ import {
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useSnackbar } from "notistack";
 
 const cityOptions = [ 'Vilnius', 'Kaunas', 'NYC' ];
 
@@ -30,13 +31,46 @@ const useStyles = makeStyles((theme) => ({
 function GeneralSettings({ className, ...rest }) {
 	const classes = useStyles();
 	const account = useSelector((state) => state.account);
+	const { enqueueSnackbar } = useSnackbar();
 
 	const [ user, setUser ] = useState();
 
 	const { register, handleSubmit, errors, control } = useForm();
 
-	const onSubmit = (data) => {
-		console.log('data ->', data);
+	const onSubmit = async (data) => {
+		const userData = {
+			firstName: data.firstName,
+			lastName: data.lastName,
+			address: {
+				country: data.country,
+				city: data.city,
+				street: data.street,
+				zipcode: data.zipcode
+			},
+			userContactInfo: {
+			  email: data.contactEmail,
+			  phone: data.number
+			}
+		  };
+	  
+		  const response = await axios
+			.patch(
+			  "https://mantasflowers-backend.azurewebsites.net/user",
+			  userData,
+			  {
+				headers: {
+				  accept: "application/json",
+				  Authorization: `Bearer ${account.user.idToken}`,
+				},
+			  }
+			)
+			.catch((error) => {
+			  enqueueSnackbar("Sistemos klaida!", {
+				variant: "error",
+			  });
+			});
+	  
+		  console.log({ response });
 	};
 
 	useEffect(() => {
