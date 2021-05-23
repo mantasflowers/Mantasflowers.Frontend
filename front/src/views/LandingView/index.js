@@ -11,6 +11,7 @@ import Hero from "../../components/LandingPage/Hero";
 import ProductGrid from "../../components/ProductCatalogue/ProductGrid";
 import NavBar from "../../components/LandingPage/NavBar";
 import CartPopUp from "../../features/carts/CartPopup";
+import FeedbackForm from "components/LandingPage/FeedbackForm";
 
 const Inner = styled.div`
   max-width: 1140;
@@ -87,6 +88,8 @@ function Index({ deviceType }) {
           />
         </Box>
       </Inner>
+
+      <FeedbackForm />
       <CartPopUp deviceType={deviceType} />
     </Page>
   );

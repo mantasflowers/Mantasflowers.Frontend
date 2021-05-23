@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import clsx from "clsx";
 import { Typography, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
-  root: {},
+const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: theme.palette.background.default,
+  },
 }));
 
 function Header({ className, ...rest }) {

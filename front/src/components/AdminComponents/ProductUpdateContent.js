@@ -230,7 +230,7 @@ const ProductUpdateContent = ({ product, handleClose }) => {
           className={classes.button}
           color="primary"
         >
-          Sukurti
+          Keisti
         </Button>
       </Box>
     </form>

@@ -8,11 +8,12 @@ import CartPopUp from "../../features/carts/CartPopup";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: "100%",
+    height: "100%",
     paddingTop: 80,
     background: theme.palette.background.paper,
   },
   productInformationBox: {
+    minHeight: 832,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",

@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import clsx from "clsx";
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import axios from "axios";
 import {
   Avatar,
   Box,
@@ -15,7 +15,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
   },
   name: {
     marginTop: theme.spacing(1),
@@ -28,25 +28,25 @@ const useStyles = makeStyles((theme) => ({
 
 function ProfileDetails({ userTwo, className, ...rest }) {
   const classes = useStyles();
-	const account = useSelector((state) => state.account);
-  const [ user, setUser ] = useState();
-  
-	useEffect(() => {
-		if (account.user.idToken != null) {
-			const getUserData = async () => {
-				const response = await axios.get(`/user/detailed`, {
-					headers: {
-						accept: 'application/json',
-						Authorization: `Bearer ${account.user.idToken}`
-					}
-				});
+  const account = useSelector((state) => state.account);
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    if (account.user.idToken != null) {
+      const getUserData = async () => {
+        const response = await axios.get(`/user/detailed`, {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${account.user.idToken}`,
+          },
+        });
         console.log(response);
-				setUser(response.data);
-			};
+        setUser(response.data);
+      };
       getUserData(user);
       console.log(user);
-		}
-	}, []);
+    }
+  }, []);
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
@@ -67,10 +67,10 @@ function ProfileDetails({ userTwo, className, ...rest }) {
             variant="h3"
             color="textPrimary"
           >
-            {user == null ? '' : user.firstName + ' ' + user.lastName }
-            <br/>
-            <br/>
-            {user == null ? '' : user.loginEmail }
+            {user == null ? "" : user.firstName + " " + user.lastName}
+            <br />
+            <br />
+            {user == null ? "" : user.loginEmail}
           </Typography>
         </Box>
       </CardContent>

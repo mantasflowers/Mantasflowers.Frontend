@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 
 const Page = forwardRef(({ title, children, ...rest }, ref) => {
   return (
-    <div ref={ref} {...rest}>
+    <div ref={ref} {...rest} style={{ backgroundColor: "#b5cb9f" }}>
       <Helmet>
         <title>{title}</title>
       </Helmet>

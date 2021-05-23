@@ -45,7 +45,7 @@ const themeConfigs = [
       },
       background: {
         default: "#d8a56d",
-        dark: "#B9D6F2",
+        dark: "#b5cb9f",
         paper: "#b5cb9f",
       },
       primary: {

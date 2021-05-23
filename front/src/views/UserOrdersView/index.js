@@ -48,6 +48,8 @@ function UserOrdersView(props) {
 
   const deviceType = props.deviceType;
 
+  console.log({ ordersData });
+
   return (
     <Page>
       <Box className={classes.root}>

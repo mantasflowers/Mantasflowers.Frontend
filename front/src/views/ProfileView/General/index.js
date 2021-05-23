@@ -7,7 +7,10 @@ import ProfileDetails from "./ProfileDetails";
 import GeneralSettings from "./GeneralSettings";
 
 const useStyles = makeStyles(() => ({
-  root: {},
+  root: {
+    height: "100%",
+    minHeight: 800,
+  },
 }));
 
 function General({ className, ...rest }) {
@@ -20,10 +23,7 @@ function General({ className, ...rest }) {
       spacing={3}
       {...rest}
     >
-      <Grid item lg={4} md={6} xl={3} xs={12}>
-        <ProfileDetails />
-      </Grid>
-      <Grid item lg={8} md={6} xl={9} xs={12}>
+      <Grid item lg={12} md={12} xl={12} xs={12}>
         <GeneralSettings />
       </Grid>
     </Grid>
