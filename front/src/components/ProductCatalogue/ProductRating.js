@@ -1,39 +1,101 @@
 import React, { useEffect, useState } from "react";
-import { Box, Rating } from "@material-ui/core";
+import { Box } from "@material-ui/core";
+import axios from "axios";
+import Rating from "@material-ui/lab/Rating";
+import { useSelector } from "react-redux";
 
 function ProductRating(props) {
-  // const { user } = useSelector(state => state.account);
-  const [rating, setRating] = useState(0);
+  const { user: account } = useSelector((state) => state.account);
+  const [avgRating, setAvgRating] = useState(2);
+  const [count, setCount] = useState(1);
+  const [isRated, setIsRated] = useState(false); //flag for user input
+  // const [isReadOnly, setIsReadOnly] = useState(false);
+  const [isReadOnly, setIsReadOnly] = useState(account ? false : true);
+
+  // const handleIsReadOnly = (value) => {
+  //   if (!user) {
+  //     setIsReadOnly(true);
+  //     console.log("osiujdfoisdf");
+  //   } else {
+  //     setIsReadOnly(value);
+  //   }
+  // };
+
+  //console.log(!account, account);
 
   useEffect(() => {
-    // cia reikia call'o i back'a pasiimti produkto ratinga;
-    const getRating = async () => {
-      // call get rating + props.id;
-      // await call;
-      // setRating(response);
-    };
-    getRating();
-  }, []);
+    async function getProductRating() {
+      try {
+        const response = await axios.get(
+          `https://mantasflowers-backend.azurewebsites.net/review/${props.id}`
+        );
+        // const rating = isRated ? 1.5 : response.data.averageScore;
+        // setAvgRating(rating);
+        setAvgRating(response.data.averageScore);
+        setCount(response.data.count);
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
-  //   const async handleRatingChange = (value) => {
-  //      funkcija, kuri handlina zmogaus reitingavima;
-  //      paimam value ir kazka dar, nezinau, reik paziuret back'o swaggeri.
-  //      mes turbut darom post'a i back'a kad pareitinguot produkta.
-  //      const data = {
-  //         rating: value
-  //      }
-  //      const response = await axios.post("URL", data, {headers: pakopink is manes} );
-  //      console.log(response);
-  //   }
+    async function getUserRating() {
+      try {
+        const response = await axios.get(
+          `https://mantasflowers-backend.azurewebsites.net/review/`,
+          {
+            params: {
+              productId: props.id,
+              Authorization: `Bearer ${account.user.idToken}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          setIsReadOnly(true);
+        }
+      } catch (error) {
+        setIsReadOnly(false);
+        console.log(error);
+      }
+    }
+    getProductRating();
+    getUserRating();
+  }, [isRated, account]);
+
+  //71a4e7f6-333b-4dd1-997f-ce38efa3aee4
+
+  const handleRatingChange = async (event) => {
+    try {
+      const data = {
+        productId: props.id,
+        score: parseInt(event.currentTarget.value),
+      };
+
+      const response = await axios.post(
+        `https://mantasflowers-backend.azurewebsites.net/review/`,
+        data,
+        {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${account.user.idToken}`,
+          },
+        }
+      );
+
+      setIsRated(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box>
-      {rating && (
+      {avgRating && count && (
         <Rating
-          // readOnly={user || checkas_ar_jau_reitingavo ? false : true}
+          onChange={handleRatingChange}
+          readOnly={isReadOnly}
+          name="half-rating"
+          value={avgRating}
           precision={0.5}
-          // onChange={(e, value) => handleRatingChange(value)}
-          // defaultValue={rating}
         />
       )}
     </Box>
