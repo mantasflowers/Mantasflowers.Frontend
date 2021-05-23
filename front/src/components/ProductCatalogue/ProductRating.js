@@ -5,11 +5,10 @@ import Rating from "@material-ui/lab/Rating";
 import { useSelector } from "react-redux";
 
 function ProductRating(props) {
-  const { user: account } = useSelector((state) => state.account);
+  const account = useSelector((state) => state.account);
   const [avgRating, setAvgRating] = useState(2);
   const [count, setCount] = useState(1);
   const [isRated, setIsRated] = useState(false); //flag for user input
-  // const [isReadOnly, setIsReadOnly] = useState(false);
   const [isReadOnly, setIsReadOnly] = useState(account ? false : true);
 
   // const handleIsReadOnly = (value) => {
@@ -34,17 +33,20 @@ function ProductRating(props) {
         setAvgRating(response.data.averageScore);
         setCount(response.data.count);
       } catch (error) {
-        console.log(error);
+        setAvgRating(1);
+        setCount(1);
       }
     }
 
     async function getUserRating() {
       try {
         const response = await axios.get(
-          `https://mantasflowers-backend.azurewebsites.net/review/`,
+          `https://mantasflowers-backend.azurewebsites.net/review`,
           {
             params: {
               productId: props.id,
+            },
+            headers: {
               Authorization: `Bearer ${account.user.idToken}`,
             },
           }
@@ -53,8 +55,12 @@ function ProductRating(props) {
           setIsReadOnly(true);
         }
       } catch (error) {
-        setIsReadOnly(false);
-        console.log(error);
+        console.log({ error });
+        if (error.response.data === "Review not found") {
+          setIsReadOnly(false);
+        } else {
+          setIsReadOnly(true);
+        }
       }
     }
     getProductRating();
