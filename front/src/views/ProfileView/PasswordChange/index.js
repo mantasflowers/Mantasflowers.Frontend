@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Grid, makeStyles } from '@material-ui/core';
 import ProfileDetails from './ProfileDetails';
-import GeneralSettings from './GeneralSettings';
+import PasswordChangeView from './PasswordChange';
 
 const useStyles = makeStyles(() => ({
 	root: {
@@ -19,7 +19,7 @@ function General({ className, ...rest }) {
 	return (
 		<Grid className={clsx(classes.root, className)} container spacing={3} {...rest}>
 			<Grid item lg={12} md={12} xl={12} xs={12}>
-				<GeneralSettings />
+				<PasswordChangeView />
 			</Grid>
 		</Grid>
 	);
