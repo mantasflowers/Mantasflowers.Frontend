@@ -104,22 +104,33 @@ class AuthService {
           if (response.data.idToken) {
             const data = jwtDecode(response.data.idToken);
 
-            let userData = {
-              ...response.data,
-              email: data.email,
-              role: "user",
-            };
+            axios
+              .get("/user/detailed", {
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${response.data.idToken}`,
+                },
+              })
+              .then((userDataResponse) => {
+                let userData = {
+                  ...userDataResponse.data,
+                  ...response.data,
+                  email: data.email,
+                  role: "user",
+                };
 
-            if (
-              data[
-                "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
-              ]
-            ) {
-              userData.role = "admin";
-            }
+                if (
+                  data[
+                    "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+                  ]
+                ) {
+                  userData.role = "admin";
+                }
 
-            this.setSession(`Bearer ${response.data.idToken}`);
-            resolve(userData);
+                this.setSession(`Bearer ${response.data.idToken}`);
+
+                resolve(userData);
+              });
           } else {
             reject("Nepavyko prisijungti!");
           }
@@ -155,18 +166,29 @@ class AuthService {
 
       const [, idToken] = token.split(" ");
 
-      let userData = {
-        email: data.email,
-        role: "user",
-        idToken: idToken,
-      };
+      axios
+        .get("/user/detailed", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${idToken}`,
+          },
+        })
+        .then((userDataResponse) => {
+          let userData = {
+            ...userDataResponse.data,
+            email: data.email,
+            role: "user",
+            idToken: idToken,
+          };
 
-      if (
-        data["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
-      ) {
-        userData.role = "admin";
-      }
-      resolve(userData);
+          if (
+            data["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]
+          ) {
+            userData.role = "admin";
+          }
+
+          resolve(userData);
+        });
     });
 
   logout = () => {

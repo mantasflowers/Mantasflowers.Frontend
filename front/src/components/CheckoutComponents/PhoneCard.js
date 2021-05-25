@@ -52,7 +52,14 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
+const AddressCard = ({
+  contactDetails,
+  register,
+  errors,
+  control,
+  cardNumber,
+  cardLabel,
+}) => {
   const classes = useStyles({ cardNumber });
 
   return (
@@ -78,6 +85,7 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               variant="outlined"
               control={control}
               className={classes.inputField}
+              defaultValue={contactDetails ? contactDetails.email : ""}
             />
             {errors.email && (
               <span style={{ color: "red" }}>{errors.email.message}</span>
@@ -94,6 +102,7 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               variant="outlined"
               control={control}
               className={classes.inputField}
+              defaultValue={contactDetails ? contactDetails.phone : ""}
             />
             {errors.phone && (
               <span style={{ color: "red" }}>{errors.phone.message}</span>

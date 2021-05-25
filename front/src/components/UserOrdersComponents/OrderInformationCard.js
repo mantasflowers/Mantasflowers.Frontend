@@ -49,7 +49,9 @@ const AddressCard = ({ orderData, cardLabel }) => {
       <CardContent>
         <Box className={classes.labelContainer}>
           <Box item className={classes.firstRow}>
-            <Typography className={classes.carLabel}>{cardLabel}</Typography>
+            <Typography className={classes.carLabel}>
+              {cardLabel} {orderData.id}
+            </Typography>
           </Box>
           <Box>
             <Typography>Statusas: {orderData.status}</Typography>

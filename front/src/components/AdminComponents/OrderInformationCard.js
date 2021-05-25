@@ -50,8 +50,6 @@ const AddressCard = ({ handleCount, orderData, cardLabel }) => {
   const account = useSelector((state) => state.account);
 
   const cancelOrder = async (id) => {
-    console.log({ id });
-
     const response = await axios
       .put(
         `https://mantasflowers-backend.azurewebsites.net/order/${orderData.id}`,
@@ -76,7 +74,9 @@ const AddressCard = ({ handleCount, orderData, cardLabel }) => {
       <CardContent>
         <Box className={classes.labelContainer}>
           <Box item className={classes.firstRow}>
-            <Typography className={classes.carLabel}>{cardLabel}</Typography>
+            <Typography className={classes.carLabel}>
+              {cardLabel} {orderData.id}
+            </Typography>
           </Box>
           <Box
             style={{

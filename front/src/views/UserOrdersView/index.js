@@ -22,8 +22,6 @@ function UserOrdersView(props) {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
 
-  console.log({ account });
-
   const [ordersData, setOrdersData] = useState(null);
 
   useEffect(() => {
@@ -38,8 +36,6 @@ function UserOrdersView(props) {
         }
       );
 
-      console.log({ response });
-
       setOrdersData(response.data.userOrders);
     };
 
@@ -47,8 +43,6 @@ function UserOrdersView(props) {
   }, []);
 
   const deviceType = props.deviceType;
-
-  console.log({ ordersData });
 
   return (
     <Page>

@@ -36,8 +36,6 @@ function OrdersView(props) {
         }
       );
 
-      console.log({ response });
-
       setOrdersData(response.data.items);
     };
 

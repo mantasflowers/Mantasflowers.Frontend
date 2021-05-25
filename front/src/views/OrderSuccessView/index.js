@@ -64,8 +64,6 @@ function CheckoutView(props) {
 
   const deviceType = props.deviceType;
 
-  console.log({ orderData });
-
   return (
     <Page>
       {orderData && (

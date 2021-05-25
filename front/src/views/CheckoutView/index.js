@@ -19,6 +19,7 @@ import {
 import { useForm } from "react-hook-form";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 import { useCart } from "contexts/cart/useCart";
 
@@ -112,6 +113,8 @@ const useStyles = makeStyles((theme) =>
 );
 
 function CheckoutView(props) {
+  const account = useSelector((state) => state.account);
+
   const { items, calculatePrice } = useCart();
   const { register, handleSubmit, errors, control } = useForm();
   const classes = useStyles();
@@ -162,8 +165,6 @@ function CheckoutView(props) {
         console.log({ error });
       });
 
-    console.log({ sessionResponse });
-
     let session = sessionResponse.data.id;
 
     const stripe = await stripePromise;
@@ -172,6 +173,8 @@ function CheckoutView(props) {
       sessionId: session,
     });
   };
+
+  console.log({ account });
 
   return (
     <Page>
@@ -216,6 +219,7 @@ function CheckoutView(props) {
                 register={register}
                 errors={errors}
                 control={control}
+                address={account.user ? account.user.address : null}
                 cardLabel="Siuntimo adresas"
                 cardNumber={1}
               />
@@ -231,6 +235,9 @@ function CheckoutView(props) {
             </Box>
             <Box>
               <PhoneCard
+                contactDetails={
+                  account.user ? account.user.contactDetails : null
+                }
                 register={register}
                 errors={errors}
                 control={control}

@@ -52,7 +52,14 @@ const useStyles = makeStyles((theme) =>
   })
 );
 
-const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
+const AddressCard = ({
+  address,
+  register,
+  errors,
+  control,
+  cardNumber,
+  cardLabel,
+}) => {
   const classes = useStyles({ cardNumber });
 
   return (
@@ -75,6 +82,7 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               variant="outlined"
               control={control}
               className={classes.inputField}
+              defaultValue={address ? address.country : ""}
             />
             {errors.country && (
               <span style={{ color: "red" }}>{errors.country.message}</span>
@@ -91,6 +99,7 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               variant="outlined"
               control={control}
               className={classes.inputField}
+              defaultValue={address ? address.city : ""}
             />
             {errors.city && (
               <span style={{ color: "red" }}>{errors.city.message}</span>
@@ -107,6 +116,7 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               variant="outlined"
               control={control}
               className={classes.inputField}
+              defaultValue={address ? address.street : ""}
             />
             {errors.street && (
               <span style={{ color: "red" }}>{errors.street.message}</span>
@@ -123,6 +133,7 @@ const AddressCard = ({ register, errors, control, cardNumber, cardLabel }) => {
               variant="outlined"
               control={control}
               className={classes.inputField}
+              defaultValue={address ? address.zipcode : ""}
             />
             {errors.zipcode && (
               <span style={{ color: "red" }}>{errors.zipcode.message}</span>
