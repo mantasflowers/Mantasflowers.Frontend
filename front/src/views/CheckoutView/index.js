@@ -5,6 +5,7 @@ import CheckoutRow from "components/CheckoutComponents/CheckoutRow";
 import CheckoutRowPrice from "components/CheckoutComponents/CheckoutRowPrice";
 import Page from "components/Page";
 
+import React, { useState } from "react";
 import {
   Grid,
   makeStyles,
@@ -115,6 +116,8 @@ const useStyles = makeStyles((theme) =>
 function CheckoutView(props) {
   const account = useSelector((state) => state.account);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const { items, calculatePrice } = useCart();
   const { register, handleSubmit, errors, control } = useForm();
   const classes = useStyles();
@@ -124,6 +127,75 @@ function CheckoutView(props) {
   // get detailed user ir tada jeigu yra data reik prefillint;
 
   const onSubmit = async (formData) => {
+    setIsSubmitting(true);
+    // // parcelmonkey shipping data;
+    // let shippingData = {
+    //   identifier: "test-variantas",
+    //   order_reference: "test-mantas-flowers",
+    //   sender: {
+    //     name: "Martynas Padarauskas",
+    //     street: "A. Voldemaro gatvė",
+    //     house: "5",
+    //     apartment: "1",
+    //     city: "Vilnius",
+    //     postal_code: "11111",
+    //     country_code: "LT",
+    //     phone_number: "+37061234567",
+    //     email: "martynas@mantasflowers.lt",
+    //   },
+    //   receiver: {
+    //     name: "zmogus kurisgaus",
+    //     street: "Medvėgalio gatvė 10-1",
+    //     city: "Kaunas",
+    //     postal_code: "44444",
+    //     country_code: "LT",
+    //     phone_number: "+37061234567",
+    //     email: "zmogus@mantasflowers.lt",
+    //   },
+    //   pickup: {
+    //     type: "hands",
+    //     packages: 1,
+    //     package_sizes: ["small"],
+    //     weight: 1,
+    //   },
+    //   delivery: {
+    //     type: "hands",
+    //     courier: "lp_express",
+    //   },
+    //   services: [
+    //     {
+    //       enabled: 1,
+    //       code: "saturday",
+    //     },
+    //     {
+    //       enabled: 1,
+    //       code: "cod",
+    //       value: 100,
+    //       currency: "EUR",
+    //     },
+    //   ],
+    //   goods: {
+    //     description: "Pack of gum",
+    //     value: 1.99,
+    //     currency: "EUR",
+    //   },
+    // };
+
+    // const shippingResponse = await axios
+    //   .post("https://api.multiparcels.com/v1/shipments", shippingData, {
+    //     headers: {
+    //       accept: "application/json",
+    //       "Content-Type": "application/x-www-form-urlencoded",
+    //       Authorization: "Bearer pJ2Hb0QWqLz2mBmRITkWzVmaAHHq0Lf0",
+    //     },
+    //   })
+    //   .catch((error) => {
+    //     console.log({ error });
+    //     setIsSubmitting(false);
+    //   });
+
+    // console.log({ shippingResponse });
+
     const orderItems = items.map((item) => {
       return {
         id: item.id,
@@ -163,6 +235,7 @@ function CheckoutView(props) {
       )
       .catch((error) => {
         console.log({ error });
+        setIsSubmitting(false);
       });
 
     let session = sessionResponse.data.id;
@@ -173,8 +246,6 @@ function CheckoutView(props) {
       sessionId: session,
     });
   };
-
-  console.log({ account });
 
   return (
     <Page>
@@ -251,6 +322,7 @@ function CheckoutView(props) {
                 variant="contained"
                 id="checkout-button"
                 type="submit"
+                disabled={isSubmitting}
                 className={classes.button}
                 color="primary"
               >

@@ -6,9 +6,13 @@ import {
   makeStyles,
   Box,
   TextField,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@material-ui/core";
 
-import { useState } from "react";
+import { Controller } from "react-hook-form";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -63,6 +67,28 @@ const ScheduleCard = ({ register, control, errors, cardNumber, cardLabel }) => {
         <Box className={classes.labelContainer} container>
           <Box item className={classes.firstRow}>
             <Typography className={classes.carLabel}>{cardLabel}</Typography>
+          </Box>
+
+          <Box mb={2}>
+            <FormControl style={{ width: "100%", padding: 5 }}>
+              <InputLabel id="shipment-select">
+                pasirinkite pristatymą
+              </InputLabel>
+              <Controller
+                as={
+                  <Select
+                    labelId="shipment-select"
+                    label="pasirinkite pristatymą"
+                  >
+                    <MenuItem value="DHL">DHL</MenuItem>
+                    <MenuItem value="DPD">DPD</MenuItem>
+                  </Select>
+                }
+                name="shipment"
+                control={control}
+                defaultValue="DPD"
+              />
+            </FormControl>
           </Box>
 
           <Box mb={2} mt={2}>

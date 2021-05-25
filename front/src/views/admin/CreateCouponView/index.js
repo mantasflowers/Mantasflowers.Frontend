@@ -83,8 +83,6 @@ function CreateCouponView() {
           variant: "error",
         });
       });
-
-    console.log({ response });
   };
 
   return (

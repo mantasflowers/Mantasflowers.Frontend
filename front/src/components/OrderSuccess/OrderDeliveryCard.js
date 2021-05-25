@@ -73,6 +73,11 @@ const OrderDeliveryCard = ({ deliveryData, status, cardNumber, cardLabel }) => {
                 Užsakymo statusas: {status}
               </Typography>
             </Box>
+            <Box style={{ width: "100%" }}>
+              <Typography className={classes.status}>
+                Pristatymo statusas: Apdorojama
+              </Typography>
+            </Box>
             <Box
               style={{
                 display: "flex",
