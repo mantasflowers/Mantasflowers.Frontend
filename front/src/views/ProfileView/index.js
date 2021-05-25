@@ -3,19 +3,20 @@ import { Box, Container, Divider, Tab, Tabs, makeStyles } from '@material-ui/cor
 import Page from '../../components/Page';
 import Header from './Header';
 import General from './General';
+import PasswordChange from './PasswordChange';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		backgroundColor: theme.palette.background.paper,
 		minHeight: '100%',
-		paddingTop: theme.spacing(3),
+		paddingTop: theme.spacing(3)
 	}
 }));
 
 function AccountView() {
 	const classes = useStyles();
 	const [ currentTab, setCurrentTab ] = useState('apie');
-	const tabs = [ { value: 'apie', label: 'Apie' } ];
+	const tabs = [ { value: 'apie', label: 'Apie' }, { value: 'password', label: 'Slaptažodžio keitimas' } ];
 
 	const handleTabsChange = (event, value) => {
 		setCurrentTab(value);
@@ -38,7 +39,9 @@ function AccountView() {
 					</Tabs>
 				</Box>
 				<Divider />
-				<Box mt={3}>{currentTab === 'apie' && <General />}</Box>
+				<Box mt={3}>
+					{(currentTab === 'apie' && <General />) || (currentTab === 'password' && <PasswordChange />)}
+				</Box>
 			</Container>
 		</Page>
 	);
