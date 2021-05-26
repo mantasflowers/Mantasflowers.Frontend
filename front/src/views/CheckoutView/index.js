@@ -233,19 +233,17 @@ function CheckoutView(props) {
         },
         message: formData.message || "",
         orderItems,
+        shipment: {
+          uid: shippingResponse.data.data.id,
+        },
       },
       successUrl: `http://localhost:3000/order/`,
       cancelUrl: "http://localhost:3000",
-      shipment: {
-        uid: shippingResponse.data.data.id,
-      },
     };
 
     const authorization = account.user
       ? `Bearer ${account.user.idToken}`
       : null;
-
-    console.log({ authorization });
 
     const sessionResponse = await axios
       .post(
