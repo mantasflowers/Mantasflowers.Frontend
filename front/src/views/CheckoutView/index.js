@@ -241,9 +241,11 @@ function CheckoutView(props) {
       },
     };
 
-    const authorization = account.user.idToken
+    const authorization = account.user
       ? `Bearer ${account.user.idToken}`
       : null;
+
+    console.log({ authorization });
 
     const sessionResponse = await axios
       .post(
