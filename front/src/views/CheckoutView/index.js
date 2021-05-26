@@ -124,77 +124,92 @@ function CheckoutView(props) {
 
   const deviceType = props.deviceType;
 
-  // get detailed user ir tada jeigu yra data reik prefillint;
-
   const onSubmit = async (formData) => {
     setIsSubmitting(true);
-    // // parcelmonkey shipping data;
-    // let shippingData = {
-    //   identifier: "test-variantas",
-    //   order_reference: "test-mantas-flowers",
-    //   sender: {
-    //     name: "Martynas Padarauskas",
-    //     street: "A. Voldemaro gatvė",
-    //     house: "5",
-    //     apartment: "1",
-    //     city: "Vilnius",
-    //     postal_code: "11111",
-    //     country_code: "LT",
-    //     phone_number: "+37061234567",
-    //     email: "martynas@mantasflowers.lt",
-    //   },
-    //   receiver: {
-    //     name: "zmogus kurisgaus",
-    //     street: "Medvėgalio gatvė 10-1",
-    //     city: "Kaunas",
-    //     postal_code: "44444",
-    //     country_code: "LT",
-    //     phone_number: "+37061234567",
-    //     email: "zmogus@mantasflowers.lt",
-    //   },
-    //   pickup: {
-    //     type: "hands",
-    //     packages: 1,
-    //     package_sizes: ["small"],
-    //     weight: 1,
-    //   },
-    //   delivery: {
-    //     type: "hands",
-    //     courier: "lp_express",
-    //   },
-    //   services: [
-    //     {
-    //       enabled: 1,
-    //       code: "saturday",
-    //     },
-    //     {
-    //       enabled: 1,
-    //       code: "cod",
-    //       value: 100,
-    //       currency: "EUR",
-    //     },
-    //   ],
-    //   goods: {
-    //     description: "Pack of gum",
-    //     value: 1.99,
-    //     currency: "EUR",
-    //   },
-    // };
+    let id = Math.random().toString(36).substring(7);
+    const price = calculatePrice();
 
-    // const shippingResponse = await axios
-    //   .post("https://api.multiparcels.com/v1/shipments", shippingData, {
-    //     headers: {
-    //       accept: "application/json",
-    //       "Content-Type": "application/x-www-form-urlencoded",
-    //       Authorization: "Bearer pJ2Hb0QWqLz2mBmRITkWzVmaAHHq0Lf0",
-    //     },
-    //   })
-    //   .catch((error) => {
-    //     console.log({ error });
-    //     setIsSubmitting(false);
-    //   });
+    const shippingData = {
+      identifier: id,
+      order_reference: id,
+      sender: {
+        name: "Mantas Flowers",
+        street: "Gedimino pr. 1",
+        house: "1",
+        apartment: "1",
+        city: "Vilnius",
+        postal_code: "11111",
+        country_code: "LT",
+        phone_number: "+37061234567",
+        email: "flowers@mantasflowers.lt",
+      },
+      receiver: {
+        name: formData.firstName + " " + formData.lastName,
+        street: formData.street,
+        city: formData.city,
+        postal_code: formData.zipcode,
+        country_code: "LT",
+        phone_number: formData.phone,
+        email: formData.email,
+      },
+      pickup: {
+        type: "hands",
+        packages: 1,
+        package_sizes: ["small"],
+        weight: 1,
+      },
+      delivery: {
+        type: "hands",
+        courier: formData.shipment,
+      },
+      services: [
+        {
+          enabled: 1,
+          code: "saturday",
+        },
+        {
+          enabled: 1,
+          code: "cod",
+          value: 3,
+          currency: "EUR",
+        },
+      ],
+      goods: {
+        description: "Gėlės",
+        value: price,
+        currency: "EUR",
+      },
+    };
 
-    // console.log({ shippingResponse });
+    const shippingResponse = await axios
+      .post("https://api.multiparcels.com/v1/shipments", shippingData, {
+        headers: {
+          accept: "application/json",
+          // "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer PO6tEuymftFn29e5GBDgAI0oALCJpRyq",
+        },
+      })
+      .catch((error) => {
+        console.log({ error });
+        setIsSubmitting(false);
+      });
+
+    const confirmResponse = await axios
+      .post(
+        `https://api.multiparcels.com/v1/shipments/${shippingResponse.data.data.id}/confirm`,
+        shippingResponse.data.data,
+        {
+          headers: {
+            accept: "application/json",
+            // "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: "Bearer PO6tEuymftFn29e5GBDgAI0oALCJpRyq",
+          },
+        }
+      )
+      .catch((error) => {
+        console.log({ error });
+        setIsSubmitting(false);
+      });
 
     const orderItems = items.map((item) => {
       return {
@@ -219,9 +234,16 @@ function CheckoutView(props) {
         message: formData.message || "",
         orderItems,
       },
-      successUrl: "http://localhost:3000/order/",
+      successUrl: `http://localhost:3000/order/`,
       cancelUrl: "http://localhost:3000",
+      shipment: {
+        uid: shippingResponse.data.data.id,
+      },
     };
+
+    const authorization = account.user.idToken
+      ? `Bearer ${account.user.idToken}`
+      : null;
 
     const sessionResponse = await axios
       .post(
@@ -230,6 +252,7 @@ function CheckoutView(props) {
         {
           headers: {
             accept: "application/json",
+            Authorization: authorization,
           },
         }
       )

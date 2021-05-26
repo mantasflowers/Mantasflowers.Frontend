@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) =>
 function UserOrdersView(props) {
   const classes = useStyles();
   const account = useSelector((state) => state.account);
-
   const [ordersData, setOrdersData] = useState(null);
 
   useEffect(() => {

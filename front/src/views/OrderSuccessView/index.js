@@ -71,7 +71,7 @@ function CheckoutView(props) {
           <Box mb={4}>
             <OrderDeliveryCard
               deliveryData={orderData.address}
-              status={orderData.status}
+              status="Laukiama apmokėjimo"
               cardLabel="Siuntimo informacija"
               cardNumber={1}
             />

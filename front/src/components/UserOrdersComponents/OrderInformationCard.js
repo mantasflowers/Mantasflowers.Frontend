@@ -45,7 +45,7 @@ const AddressCard = ({ orderData, cardLabel }) => {
   const classes = useStyles();
 
   return (
-    <Card style={{ backgroundColor: "#d8a56d" }}>
+    <Card style={{ backgroundColor: "#d8a56d", marginBottom: 20 }}>
       <CardContent>
         <Box className={classes.labelContainer}>
           <Box item className={classes.firstRow}>
@@ -54,7 +54,7 @@ const AddressCard = ({ orderData, cardLabel }) => {
             </Typography>
           </Box>
           <Box>
-            <Typography>Statusas: {orderData.status}</Typography>
+            <Typography>Statusas: laukiama apmokėjimo</Typography>
             <Link to={`/order/password=${orderData.uniquePassword}`}>
               <Typography>Peržiūrėti užsakymą</Typography>
             </Link>

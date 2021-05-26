@@ -80,13 +80,12 @@ const ScheduleCard = ({ register, control, errors, cardNumber, cardLabel }) => {
                     labelId="shipment-select"
                     label="pasirinkite pristatymą"
                   >
-                    <MenuItem value="DHL">DHL</MenuItem>
-                    <MenuItem value="DPD">DPD</MenuItem>
+                    <MenuItem value="lp_express">LP Express</MenuItem>
                   </Select>
                 }
                 name="shipment"
                 control={control}
-                defaultValue="DPD"
+                defaultValue="lp_express"
               />
             </FormControl>
           </Box>

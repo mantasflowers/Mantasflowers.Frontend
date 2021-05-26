@@ -74,9 +74,42 @@ const AddressCard = ({
           <Box mb={2} mt={2}>
             <TextField
               fullWidth
+              label="vardas"
+              name="firstName"
+              inputRef={register({
+                required: "laukas privalomas",
+              })}
+              variant="outlined"
+              control={control}
+              className={classes.inputField}
+            />
+            {errors.firstName && (
+              <span style={{ color: "red" }}>{errors.firstName.message}</span>
+            )}
+          </Box>
+          <Box mb={2}>
+            <TextField
+              fullWidth
+              label="pavardė"
+              name="lastName"
+              inputRef={register({
+                required: "laukas privalomas",
+              })}
+              variant="outlined"
+              control={control}
+              className={classes.inputField}
+            />
+            {errors.lastName && (
+              <span style={{ color: "red" }}>{errors.lastName.message}</span>
+            )}
+          </Box>
+          <Box mb={2}>
+            <TextField
+              fullWidth
               label="el. paštas"
               name="email"
               inputRef={register({
+                required: "laukas privalomas",
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i,
                   message: "neteisingas el. pašto adresas",

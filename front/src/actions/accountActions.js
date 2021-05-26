@@ -61,7 +61,7 @@ export function registerUser(email, password) {
     try {
       dispatch({ type: REGISTER_REQUEST });
 
-      const response = await authService.registerUser(email, password);
+      await authService.registerUser(email, password);
 
       const user = await authService.loginWithEmailAndPassword(email, password);
 
