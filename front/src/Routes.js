@@ -28,6 +28,12 @@ const routesConfig = [
   },
   {
     exact: true,
+    path: "/products/:by",
+    component: lazy(() => import("./views/OrderByView")),
+  },
+
+  {
+    exact: true,
     path: "/product-information/:id",
     component: lazy(() => import("./views/ProductInformation")),
   },

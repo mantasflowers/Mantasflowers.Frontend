@@ -8,8 +8,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
 import { useSnackbar } from "notistack";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -46,10 +46,21 @@ function FeedbackForm() {
   const { register, handleSubmit, errors, control } = useForm();
   const { enqueueSnackbar } = useSnackbar();
 
-  const onSubmit = (data) => {
-    enqueueSnackbar("Ačiū!", {
-      variant: "success",
-    });
+  const onSubmit = async (data) => {
+    const response = await axios.post(
+      "https://mantasflowers-backend.azurewebsites.net/feedback",
+      { name: data.name, text: data.text, email: data.email },
+      {
+        headers: {
+          accept: "application/json",
+        },
+      }
+    );
+    if (response) {
+      enqueueSnackbar("Ačiū!", {
+        variant: "success",
+      });
+    }
   };
 
   return (
@@ -85,16 +96,32 @@ function FeedbackForm() {
         <Box mb={2}>
           <TextField
             fullWidth
-            label="atsiliepimas"
-            name="feedback"
-            type="feedback"
+            label="vardas"
+            name="name"
+            type="name"
             inputRef={register({ required: "laukas privalomas" })}
             variant="outlined"
             control={control}
             className={classes.inputField}
           />
-          {errors.feedback && (
-            <span style={{ color: "red" }}>{errors.feedback.message}</span>
+          {errors.name && (
+            <span style={{ color: "red" }}>{errors.name.message}</span>
+          )}
+        </Box>
+
+        <Box mb={2}>
+          <TextField
+            fullWidth
+            label="atsiliepimas"
+            name="text"
+            type="text"
+            inputRef={register({ required: "laukas privalomas" })}
+            variant="outlined"
+            control={control}
+            className={classes.inputField}
+          />
+          {errors.text && (
+            <span style={{ color: "red" }}>{errors.text.message}</span>
           )}
         </Box>
 
