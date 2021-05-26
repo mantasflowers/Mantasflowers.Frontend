@@ -54,7 +54,12 @@ const AddressCard = ({ orderData, cardLabel }) => {
             </Typography>
           </Box>
           <Box>
-            <Typography>Statusas: laukiama apmokėjimo</Typography>
+            <Typography>
+              Statusas:
+              {orderData.status === "canceled"
+                ? `Užsakymas atšauktas - ${orderData.orderStatusContext}`
+                : "Laukiama apmokėjimo"}
+            </Typography>
             <Link to={`/order/password=${orderData.uniquePassword}`}>
               <Typography>Peržiūrėti užsakymą</Typography>
             </Link>

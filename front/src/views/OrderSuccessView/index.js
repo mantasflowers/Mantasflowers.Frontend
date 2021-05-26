@@ -71,7 +71,11 @@ function CheckoutView(props) {
           <Box mb={4}>
             <OrderDeliveryCard
               deliveryData={orderData.address}
-              status="Laukiama apmokėjimo"
+              status={
+                orderData.status === "canceled"
+                  ? `Užsakymas atšauktas - ${orderData.orderStatusContext}`
+                  : "Laukiama apmokėjimo"
+              }
               cardLabel="Siuntimo informacija"
               cardNumber={1}
             />

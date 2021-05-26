@@ -9,7 +9,7 @@ import {
   Dialog,
   TextField,
 } from "@material-ui/core";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -65,27 +65,26 @@ const AddressCard = ({ handleCount, orderData, cardLabel }) => {
   };
 
   const onSubmit = async (data) => {
-    console.log({ data });
-    // const response = await axios
-    //   .put(
-    //     `https://mantasflowers-backend.azurewebsites.net/order/${orderData.id}`,
-    //     { status: "canceled", rejectMessage: data.message },
-    //     {
-    //       headers: {
-    //         accept: "application/json",
-    //         Authorization: `Bearer ${account.user.idToken}`,
-    //       },
-    //     }
-    //   )
+    const response = await axios
+      .put(
+        `https://mantasflowers-backend.azurewebsites.net/order/${orderData.id}`,
+        { status: "canceled", orderStatusContext: data.message },
+        {
+          headers: {
+            accept: "application/json",
+            Authorization: `Bearer ${account.user.idToken}`,
+          },
+        }
+      )
 
-    //   .catch((err) => {
-    //     console.log({ err });
-    //   });
+      .catch((err) => {
+        console.log({ err });
+      });
 
-    // if (response) {
-    //   handleClose();
-    //   handleCount();
-    // }
+    if (response) {
+      handleClose();
+      handleCount();
+    }
   };
 
   return (
@@ -112,7 +111,13 @@ const AddressCard = ({ handleCount, orderData, cardLabel }) => {
                 </Link>
               </Box>
 
-              {orderData.status === "canceled" ? null : (
+              {orderData.status === "canceled" ? (
+                <Box>
+                  <Typography>
+                    Atšauktas dėl: {orderData.orderStatusContext}
+                  </Typography>
+                </Box>
+              ) : (
                 <Box>
                   <Button
                     color="primary"

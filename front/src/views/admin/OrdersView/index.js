@@ -27,7 +27,7 @@ function OrdersView(props) {
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
-        `https://mantasflowers-backend.azurewebsites.net//order?page=1&pageSize=25&statuses=unpaid&statuses=in_shipping&statuses=completed&statuses=canceled&statuses=rejected`,
+        `https://mantasflowers-backend.azurewebsites.net//order?page=1&pageSize=100&statuses=unpaid&statuses=in_shipping&statuses=completed&statuses=canceled&statuses=rejected`,
         {
           headers: {
             accept: "application/json",
