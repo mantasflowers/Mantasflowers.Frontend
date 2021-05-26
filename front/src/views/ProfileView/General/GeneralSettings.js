@@ -194,7 +194,7 @@ function GeneralSettings({ className, ...rest }) {
                 <Grid item md={6} xs={12}>
                   <TextField
                     defaultValue={
-                      user.contactDetails.email ? user.contactDetails.email : ""
+                      user.contactDetails ? user.contactDetails.email : ""
                     }
                     fullWidth
                     label="Kontaktinis el. paštas"
@@ -209,7 +209,7 @@ function GeneralSettings({ className, ...rest }) {
                 <Grid item md={6} xs={12}>
                   <TextField
                     defaultValue={
-                      user.contactDetails.phone ? user.contactDetails.phone : ""
+                      user.contactDetails ? user.contactDetails.phone : ""
                     }
                     fullWidth
                     label="Tel. numeris"
@@ -230,9 +230,7 @@ function GeneralSettings({ className, ...rest }) {
               <Grid container spacing={4}>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    defaultValue={
-                      user.address.country ? user.address.country : ""
-                    }
+                    defaultValue={user.address ? user.address.country : ""}
                     fullWidth
                     label="Šalis"
                     name="country"
@@ -245,7 +243,7 @@ function GeneralSettings({ className, ...rest }) {
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    defaultValue={user.address.city ? user.address.city : ""}
+                    defaultValue={user.address ? user.address.city : ""}
                     fullWidth
                     label="Miestas"
                     name="city"
@@ -258,9 +256,7 @@ function GeneralSettings({ className, ...rest }) {
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    defaultValue={
-                      user.address.street ? user.address.street : ""
-                    }
+                    defaultValue={user.address ? user.address.street : ""}
                     fullWidth
                     label="Gatvė ir namo/buto numeris"
                     name="street"
@@ -273,9 +269,7 @@ function GeneralSettings({ className, ...rest }) {
                 </Grid>
                 <Grid item md={6} xs={12}>
                   <TextField
-                    defaultValue={
-                      user.address.zipcode ? user.address.zipcode : ""
-                    }
+                    defaultValue={user.address ? user.address.zipcode : ""}
                     fullWidth
                     label="Pašto kodas"
                     name="zipcode"
