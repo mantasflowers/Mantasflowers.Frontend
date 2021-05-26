@@ -29,8 +29,8 @@ function Error404View() {
   const mobileDevice = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Page className={classes.root} title="404:)">
-      <Container maxWidth="lg">
+    <Page title="404:)">
+      <Container maxWidth="lg" style={{ minHeight: 700, marginTop: 65 }}>
         <Typography
           align="center"
           variant={mobileDevice ? "h4" : "h1"}
@@ -40,7 +40,7 @@ function Error404View() {
           404 :)
         </Typography>
         <Typography align="center" variant="subtitle2" color="textSecondary">
-          Try navigating next time
+          Kitą kartą bandykite naviguoti
         </Typography>
         <Box mt={6} display="flex" justifyContent="center">
           <Button
@@ -49,7 +49,7 @@ function Error404View() {
             to="/"
             variant="outlined"
           >
-            Back
+            atgal
           </Button>
         </Box>
       </Container>
