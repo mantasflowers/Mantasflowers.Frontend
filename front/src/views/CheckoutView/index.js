@@ -194,80 +194,82 @@ function CheckoutView(props) {
         setIsSubmitting(false);
       });
 
-    const confirmResponse = await axios
-      .post(
-        `https://api.multiparcels.com/v1/shipments/${shippingResponse.data.data.id}/confirm`,
-        shippingResponse.data.data,
-        {
-          headers: {
-            accept: "application/json",
-            // "Content-Type": "application/x-www-form-urlencoded",
-            Authorization: "Bearer PO6tEuymftFn29e5GBDgAI0oALCJpRyq",
-          },
-        }
-      )
-      .catch((error) => {
-        console.log({ error });
-        setIsSubmitting(false);
+    if (shippingResponse) {
+      const confirmResponse = await axios
+        .post(
+          `https://api.multiparcels.com/v1/shipments/${shippingResponse.data.data.id}/confirm`,
+          shippingResponse.data.data,
+          {
+            headers: {
+              accept: "application/json",
+              // "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: "Bearer PO6tEuymftFn29e5GBDgAI0oALCJpRyq",
+            },
+          }
+        )
+        .catch((error) => {
+          console.log({ error });
+          setIsSubmitting(false);
+        });
+
+      const orderItems = items.map((item) => {
+        return {
+          id: item.id,
+          quantity: item.quantity,
+          unitPrice: item.price,
+        };
       });
 
-    const orderItems = items.map((item) => {
-      return {
-        id: item.id,
-        quantity: item.quantity,
-        unitPrice: item.price,
+      const data = {
+        order: {
+          address: {
+            country: formData.country,
+            city: formData.city,
+            street: formData.street,
+            zipcode: formData.zipcode,
+          },
+          contactDetails: {
+            email: formData.email || "",
+            phone: formData.phone,
+          },
+          message: formData.message || "",
+          orderItems,
+          shipment: {
+            uid: shippingResponse.data.data.id,
+          },
+        },
+        successUrl: `http://localhost:3000/order/`,
+        cancelUrl: "http://localhost:3000",
       };
-    });
 
-    const data = {
-      order: {
-        address: {
-          country: formData.country,
-          city: formData.city,
-          street: formData.street,
-          zipcode: formData.zipcode,
-        },
-        contactDetails: {
-          email: formData.email || "",
-          phone: formData.phone,
-        },
-        message: formData.message || "",
-        orderItems,
-        shipment: {
-          uid: shippingResponse.data.data.id,
-        },
-      },
-      successUrl: `http://localhost:3000/order/`,
-      cancelUrl: "http://localhost:3000",
-    };
+      const authorization = account.user
+        ? `Bearer ${account.user.idToken}`
+        : null;
 
-    const authorization = account.user
-      ? `Bearer ${account.user.idToken}`
-      : null;
+      const sessionResponse = await axios
+        .post(
+          "https://mantasflowers-backend.azurewebsites.net/payment/create-checkout-session",
+          data,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization: authorization,
+            },
+          }
+        )
+        .catch((error) => {
+          console.log({ error });
+          setIsSubmitting(false);
+        });
 
-    const sessionResponse = await axios
-      .post(
-        "https://mantasflowers-backend.azurewebsites.net/payment/create-checkout-session",
-        data,
-        {
-          headers: {
-            accept: "application/json",
-            Authorization: authorization,
-          },
-        }
-      )
-      .catch((error) => {
-        console.log({ error });
-        setIsSubmitting(false);
+      let session = sessionResponse.data.id;
+
+      const stripe = await stripePromise;
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session,
       });
-
-    let session = sessionResponse.data.id;
-
-    const stripe = await stripePromise;
-
-    const result = await stripe.redirectToCheckout({
-      sessionId: session,
-    });
+    }
   };
 
   return (
